@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "864311510417",
+    "project_id": "mandob-f730d",
+    "storage_bucket": "mandob-f730d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864311510417:android:c4b59e90037edb705a8630",
+        "android_client_info": {
+          "package_name": "com.example.mandob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864311510417-j34vov5l6i53skemevq4qj28fqpeep2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-Avcn7lI2B4JjJqvJzTW83-qmk7916q8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864311510417-j34vov5l6i53skemevq4qj28fqpeep2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
