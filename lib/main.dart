@@ -7,10 +7,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
-import 'package:mandob/presentation/screens/customer/customer_screen.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
-import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
+import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 
@@ -40,25 +39,23 @@ class MyApp extends StatelessWidget {
         builder: (context,state){
           return  MaterialApp(
             theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarIconBrightness: Brightness.dark,
-                  statusBarColor: ColorManager.lightColor,
-                ),
-              )
-            ),
+                appBarTheme: const AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarIconBrightness: Brightness.dark,
+                statusBarColor: ColorManager.lightColor,
+              ),
+            )),
             debugShowCheckedModeBanner: false,
-            home:const CustomerScreen(),
-            localizationsDelegates:   const [
+            home: const StartScreen(),
+            localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
               DefaultCupertinoLocalizations.delegate,
-
             ],
-            supportedLocales:  const [
-              Locale("en",""),
+            supportedLocales: const [
+              Locale("en", ""),
               Locale("ar",""),
             ],
             locale: LocalizationCubit.get(context).appLocal,

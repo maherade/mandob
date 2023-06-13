@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/data/modles/user_model.dart';
 import 'package:mandob/styles/color_manager.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/firebase_errors.dart';
@@ -14,22 +15,19 @@ class MandoobCubit extends Cubit<MandoobStates> {
 
   static MandoobCubit get(context) => BlocProvider.of(context);
 
-
   bool isCheckBoxTrue = false;
 
-  void changeCheckBox({required bool value}){
-    isCheckBoxTrue=value;
+  void changeCheckBox({required bool value}) {
+    isCheckBoxTrue = value;
     emit(ChangeCheckBoxState());
-
   }
 
-  Future <void> toPrivacy()async
-  {
-    String url= "https://www.freeprivacypolicy.com/live/b9836dca-bb1f-451d-9d36-9b9549719cde";
-    await launch(url , forceSafariVC: false);
+  Future<void> toPrivacy() async {
+    String url =
+        "https://www.freeprivacypolicy.com/live/b9836dca-bb1f-451d-9d36-9b9549719cde";
+    await launch(url, forceSafariVC: false);
     emit(LaunchState());
   }
-
 
   void createAccountWithFirebaseAuth(
       String email, String password, String name, String phone) async {
@@ -44,7 +42,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
           uId: credential.user?.uid ?? "",
           name: name,
           email: email,
-          phone: phone);
+          phone: phone,
+          pic: "assets/images/user.png",
+          isCustomer: CashHelper.getData(key: 'isCustomer'));
       await DataBaseUtils.addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
         customToast(

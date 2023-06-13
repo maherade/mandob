@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
+import 'package:mandob/presentation/screens/customer/customer_screen.dart';
 import 'package:mandob/presentation/screens/register_screen/register_screen.dart';
+import 'package:mandob/presentation/screens/test.dart';
 import 'package:mandob/styles/color_manager.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -147,7 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               elevation: 15.0,
                             ),
                             onPressed: () {
-                              validateForm();
+                              if (CashHelper.getData(key: 'isCustomer') ==
+                                  true) {
+                                validateForm(const CustomerScreen());
+                              } else if (CashHelper.getData(
+                                      key: 'isCustomer') ==
+                                  false) {
+                                validateForm(const TestScreens());
+                              }
                             },
                             child: const Text(
                               "Login",
@@ -174,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              RegisterScreen()));
+                                              const RegisterScreen()));
                                 },
                                 child: const Text(
                                   "Create Account",
@@ -196,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void validateForm() {
+  void validateForm(Widget widget) {
     if (formKey.currentState!.validate()) {
       MandoobCubit.get(context).loginWithFirebaseAuth(
         emailController.text,
@@ -204,6 +214,8 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       emailController.clear();
       passwordController.clear();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => widget));
     }
   }
 }

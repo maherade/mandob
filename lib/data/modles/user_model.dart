@@ -4,8 +4,8 @@ class MyUser {
   String? name;
   String? phone;
   String? email;
-  bool isCustomer = false;
-  String pic = "assets/images/user.png";
+  bool? isCustomer;
+  String? pic;
 
   MyUser(
       {required this.uId,
@@ -17,10 +17,12 @@ class MyUser {
 
   MyUser.fromJson(Map<String, dynamic> json)
       : this(
-          uId: json["uId"],
+    uId: json["uId"],
           name: json["name"],
           phone: json["phone"],
           email: json["email"],
+          isCustomer: json["isCustomer"],
+          pic: json["pic"],
         );
 
   Map<String, dynamic> toJson() {
@@ -29,6 +31,8 @@ class MyUser {
       "name": name,
       "phone": phone,
       "email": email,
+      "isCustomer": isCustomer,
+      "pic": pic,
     };
   }
 }

@@ -278,10 +278,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void validateForm() {
     if (formKey.currentState!.validate()) {
       MandoobCubit.get(context).createAccountWithFirebaseAuth(
-          emailController.text,
-          passwordController.text,
-          userNameController.text,
-          phoneController.text);
+        emailController.text,
+        passwordController.text,
+        userNameController.text,
+        phoneController.text,
+      );
 
       emailController.clear();
       passwordController.clear();
