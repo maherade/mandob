@@ -16,7 +16,7 @@ class DefaultTextField extends StatefulWidget {
    DefaultTextField({
     required this.hintText,
     required this.controller,
-     this.hintColor=ColorManager.primaryColor,
+     this.hintColor=Colors.grey,
 
     this.isPass = false,
     required this.textInputType,
@@ -45,10 +45,9 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       child: TextFormField(
         style: GoogleFonts.almarai(
           fontSize: 16.0,
-          color: ColorManager.primaryColor,
+          color: ColorManager.textColor,
         ),
         decoration: InputDecoration(
-
             hintText: widget.hintText,
             hintStyle: GoogleFonts.almarai(
                 fontSize: 16.0,
@@ -57,7 +56,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
             ),
           prefixIcon: Icon(
             widget.prefixIcon,
-            color: ColorManager.primaryColor,
+            color: Colors.grey,
           ),
             border: InputBorder.none,
             enabledBorder: OutlineInputBorder(
@@ -67,7 +66,10 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                  )
             ),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12)
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                    color: Colors.white
+                )
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),

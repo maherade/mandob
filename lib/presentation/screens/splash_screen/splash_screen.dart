@@ -66,15 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: double.infinity,
             ),
 
-            // Text(
-            //   'دكانه',
-            //   style: GoogleFonts.cairo(
-            //     fontSize: 32.0,
-            //     fontWeight: FontWeight.w700,
-            //     color: ColorManager.white,
-            //   ),
-            //   textAlign: TextAlign.center,
-            // ),
+
           ],
         ),
       ),

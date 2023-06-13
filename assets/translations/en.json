@@ -1,5 +1,14 @@
 {
-  "test": "English"
-
-
+  "test": "English",
+  "language": "English",
+  "welcomeMessage": "Welcome",
+  "privacyMessage": "Agree to our ",
+  "privacyLink": "privacy policies",
+  "warningMessage": "You can only move forward if you agree to privacy policy",  "welcomeMessage": "Welcome",
+  "privacyMessage": "Agree to our ",
+  "privacyLink": "privacy policies",
+  "warningMessage": "You can only move forward if you agree to privacy policy",
+  "driver": "Driver",
+  "customer": "Customer",
+  "privacyToast": "You must accept to privacy policy first"
 }

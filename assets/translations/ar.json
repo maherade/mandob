@@ -1,7 +1,11 @@
 {
-  "test": "عربي"
-
-
-
-
+  "test": "عربي",
+  "language": "عربي",
+  "welcomeMessage": "مرحبا",
+  "privacyMessage": "وافق على سياسات الخصوصية ",
+  "privacyLink": " الخاصة بنا",
+  "warningMessage": "لا يمكنك المرور إلا إذا وافقت على سياسة الخصوصية",
+  "driver": "مندوب",
+  "customer": "زبون",
+  "privacyToast": "يجب عليك الموافقة على سياسة الخصوصية أولاً"
 }

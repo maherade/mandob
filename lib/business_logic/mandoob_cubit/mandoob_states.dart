@@ -2,6 +2,11 @@ abstract class MandoobStates {}
 
 class InitialState extends MandoobStates {}
 
+class LaunchState extends MandoobStates {}
+
+class ChangeCheckBoxState extends MandoobStates {}
+
+
 // Sign Up States
 class SignUpLoadingState extends MandoobStates {}
 
