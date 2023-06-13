@@ -20,10 +20,10 @@ class LocalizationCubit extends Cubit<LocalizationStates>{
     String languageCode = CashHelper.getData(key: CashHelper.languageKey).toString();
 
     if(languageCode == 'null'){
-      CashHelper.saveData(key: CashHelper.languageKey,value: "ar");
-      CashHelper.saveData(key: CashHelper.languageNameKey,value: "langArabic");
-      _appLocale = const Locale("ar");
-      changeLanguage(code: "ar");
+      CashHelper.saveData(key: CashHelper.languageKey,value: "en");
+      CashHelper.saveData(key: CashHelper.languageNameKey,value: "langEnglish");
+      _appLocale = const Locale("en");
+      changeLanguage(code: "en");
       debugPrint('default language is english');
       emit(FetchLocalizationState());
     }

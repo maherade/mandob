@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
+import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'business_logic/localization_cubit/localization_cubit.dart';
 import 'firebase_options.dart';
@@ -35,6 +36,14 @@ class MyApp extends StatelessWidget {
         listener: (context,state){},
         builder: (context,state){
           return  MaterialApp(
+            theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarIconBrightness: Brightness.dark,
+                  statusBarColor: ColorManager.lightColor,
+                ),
+              )
+            ),
             debugShowCheckedModeBanner: false,
             home:const SplashScreen(),
             localizationsDelegates:   const [
