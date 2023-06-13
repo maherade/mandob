@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
-import 'package:mandob/presentation/screens/test.dart';
+import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
+import 'package:mandob/widgets/default_text_field.dart';
+import 'package:mandob/widgets/defualtButton.dart';
 
 import '../../../business_logic/mandoob_cubit/mandoob_cubit.dart';
 import '../customer/customer_screen.dart';
@@ -21,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   var userNameController = TextEditingController();
-  bool visible = true;
+  bool isPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +31,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorManager.lightColor2,
+        backgroundColor: ColorManager.lightColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          centerTitle: true,
         ),
         body: Column(
           children: [
@@ -54,209 +55,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextFormField(
-                          style: const TextStyle(color: ColorManager.textColor),
-                          cursorColor: ColorManager.textColor,
-                          textInputAction: TextInputAction.next,
-                          controller: userNameController,
-                          keyboardType: TextInputType.name,
-                          validator: (text) {
-                            if (text!.trim() == "") {
-                              return "Please Enter Your User Name";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: const Icon(
-                              Icons.edit,
-                              color: ColorManager.textColor,
-                            ),
-                            labelText: "User Name",
-                            labelStyle: const TextStyle(
-                              color: ColorManager.textColor,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: mediaQuery.height * .02,
-                        ),
-                        TextFormField(
-                          style: const TextStyle(color: ColorManager.textColor),
-                          cursorColor: ColorManager.textColor,
-                          controller: phoneController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.phone,
-                          validator: (text) {
-                            if (text!.trim() == "") {
-                              return "Please Enter Your Phone Number";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: const Icon(
-                              Icons.phone,
-                              color: ColorManager.textColor,
-                            ),
-                            labelText: "Phone Number",
-                            labelStyle: const TextStyle(
-                              color: ColorManager.textColor,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: mediaQuery.height * .02,
-                        ),
-                        TextFormField(
-                          style: const TextStyle(color: ColorManager.textColor),
-                          cursorColor: ColorManager.textColor,
-                          controller: emailController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (text) {
-                            if (text!.trim() == "") {
-                              return "Please Enter Your Email";
-                            }
-                            final bool emailValid = RegExp(
-                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(text);
-                            if (emailValid == false) {
-                              return "Please Enter Valid Email";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: const Icon(
-                              Icons.email,
-                              color: ColorManager.textColor,
-                            ),
-                            labelText: "Email",
-                            labelStyle: const TextStyle(
-                              color: ColorManager.textColor,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: mediaQuery.height * .02,
-                        ),
-                        TextFormField(
-                          style: const TextStyle(color: ColorManager.textColor),
-                          cursorColor: ColorManager.textColor,
-                          controller: passwordController,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.name,
-                          obscureText: visible,
-                          validator: (text) {
-                            if (text!.trim() == "") {
-                              return "Please Enter Your Password";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  visible = !visible;
-                                });
-                              },
-                              icon: Icon(
-                                visible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: ColorManager.textColor,
+                  child: CashHelper.getData(key: CashHelper.languageKey)
+                              .toString() ==
+                          'en'
+                      ? Form(
+                          key: formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DefaultTextField(
+                                hintText: 'User Name',
+                                controller: userNameController,
+                                textInputType: TextInputType.name,
+                                prefixIcon: Icons.edit,
                               ),
-                            ),
-                            labelText: "Password",
-                            labelStyle: const TextStyle(
-                              color: ColorManager.textColor,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  color: ColorManager.textColor),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: mediaQuery.height * .02,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          width: mediaQuery.width * .8,
-                          height: mediaQuery.height * .06,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: ColorManager.darkGrey,
-                              elevation: 15.0,
-                            ),
-                            onPressed: () {
-                              if (CashHelper.getData(key: 'isCustomer') ==
-                                  true) {
-                                validateForm(const CustomerScreen());
-                              } else if (CashHelper.getData(
-                                  key: 'isCustomer') ==
-                                  false) {
-                                validateForm(const TestScreens());
-                              }
-                            },
-                            child: const Text(
-                              "Create Account",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: ColorManager.lightColor2),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: mediaQuery.height * .01,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Do You have an Account?",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorManager.textColor),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultTextField(
+                                hintText: 'Phone Number',
+                                controller: phoneController,
+                                textInputType: TextInputType.phone,
+                                prefixIcon: Icons.phone,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultTextField(
+                                hintText: 'Email',
+                                controller: emailController,
+                                textInputType: TextInputType.emailAddress,
+                                prefixIcon: Icons.email,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultTextField(
+                                hintText: 'Password',
+                                controller: passwordController,
+                                textInputType: TextInputType.text,
+                                prefixIcon: Icons.lock,
+                                isPass: true,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultButton(
+                                  buttonText: 'Create Account',
+                                  onPressed: () {
+                                    if (CashHelper.getData(key: 'isCustomer') ==
+                                        true) {
+                                      validateForm(const CustomerScreen());
+                                    } else if (CashHelper.getData(
+                                            key: 'isCustomer') ==
+                                        false) {
+                                      validateForm(const MandobScreen());
+                                    }
+                                  },
+                                  width: mediaQuery.width * .6,
+                                  color2: ColorManager.primaryColor),
+                              SizedBox(
+                                height: mediaQuery.height * .01,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Do You have an Account?",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorManager.textColor),
                             ),
                             TextButton(
                                 onPressed: () {
@@ -265,17 +133,104 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           builder: (context) =>
                                               const LoginScreen()));
                                 },
-                                child: const Text(
-                                  "Login",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorManager.textColor),
-                                )),
-                          ],
+                                      child: const Text(
+                                        "Login",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorManager.primaryColor),
+                                      )),
+                                ],
+                              )
+                            ],
+                          ),
                         )
-                      ],
-                    ),
-                  ),
+                      : Form(
+                          key: formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DefaultTextField(
+                                hintText: 'اسم المستخدم',
+                                controller: userNameController,
+                                textInputType: TextInputType.name,
+                                prefixIcon: Icons.edit,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultTextField(
+                                hintText: 'رقم الهاتف',
+                                controller: phoneController,
+                                textInputType: TextInputType.phone,
+                                prefixIcon: Icons.phone,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultTextField(
+                                hintText: 'البريد الالكتروني',
+                                controller: emailController,
+                                textInputType: TextInputType.emailAddress,
+                                prefixIcon: Icons.email,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultTextField(
+                                hintText: 'كلمة المرور',
+                                controller: passwordController,
+                                textInputType: TextInputType.text,
+                                prefixIcon: Icons.lock,
+                                isPass: true,
+                              ),
+                              SizedBox(
+                                height: mediaQuery.height * .02,
+                              ),
+                              DefaultButton(
+                                  buttonText: 'إنشاء حساب',
+                                  onPressed: () {
+                                    if (CashHelper.getData(key: 'isCustomer') ==
+                                        true) {
+                                      validateForm(const CustomerScreen());
+                                    } else if (CashHelper.getData(
+                                            key: 'isCustomer') ==
+                                        false) {
+                                      validateForm(const MandobScreen());
+                                    }
+                                  },
+                                  width: mediaQuery.width * .6,
+                                  color2: ColorManager.primaryColor),
+                              SizedBox(
+                                height: mediaQuery.height * .01,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "لديك حساب بالفعل؟",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorManager.textColor),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginScreen()));
+                                    },
+                                    child: const Text(
+                                      "تسجيل الدخول",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorManager.primaryColor),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                 ),
               ),
             ),

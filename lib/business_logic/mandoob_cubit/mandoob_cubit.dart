@@ -89,4 +89,37 @@ class MandoobCubit extends Cubit<MandoobStates> {
       customToast(title: 'Something went wrong $e', color: ColorManager.red);
     }
   }
+
+// Future<void> saveUser({
+//   required String name,
+//   required String email,
+//   required String phone,
+//   required String id,
+// })async{
+//
+//   emit(SaveUserLoadingState());
+//
+//   MyUser myUser=MyUser(
+//       name: name,
+//       phone: phone,
+//       email: email,
+//       uId: id,
+//   );
+//
+//   FirebaseFirestore.instance.
+//   collection('Drivers').
+//   doc(id).
+//   set(myUser.toJson()).then((value) {
+//
+//     debugPrint('Save User Success');
+//
+//     emit(SaveUserSuccessState());
+//   }).catchError((error){
+//
+//     debugPrint('Error in userRegister is ${error.toString()}');
+//     emit(SaveUserErrorState());
+//
+//   });
+//
+// }
 }

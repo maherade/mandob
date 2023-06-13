@@ -23,7 +23,6 @@ class StartScreen extends StatelessWidget {
             backgroundColor: ColorManager.lightColor,
             appBar: AppBar(
               actions: [
-
                 GestureDetector(
                   onTap: (){
                     if(CashHelper.getData(key: CashHelper.languageKey).toString() == 'en'){
@@ -72,20 +71,23 @@ class StartScreen extends StatelessWidget {
             ),
             body: Column(
               children: [
-
                 Image(
                     image:AssetImage('assets/images/delivery.png'),
                     height: MediaQuery.of(context).size.height*.2,
                     width: MediaQuery.of(context).size.height*.2,
                 ),
 
-                CashHelper.getData(key: CashHelper.languageKey).toString() == 'en'?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Mandoob ',style: GoogleFonts.almarai(
-                        fontWeight: FontWeight.w700,
-                        fontSize: MediaQuery.of(context).size.height*.03,
+                CashHelper.getData(key: CashHelper.languageKey).toString() ==
+                        'en'
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Mandoob ',
+                            style: GoogleFonts.almarai(
+                                fontWeight: FontWeight.w700,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
                                 color: ColorManager.black),
                             textAlign: TextAlign.center,
                           ),
@@ -143,9 +145,7 @@ class StartScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-
                       SizedBox(height: MediaQuery.of(context).size.height*.06,),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -187,9 +187,7 @@ class StartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-
                       SizedBox(height: MediaQuery.of(context).size.height*.02,),
-
                       Padding(
                         padding:EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.025),
                         child: Text(AppLocalizations.of(context)!.translate('warningMessage').toString(),style: GoogleFonts.almarai(
@@ -200,9 +198,7 @@ class StartScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
-
                       SizedBox(height: MediaQuery.of(context).size.height*.055,),
-
                       MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(7)
@@ -231,9 +227,7 @@ class StartScreen extends StatelessWidget {
                             color: ColorManager.lightColor
                         ),),
                       ),
-
                       SizedBox(height:MediaQuery.of(context).size.height*.02,),
-
                       MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(7)

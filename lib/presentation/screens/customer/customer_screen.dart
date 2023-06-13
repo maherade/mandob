@@ -42,8 +42,6 @@ class CustomerScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-
               Align(
                 alignment: Alignment.center,
                 child: Container(

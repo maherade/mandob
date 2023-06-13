@@ -24,3 +24,11 @@ class LoginSuccessState extends MandoobStates {}
 class LoginErrorState extends MandoobStates {
   LoginErrorState(String error);
 }
+// //Save User
+// class SaveUserLoadingState  extends MandoobStates{}
+// class SaveUserSuccessState  extends MandoobStates{}
+// class SaveUserErrorState  extends MandoobStates{}
+//
+// class GetUserLoadingState  extends MandoobStates{}
+// class GetUserSuccessState  extends MandoobStates{}
+// class GetUserErrorState  extends MandoobStates{}

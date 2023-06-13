@@ -1,5 +1,5 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mandob/styles/color_manager.dart';
 
 class DefaultTextField extends StatefulWidget {
@@ -17,7 +17,6 @@ class DefaultTextField extends StatefulWidget {
     required this.hintText,
     required this.controller,
      this.hintColor=Colors.grey,
-
     this.isPass = false,
     required this.textInputType,
      this.labelText = "",
@@ -76,34 +75,35 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
             ),
             errorStyle: GoogleFonts.almarai(
               fontSize: 13.0,
-              color: ColorManager.gold,
-            ),
+                  color: ColorManager.red,
+                ),
             fillColor: Colors.white,
             filled: true,
 
         ),
-        maxLines: widget.lines,
-        keyboardType: widget.textInputType,
-        controller: widget.controller,
-        validator: (value){
-          if(value!.isEmpty){
-            return 'قم بإضافة البيانات المطلوبه';
-          }
-          return null;
-        },
-      ),
-    ):Container(
-      padding:  const EdgeInsets.symmetric(
-        vertical: 0,
-        horizontal: 0,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-      ),
-      child: TextFormField(
-        style: GoogleFonts.almarai(
-            fontSize: 15.0,
-            color: ColorManager.primaryColor,
+              maxLines: widget.lines,
+              keyboardType: widget.textInputType,
+              controller: widget.controller,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'قم بإضافة البيانات المطلوبه';
+                }
+                return null;
+              },
+            ),
+          )
+        : Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 0,
+              horizontal: 0,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: TextFormField(
+              style: GoogleFonts.almarai(
+                fontSize: 15.0,
+                color: ColorManager.primaryColor,
           ),
         decoration: InputDecoration(
           
@@ -124,8 +124,8 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
           ),
           errorStyle: GoogleFonts.almarai(
             fontSize: 13.0,
-            color: ColorManager.gold,
-          ),
+                    color: ColorManager.red,
+                  ),
           fillColor: Colors.white,
           filled: true,
           prefixIcon: Icon(
