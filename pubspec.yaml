@@ -45,11 +45,12 @@ dependencies:
   flutter_bloc: ^8.0.1
   fluttertoast: ^8.2.2
   image_picker: ^0.8.8
-  google_fonts: ^5.0.0
+  google_fonts:
   lottie: ^2.4.0
   intl: ^0.18.0
   smooth_page_indicator: ^1.1.0
   url_launcher: ^6.1.11
+  firebase_storage:
 
 dev_dependencies:
   flutter_test:

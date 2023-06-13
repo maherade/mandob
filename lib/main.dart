@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
+import 'package:mandob/presentation/screens/customer/customer_screen.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               ),
             )),
             debugShowCheckedModeBanner: false,
-            home: const StartScreen(),
+            home: const CustomerScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

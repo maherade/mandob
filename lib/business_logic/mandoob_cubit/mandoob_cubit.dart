@@ -1,6 +1,12 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
+import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/data/modles/user_model.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
@@ -122,4 +128,140 @@ class MandoobCubit extends Cubit<MandoobStates> {
 //   });
 //
 // }
+
+
+
+  List<String> governmentName=[
+    'محافظة الداخلية',
+    'محافظة الظاهرة',
+    'محافظة شمال الباطنة',
+    'محافظة جنوب الباطنة',
+    'محافظة البريمي',
+    'محافظة الوسطى',
+    'محافظة شمال الشرقية',
+    'محافظة جنوب الشرقية',
+    'محافظة ظفار',
+    'محافظة مسقط',
+    'محافظة مسندم'
+  ];
+
+
+  // upload product image
+
+  File? productImage;
+
+  ImageProvider product = const AssetImage('assets/images/location.jpg');
+
+  var picker = ImagePicker();
+
+  Future<void> getProductImage() async {
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      productImage = File(pickedFile.path);
+      product = FileImage(productImage!);
+      debugPrint('Path is ${pickedFile.path}');
+      emit(PickProductImageSuccessState());
+    } else {
+      debugPrint('No Image selected.');
+      emit(PickProductImageErrorState());
+    }
+
+  }
+
+
+  String ?productPath;
+
+  Future uploadProductImage({
+    required String productAddress,
+    required String productPrice,
+    required String productWeight,
+    required String productNotes,
+    required String productFrom,
+    required String productTo,
+    required String productGovernment,
+  }){
+
+    emit(UploadProductImageLoadingState());
+    return firebase_storage.FirebaseStorage.instance.ref()
+        .child('productImages/${Uri.file(productImage!.path).pathSegments.last}')
+        .putFile(productImage!).then((value) {
+
+      value.ref.getDownloadURL().then((value) {
+
+        debugPrint('Upload Success');
+        productPath = value;
+
+        uploadProduct(
+            productAddress: productAddress,
+            productFrom: productFrom,
+            productNotes: productNotes,
+            productTo: productTo,
+            productWeight: productWeight,
+            productPrice: productPrice,
+            productGovernment: productGovernment,
+            productImage: productPath!
+        );
+
+        emit(UploadProductImageSuccessState());
+
+      }).catchError((error){
+
+        debugPrint('Error in Upload profileImage ${error.toString()}');
+        emit(UploadProductImageErrorState());
+
+      });
+
+    }).catchError((error){
+
+      debugPrint('Error in Upload profileImage ${error.toString()}');
+      emit(UploadProductImageErrorState());
+    });
+  }
+
+  void uploadProduct({
+
+    required String productAddress,
+    required String productPrice,
+    required String productWeight,
+    required String productNotes,
+    required String productFrom,
+    required String productTo,
+    required String productImage,
+    required String productGovernment,
+
+  }){
+
+    emit(AddProductLoadingStates());
+
+    ProductModel productModel =ProductModel(
+        productAddress: productAddress,
+        productFrom: productFrom,
+        productNotes: productNotes,
+        productTo: productTo,
+        productGovernment: productGovernment,
+        productWeight: productWeight,
+        productPrice: productPrice,
+        productImage: productImage,
+    );
+
+    FirebaseFirestore.instance
+        .collection('Products')
+        .add(productModel.toJson())
+        .then((value) {
+
+
+      debugPrint('Add Product Success');
+      emit(AddProductSuccessStates());
+
+    }).catchError((error){
+
+      debugPrint('Error in Add Product is:${error.toString()}');
+      emit(AddProductErrorStates());
+
+    });
+
+  }
 }
