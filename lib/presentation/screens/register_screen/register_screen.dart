@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
+import 'package:mandob/presentation/screens/test.dart';
 import 'package:mandob/styles/color_manager.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 
 import '../../../business_logic/mandoob_cubit/mandoob_cubit.dart';
+import '../customer/customer_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -226,7 +229,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               elevation: 15.0,
                             ),
                             onPressed: () {
-                              validateForm();
+                              if (CashHelper.getData(key: 'isCustomer') ==
+                                  true) {
+                                validateForm(const CustomerScreen());
+                              } else if (CashHelper.getData(
+                                  key: 'isCustomer') ==
+                                  false) {
+                                validateForm(const TestScreens());
+                              }
                             },
                             child: const Text(
                               "Create Account",
@@ -275,7 +285,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void validateForm() {
+  void validateForm(Widget widget) {
     if (formKey.currentState!.validate()) {
       MandoobCubit.get(context).createAccountWithFirebaseAuth(
         emailController.text,
@@ -283,11 +293,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         userNameController.text,
         phoneController.text,
       );
-
       emailController.clear();
       passwordController.clear();
       userNameController.clear();
       phoneController.clear();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => widget));
     }
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
@@ -87,28 +86,37 @@ class StartScreen extends StatelessWidget {
                     Text('Mandoob ',style: GoogleFonts.almarai(
                         fontWeight: FontWeight.w700,
                         fontSize: MediaQuery.of(context).size.height*.03,
-                        color: ColorManager.black),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text('مندوب ',style: GoogleFonts.almarai(
-                        fontWeight: FontWeight.w700,
-                        fontSize: MediaQuery.of(context).size.height*.03,
-                        color: ColorManager.primaryColor),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ):  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('مندوب ',style: GoogleFonts.almarai(
-                        fontWeight: FontWeight.w700,
-                        fontSize: MediaQuery.of(context).size.height*.03,
-                        color: ColorManager.primaryColor),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text('Mandoob ',style: GoogleFonts.almarai(
-                        fontWeight: FontWeight.w700,
-                        fontSize: MediaQuery.of(context).size.height*.03,
+                                color: ColorManager.black),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'مندوب ',
+                            style: GoogleFonts.almarai(
+                                fontWeight: FontWeight.w700,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                color: ColorManager.primaryColor),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'مندوب ',
+                            style: GoogleFonts.almarai(
+                                fontWeight: FontWeight.w700,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                color: ColorManager.primaryColor),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Mandoob ',
+                            style: GoogleFonts.almarai(
+                                fontWeight: FontWeight.w700,
+                                fontSize: MediaQuery.of(context).size.height*.03,
                         color: ColorManager.black),
                       textAlign: TextAlign.center,
                     ),
