@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/data/modles/onbaording_model.dart';
+import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
+import 'package:mandob/presentation/screens/register_screen/register_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoarding extends StatelessWidget {
+  static var pageController = PageController();
 
-  static var pageController=PageController();
-
-  static List<OnBoardingModel> onBoardingData=[
-    OnBoardingModel(title: 'Lorem Ipsum',describtion: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',image: 'assets/images/food.json'),
+  static List<OnBoardingModel> onBoardingData = [
+    OnBoardingModel(
+        title: 'Lorem Ipsum',
+        describtion:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        image: 'assets/images/food.json'),
     OnBoardingModel(title: 'Simply dummy',describtion: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',image: 'assets/images/onboarding3.json'),
     OnBoardingModel(title: 'Typesetting industry',describtion: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',image: 'assets/images/onboarding2.json'),
   ];
@@ -83,29 +88,39 @@ class OnBoarding extends StatelessWidget {
 
                           DefaultButton(
                             buttonText: 'Get Started',
-                            onPressed: (){},
-                            color: ColorManager.primaryColor,
-                            color2: Colors.red,
-
-                          ),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const LoginScreen()));
+                          },
+                          color: ColorManager.primaryColor,
+                          color2: Colors.red,
+                        ),
 
                           SizedBox(height: MediaQuery.sizeOf(context).height*.025,),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-
-                              Text(
-                                'Don\'t have an account?',
-                                style: GoogleFonts.cairo(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w700,
-                                  color: ColorManager.darkGrey,
-                                ),
-                                textAlign: TextAlign.center,
+                            Text(
+                              'Don\'t have an account?',
+                              style: GoogleFonts.cairo(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w700,
+                                color: ColorManager.darkGrey,
                               ),
-
-                              Text(
+                              textAlign: TextAlign.center,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            const RegisterScreen()));
+                              },
+                              child: Text(
                                 ' SignUp ',
                                 style: GoogleFonts.cairo(
                                   fontSize: 15.0,
@@ -114,8 +129,8 @@ class OnBoarding extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-
-                            ],
+                            ),
+                          ],
                           ),
 
 

@@ -1,4 +1,4 @@
-package com.example.mandob
+package com.mandoob.mandob
 
 import io.flutter.embedding.android.FlutterActivity
 

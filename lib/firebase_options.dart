@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD-Avcn7lI2B4JjJqvJzTW83-qmk7916q8',
-    appId: '1:864311510417:android:c4b59e90037edb705a8630',
-    messagingSenderId: '864311510417',
-    projectId: 'mandob-f730d',
-    storageBucket: 'mandob-f730d.appspot.com',
+    apiKey: 'AIzaSyAmkG3XS-GNGoIvrueeYaV84JcfYtw34Xw',
+    appId: '1:181082086189:android:2579cd41d2d4aaaf4a51a4',
+    messagingSenderId: '181082086189',
+    projectId: 'mandoob-e229e',
+    storageBucket: 'mandoob-e229e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAOBRSJfib3FEZasRxKWrZd1wxY2eMBZfc',
-    appId: '1:864311510417:ios:274d57ffd216a7a55a8630',
-    messagingSenderId: '864311510417',
-    projectId: 'mandob-f730d',
-    storageBucket: 'mandob-f730d.appspot.com',
+    apiKey: 'AIzaSyByYchrr2mWY4aElYETYwdb5vDzpKrvMA8',
+    appId: '1:181082086189:ios:a580d37ead6925684a51a4',
+    messagingSenderId: '181082086189',
+    projectId: 'mandoob-e229e',
+    storageBucket: 'mandoob-e229e.appspot.com',
     iosClientId:
-        '864311510417-omo1ig895ouv4qlfi02mon5jl3uq6l2n.apps.googleusercontent.com',
-    iosBundleId: 'com.example.mandob',
+        '181082086189-5mjudjunm2bv3u4s7felkdkn4hfh17cf.apps.googleusercontent.com',
+    iosBundleId: 'com.mandoob.mandob',
   );
 }

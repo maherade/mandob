@@ -1,13 +1,7 @@
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/on_boarding/on_boarding.dart';
-import 'package:mandob/presentation/screens/test.dart';
 import 'package:mandob/styles/color_manager.dart';
 
 
@@ -37,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         toolbarHeight: 0.0,
         elevation: 0.0,
