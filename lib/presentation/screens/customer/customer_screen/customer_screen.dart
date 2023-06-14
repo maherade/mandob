@@ -1,6 +1,4 @@
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +70,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
-
                     Container(
                       height: MediaQuery.sizeOf(context).height*.32,
                       width: double.infinity,

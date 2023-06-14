@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -20,7 +21,6 @@ class _CustomerHistoryState extends State<CustomerHistory> {
   Widget build(BuildContext context) {
     return BlocConsumer<MandoobCubit,MandoobStates>(
       listener: (context,state){
-
       },
       builder: (context,state){
         var cubit=MandoobCubit.get(context);
@@ -69,7 +69,6 @@ class _CustomerHistoryState extends State<CustomerHistory> {
               ),
             ):Center(
               child: Column(
-
                 children: [
                   SizedBox(height: MediaQuery.sizeOf(context).height*.2,),
                   Lottie.asset(
