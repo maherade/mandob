@@ -18,9 +18,7 @@ class SignUpErrorState extends MandoobStates {
 
 //Login States
 class LoginLoadingState extends MandoobStates {}
-
 class LoginSuccessState extends MandoobStates {}
-
 class LoginErrorState extends MandoobStates {
   LoginErrorState(String error);
 }
@@ -34,23 +32,35 @@ class LoginErrorState extends MandoobStates {
 // class GetUserErrorState  extends MandoobStates{}
 
  class PickProductImageSuccessState  extends MandoobStates{}
- class PickProductImageErrorState  extends MandoobStates{}
 
- class UploadProductImageLoadingState  extends MandoobStates{}
- class UploadProductImageSuccessState  extends MandoobStates{}
- class UploadProductImageErrorState  extends MandoobStates{}
+class PickProductImageErrorState extends MandoobStates {}
 
- class AddProductLoadingStates  extends MandoobStates{}
- class AddProductSuccessStates  extends MandoobStates{}
- class AddProductErrorStates  extends MandoobStates{}
+class UploadProductImageLoadingState extends MandoobStates {}
 
+class UploadProductImageSuccessState extends MandoobStates {}
 
- class PickProfileImageSuccessState  extends MandoobStates{}
- class PickProfileImageErrorState  extends MandoobStates{}
+class UploadProductImageErrorState extends MandoobStates {}
 
- class UploadProfileImageLoadingState  extends MandoobStates{}
- class UploadProfileImageSuccessState  extends MandoobStates{}
- class UploadProfileImageErrorState  extends MandoobStates{}
+class AddProductLoadingStates extends MandoobStates {}
+
+class AddProductSuccessStates extends MandoobStates {}
+
+class AddProductErrorStates extends MandoobStates {}
+
+//
+// class GetProductsLoadingStates extends MandoobStates{}
+// class GetProductsSuccessStates extends MandoobStates{}
+// class GetProductsErrorStates extends MandoobStates{}
+
+class PickProfileImageSuccessState extends MandoobStates {}
+
+class PickProfileImageErrorState extends MandoobStates {}
+
+class UploadProfileImageLoadingState extends MandoobStates {}
+
+class UploadProfileImageSuccessState extends MandoobStates {}
+
+class UploadProfileImageErrorState extends MandoobStates {}
 
 //Get User
 class GetUserLoadingState  extends MandoobStates{}

@@ -1,7 +1,8 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,7 +52,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
           phone: phone,
           pic: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
           isCustomer: CashHelper.getData(key: 'isCustomer'));
-      await DataBaseUtils.addUserToFireStore(myUser).then((value) {
+      await addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
         customToast(
           title: 'Account Created Successfully',
@@ -79,10 +80,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
         email: email,
         password: password,
       );
-      MyUser? myUser =
-          await DataBaseUtils.readUserFromFireStore(credential.user?.uid ?? "");
+      MyUser? myUser = await readUserFromFireStore(credential.user?.uid ?? "");
       if (myUser != null) {
-        CashHelper.saveData(key: 'isUid',value: credential.user?.uid);
+        CashHelper.saveData(key: 'isUid', value: credential.user?.uid);
         print(CashHelper.getData(key: 'isUid'));
         emit(LoginSuccessState());
         print("-----------Login Successfully");
@@ -97,40 +97,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
       customToast(title: 'Something went wrong $e', color: ColorManager.red);
     }
   }
-
-// Future<void> saveUser({
-//   required String name,
-//   required String email,
-//   required String phone,
-//   required String id,
-// })async{
-//
-//   emit(SaveUserLoadingState());
-//
-//   MyUser myUser=MyUser(
-//       name: name,
-//       phone: phone,
-//       email: email,
-//       uId: id,
-//   );
-//
-//   FirebaseFirestore.instance.
-//   collection('Drivers').
-//   doc(id).
-//   set(myUser.toJson()).then((value) {
-//
-//     debugPrint('Save User Success');
-//
-//     emit(SaveUserSuccessState());
-//   }).catchError((error){
-//
-//     debugPrint('Error in userRegister is ${error.toString()}');
-//     emit(SaveUserErrorState());
-//
-//   });
-//
-// }
-
 
 
   List<String> governmentName=[
@@ -274,28 +240,37 @@ class MandoobCubit extends Cubit<MandoobStates> {
         .collection('Products')
         .add(productModel.toJson())
         .then((value) {
-
-
       debugPrint('Add Product Success');
       emit(AddProductSuccessStates());
-
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in Add Product is:${error.toString()}');
       emit(AddProductErrorStates());
-
     });
-
   }
 
-  MyUser ?user;
-  
-  Future<void> getUser()async{
+  CollectionReference<ProductModel> getProductsCollection() {
+    return FirebaseFirestore.instance
+        .collection('products')
+        .withConverter<ProductModel>(
+            fromFirestore: (snapshot, options) =>
+                ProductModel.fromJson(snapshot.data()!),
+            toFirestore: (product, options) => product.toJson());
+  }
 
+  Stream<QuerySnapshot<ProductModel>> getProductsFromFireStore() {
+    return getProductsCollection().snapshots();
+  }
+
+  MyUser? user;
+
+  Future<void> getUser() async {
     emit(GetUserLoadingState());
-    FirebaseFirestore.instance.collection('users').doc('${CashHelper.getData(key: 'isUid')}').get().then((value) {
-
-      user=MyUser.fromJson(value.data()!);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc('${CashHelper.getData(key: 'isUid')}')
+        .get()
+        .then((value) {
+      user = MyUser.fromJson(value.data()!);
       print(user!.name);
       emit(GetUserSuccessState());
 
