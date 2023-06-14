@@ -73,7 +73,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     }
   }
 
-  void loginWithFirebaseAuth(String email, String password) async {
+  Future<void> loginWithFirebaseAuth(String email, String password) async {
     try {
       emit(LoginLoadingState());
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -83,6 +83,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
       MyUser? myUser = await readUserFromFireStore(credential.user?.uid ?? "");
       if (myUser != null) {
         CashHelper.saveData(key: 'isUid', value: credential.user?.uid);
+        await getUser();
         print(CashHelper.getData(key: 'isUid'));
         emit(LoginSuccessState());
         print("-----------Login Successfully");
@@ -355,7 +356,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
   void getCustomerHistory(){
 
     emit(GetCustomerHistoryLoadingState());
-    FirebaseFirestore.instance.collection('products').get().then((value) {
+    FirebaseFirestore.instance.collection('Products').get().then((value) {
 
       value.docs.forEach((element) {
 
@@ -363,10 +364,13 @@ class MandoobCubit extends Cubit<MandoobStates> {
 
           customerHistory.add(ProductModel.fromJson(element.data()));
 
+        }else{
+
         }
 
       });
 
+      print(customerHistory.length);
       emit(GetCustomerHistorySuccessState());
     }).catchError((error){
 

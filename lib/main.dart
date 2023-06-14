@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => MandoobCubit()..getUser()),
+        BlocProvider(create: (BuildContext context) => MandoobCubit()..getUser()..getCustomerHistory()),
         BlocProvider(create: (BuildContext context) => LocalizationCubit()..fetchLocalization()),
       ],
       child: BlocConsumer<LocalizationCubit,LocalizationStates>(

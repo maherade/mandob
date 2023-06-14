@@ -213,11 +213,13 @@ class _LoginScreenState extends State<LoginScreen> {
       MandoobCubit.get(context).loginWithFirebaseAuth(
         emailController.text,
         passwordController.text,
-      );
-      emailController.clear();
-      passwordController.clear();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => widget));
+      ).then((value) {
+        emailController.clear();
+        passwordController.clear();
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => widget));
+      });
+
     }
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
+import 'package:mandob/presentation/screens/customer/customer_history/customer_history.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -40,12 +41,13 @@ class _CustomerScreenState extends State<CustomerScreen> {
         },
       builder: (context,state){
           var cubit=MandoobCubit.get(context);
-          return Scaffold(
+          return cubit.user !=null?
+          Scaffold(
             backgroundColor: ColorManager.lightColor,
             appBar: AppBar(
               titleSpacing: 0.0,
               iconTheme: const IconThemeData(
-                color: ColorManager.textColor
+                  color: ColorManager.textColor
               ),
               backgroundColor: ColorManager.lightColor,
               elevation: 0.0,
@@ -78,7 +80,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       child: Column(
                         children: [
                           SizedBox(height: MediaQuery.sizeOf(context).height*.06,),
-                           CircleAvatar(
+                          CircleAvatar(
                             radius: 67,
                             backgroundColor: ColorManager.lightColor2,
                             child: CircleAvatar(
@@ -104,7 +106,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     GestureDetector(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (_){
-                          return ProfileScreen();
+                          return const ProfileScreen();
                         }));
                       },
                       child: Padding(
@@ -115,36 +117,45 @@ class _CustomerScreenState extends State<CustomerScreen> {
                             const Icon(
                                 Icons.person
                             ),
-                          const SizedBox(width: 10,),
-                          Text(
-                          'حسابي',
-                            style: GoogleFonts.cairo(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w700,
-                              color: ColorManager.textColor,
-                            )),
+                            const SizedBox(width: 10,),
+                            Text(
+                                'حسابي',
+                                style: GoogleFonts.cairo(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorManager.textColor,
+                                )),
 
                           ],
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Icon(
-                              Icons.history
-                          ),
-                          const SizedBox(width: 10,),
-                          Text(
-                              'مرجعي',
-                              style: GoogleFonts.cairo(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                color: ColorManager.textColor,
-                              )),
-                        ],
+
+                    // مرجعي
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                          return const CustomerHistory();
+                        }));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                                Icons.history
+                            ),
+                            const SizedBox(width: 10,),
+                            Text(
+                                'مرجعي',
+                                style: GoogleFonts.cairo(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorManager.textColor,
+                                )),
+                          ],
+                        ),
                       ),
                     ),
 
@@ -374,11 +385,11 @@ class _CustomerScreenState extends State<CustomerScreen> {
                         textAlign: TextAlign.center,
                       ),
                       DefaultTextField(
-                          hintText: 'السعر',
-                          prefixIcon: Icons.price_change,
-                          isPass: false,
-                          controller: CustomerScreen.priceController,
-                          textInputType: TextInputType.number,
+                        hintText: 'السعر',
+                        prefixIcon: Icons.price_change,
+                        isPass: false,
+                        controller: CustomerScreen.priceController,
+                        textInputType: TextInputType.number,
 
                       ),
                       SizedBox(height: MediaQuery.sizeOf(context).height*.015,),
@@ -415,10 +426,10 @@ class _CustomerScreenState extends State<CustomerScreen> {
                         textAlign: TextAlign.center,
                       ),
                       DefaultTextField(
-                          hintText: 'الملاحظات',
-                          controller: CustomerScreen.notesController,
-                          textInputType: TextInputType.text,
-                          lines: 4,
+                        hintText: 'الملاحظات',
+                        controller: CustomerScreen.notesController,
+                        textInputType: TextInputType.text,
+                        lines: 4,
                       ),
                       SizedBox(height: MediaQuery.sizeOf(context).height*.05,),
 
@@ -429,28 +440,28 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       DefaultButton(
                         onPressed: (){
                           if(CustomerScreen.formKey.currentState!.validate()){
-                             cubit.uploadProductImage(
-                                 productGovernment: CustomerScreen.bottomValue,
-                                 productAddress:  CustomerScreen.addressController.text,
-                                 productPrice: CustomerScreen.priceController.text,
-                                 productWeight: CustomerScreen.weightController.text,
-                                 productNotes: CustomerScreen.notesController.text,
-                                 productFrom: CustomerScreen.fromController.text,
-                                 productTo: CustomerScreen.toController.text,
-                                 userUid: cubit.user!.uId,
-                                 userPhone: cubit.user!.phone,
-                                 userName: cubit.user!.name,
-                                 userImage: cubit.user!.pic,
-                                 userEmail: cubit.user!.email,
-                             ).then((value) {
-                               CustomerScreen.addressController.clear();
-                               CustomerScreen.priceController.clear();
-                               CustomerScreen.weightController.clear();
-                               CustomerScreen.notesController.clear();
-                               CustomerScreen.fromController.clear();
-                               CustomerScreen.toController.clear();
-                               cubit.productImage=null;
-                             });
+                            cubit.uploadProductImage(
+                              productGovernment: CustomerScreen.bottomValue,
+                              productAddress:  CustomerScreen.addressController.text,
+                              productPrice: CustomerScreen.priceController.text,
+                              productWeight: CustomerScreen.weightController.text,
+                              productNotes: CustomerScreen.notesController.text,
+                              productFrom: CustomerScreen.fromController.text,
+                              productTo: CustomerScreen.toController.text,
+                              userUid: cubit.user!.uId,
+                              userPhone: cubit.user!.phone,
+                              userName: cubit.user!.name,
+                              userImage: cubit.user!.pic,
+                              userEmail: cubit.user!.email,
+                            ).then((value) {
+                              CustomerScreen.addressController.clear();
+                              CustomerScreen.priceController.clear();
+                              CustomerScreen.weightController.clear();
+                              CustomerScreen.notesController.clear();
+                              CustomerScreen.fromController.clear();
+                              CustomerScreen.toController.clear();
+                              cubit.productImage=null;
+                            });
                           }
                         },
                         buttonText: 'اضافه',
@@ -465,6 +476,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 ),
               ),
             ),
+          ):const Scaffold(
+            body: SafeArea(child: Center(child: CircularProgressIndicator(),)),
           );
       },
     );
