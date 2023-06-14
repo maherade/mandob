@@ -51,7 +51,7 @@ class _CustomerHistoryState extends State<CustomerHistory> {
                 textAlign: TextAlign.center,
               ),
             ),
-            body: Container(
+            body: cubit.customerHistory.isNotEmpty? Container(
               padding: const EdgeInsets.all(5),
               margin: const EdgeInsets.all(5),
               child: Column(
@@ -65,6 +65,25 @@ class _CustomerHistoryState extends State<CustomerHistory> {
                         }),
                   )
 
+                ],
+              ),
+            ):Center(
+              child: Column(
+
+                children: [
+                  SizedBox(height: MediaQuery.sizeOf(context).height*.2,),
+                  Lottie.asset(
+                    "assets/images/empty.json",
+                    fit: BoxFit.fill,
+                    width: MediaQuery.of(context).size.height * 0.25,
+                    height: MediaQuery.of(context).size.height * 0.25,
+                  ),
+                  Text("لا يوجد طلبات",
+                      style: GoogleFonts.cairo(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w700,
+                        color: ColorManager.textColor,
+                      ))
                 ],
               ),
             ),

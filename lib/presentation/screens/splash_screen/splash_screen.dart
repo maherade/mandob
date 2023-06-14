@@ -26,24 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3),()async{
 
       if(CashHelper.getData(key: 'isUid')!=null&&CashHelper.getData(key: 'isCustomer')==true){
-        await MandoobCubit.get(context).getUser().then((value) {
-          if(MandoobCubit.get(context).user!.pic !=null){
-             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-            const CustomerScreen()
-            ), (Route<dynamic> route) => false);
-          }
-        });
+
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+        const CustomerScreen()
+        ), (Route<dynamic> route) => false);
 
 
       }
       else if(CashHelper.getData(key: 'isUid')!=null&&CashHelper.getData(key: 'isCustomer')==false){
-        await MandoobCubit.get(context).getUser().then((value) {
-          if(MandoobCubit.get(context).user!.pic !=null){
-            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-            const MandobScreen()
-            ), (Route<dynamic> route) => false);
-          }
-        });
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+        const MandobScreen()
+        ), (Route<dynamic> route) => false);
 
 
       }
