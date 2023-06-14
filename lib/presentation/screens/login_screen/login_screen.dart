@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
-import 'package:mandob/presentation/screens/customer/customer_screen.dart';
+import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
 import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/presentation/screens/register_screen/register_screen.dart';
 import 'package:mandob/styles/color_manager.dart';

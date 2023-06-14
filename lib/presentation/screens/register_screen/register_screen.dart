@@ -8,7 +8,7 @@ import 'package:mandob/widgets/default_text_field.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
 import '../../../business_logic/mandoob_cubit/mandoob_cubit.dart';
-import '../customer/customer_screen.dart';
+import '../customer/customer_screen/customer_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

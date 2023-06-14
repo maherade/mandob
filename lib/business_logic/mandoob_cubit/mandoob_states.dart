@@ -43,3 +43,22 @@ class LoginErrorState extends MandoobStates {
  class AddProductLoadingStates  extends MandoobStates{}
  class AddProductSuccessStates  extends MandoobStates{}
  class AddProductErrorStates  extends MandoobStates{}
+
+
+ class PickProfileImageSuccessState  extends MandoobStates{}
+ class PickProfileImageErrorState  extends MandoobStates{}
+
+ class UploadProfileImageLoadingState  extends MandoobStates{}
+ class UploadProfileImageSuccessState  extends MandoobStates{}
+ class UploadProfileImageErrorState  extends MandoobStates{}
+
+//Get User
+class GetUserLoadingState  extends MandoobStates{}
+class GetUserSuccessState  extends MandoobStates{}
+class GetUserErrorState  extends MandoobStates{}
+
+class GetCustomerHistoryLoadingState  extends MandoobStates{}
+class GetCustomerHistorySuccessState  extends MandoobStates{}
+class GetCustomerHistoryErrorState  extends MandoobStates{}
+
+

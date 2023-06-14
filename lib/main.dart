@@ -7,9 +7,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
-import 'package:mandob/presentation/screens/customer/customer_screen.dart';
+import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
+import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => MandoobCubit()),
+        BlocProvider(create: (BuildContext context) => MandoobCubit()..getUser()),
         BlocProvider(create: (BuildContext context) => LocalizationCubit()..fetchLocalization()),
       ],
       child: BlocConsumer<LocalizationCubit,LocalizationStates>(
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
               ),
             )),
             debugShowCheckedModeBanner: false,
-            home: const CustomerScreen(),
+            home: const SplashScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

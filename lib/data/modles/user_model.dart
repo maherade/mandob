@@ -13,7 +13,8 @@ class MyUser {
       required this.phone,
       required this.email,
       this.isCustomer = false,
-      this.pic = "assets/images/user.png"});
+      required this.pic
+      });
 
   MyUser.fromJson(Map<String, dynamic> json)
       : this(

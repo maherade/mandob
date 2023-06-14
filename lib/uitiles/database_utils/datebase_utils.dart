@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../data/modles/user_model.dart';
 
 class DataBaseUtils {

@@ -8,6 +8,11 @@ class ProductModel {
    String ?productTo;
    String ?productImage;
    String ?productGovernment;
+   String ?userName;
+   String ?userPhone;
+   String ?userEmail;
+   String ?userImage;
+   String ?userUid;
 
    ProductModel(
       {
@@ -19,6 +24,11 @@ class ProductModel {
         required this.productTo,
         required this.productImage,
         required this.productGovernment,
+        required this.userName,
+        required this.userPhone,
+        required this.userEmail,
+        required this.userImage,
+        required this.userUid,
 
       });
 
@@ -32,6 +42,11 @@ class ProductModel {
      productTo: json["productTo"],
      productImage: json["productImage"],
      productGovernment: json["productGovernment"],
+     userName: json["userName"],
+     userPhone: json["userPhone"],
+     userEmail: json["userEmail"],
+     userImage: json["userImage"],
+     userUid: json["userUid"],
   );
 
   Map<String, dynamic> toJson() {
@@ -44,6 +59,11 @@ class ProductModel {
       "productTo": productTo,
       "productImage": productImage,
       "productGovernment": productGovernment,
+      "userName": userName,
+      "userPhone": userPhone,
+      "userEmail": userEmail,
+      "userImage": userImage,
+      "userUid": userUid,
     };
   }
 }

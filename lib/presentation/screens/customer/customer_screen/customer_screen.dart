@@ -7,7 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
+import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
+import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/default_text_field.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
@@ -41,7 +44,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
             backgroundColor: ColorManager.lightColor,
             appBar: AppBar(
               titleSpacing: 0.0,
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: ColorManager.textColor
               ),
               backgroundColor: ColorManager.lightColor,
@@ -61,7 +64,122 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-            drawer: Drawer(),
+            drawer: Drawer(
+              child: Container(
+                color: ColorManager.lightColor,
+                child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
+
+                    Container(
+                      height: MediaQuery.sizeOf(context).height*.32,
+                      width: double.infinity,
+                      color: ColorManager.lightColor2,
+                      child: Column(
+                        children: [
+                          SizedBox(height: MediaQuery.sizeOf(context).height*.06,),
+                           CircleAvatar(
+                            radius: 67,
+                            backgroundColor: ColorManager.lightColor2,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage((cubit.user!.pic!)!),
+                              radius: 65,
+                            ),
+                          ),
+                          SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
+                          Text(
+                              cubit.user!.name!,
+                              style: GoogleFonts.cairo(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w700,
+                                color: ColorManager.textColor,
+                              )),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 5,),
+
+                    // حسابي
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                          return ProfileScreen();
+                        }));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                                Icons.person
+                            ),
+                          const SizedBox(width: 10,),
+                          Text(
+                          'حسابي',
+                            style: GoogleFonts.cairo(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w700,
+                              color: ColorManager.textColor,
+                            )),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Icon(
+                              Icons.history
+                          ),
+                          const SizedBox(width: 10,),
+                          Text(
+                              'مرجعي',
+                              style: GoogleFonts.cairo(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w700,
+                                color: ColorManager.textColor,
+                              )),
+                        ],
+                      ),
+                    ),
+
+                    // تسجيل الخروج
+                    GestureDetector(
+                      onTap: (){
+                        CashHelper.removeData(key: 'isUid');
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                        const LoginScreen()
+                        ), (Route<dynamic> route) => false);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                                Icons.logout
+                            ),
+                            const SizedBox(width: 10,),
+                            Text(
+                                'تسجيل الخروج',
+                                style: GoogleFonts.cairo(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorManager.textColor,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             body: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).height*.02),
@@ -89,7 +207,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                             ),
                             child: cubit.productImage==null? Image(
                               fit: BoxFit.cover,
-                              image:const AssetImage('assets/images/location.jpg'),
+                              image:const AssetImage('assets/images/click.jpg'),
                               height: MediaQuery.of(context).size.height*.3,
                               width: MediaQuery.of(context).size.height*.35,
 
@@ -298,10 +416,9 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       ),
                       DefaultTextField(
                           hintText: 'الملاحظات',
-                          isPass: false,
-                          prefixIcon: Icons.note_alt_rounded,
                           controller: CustomerScreen.notesController,
-                          textInputType: TextInputType.text
+                          textInputType: TextInputType.text,
+                          lines: 4,
                       ),
                       SizedBox(height: MediaQuery.sizeOf(context).height*.05,),
 
@@ -319,7 +436,12 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                  productWeight: CustomerScreen.weightController.text,
                                  productNotes: CustomerScreen.notesController.text,
                                  productFrom: CustomerScreen.fromController.text,
-                                 productTo: CustomerScreen.toController.text
+                                 productTo: CustomerScreen.toController.text,
+                                 userUid: cubit.user!.uId,
+                                 userPhone: cubit.user!.phone,
+                                 userName: cubit.user!.name,
+                                 userImage: cubit.user!.pic,
+                                 userEmail: cubit.user!.email,
                              ).then((value) {
                                CustomerScreen.addressController.clear();
                                CustomerScreen.priceController.clear();
@@ -327,6 +449,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                CustomerScreen.notesController.clear();
                                CustomerScreen.fromController.clear();
                                CustomerScreen.toController.clear();
+                               cubit.productImage=null;
                              });
                           }
                         },
