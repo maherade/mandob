@@ -134,6 +134,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                     // مرجعي
                     GestureDetector(
                       onTap: (){
+                        cubit.getCustomerHistory();
                         Navigator.push(context, MaterialPageRoute(builder: (_){
                           return const CustomerHistory();
                         }));

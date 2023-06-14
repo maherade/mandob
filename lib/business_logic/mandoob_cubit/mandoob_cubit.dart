@@ -356,6 +356,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
   void getCustomerHistory(){
 
     emit(GetCustomerHistoryLoadingState());
+    customerHistory=[];
     FirebaseFirestore.instance.collection('Products').get().then((value) {
 
       value.docs.forEach((element) {
