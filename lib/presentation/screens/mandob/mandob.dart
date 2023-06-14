@@ -6,7 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/database_utils/datebase_utils.dart';
-import 'package:mandob/widgets/view_order.dart';
+import 'package:mandob/widgets/order_item.dart';
 
 class MandobScreen extends StatefulWidget {
   const MandobScreen({super.key});

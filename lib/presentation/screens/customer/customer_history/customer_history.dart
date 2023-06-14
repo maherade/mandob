@@ -1,16 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
-import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/styles/color_manager.dart';
-import 'package:mandob/uitiles/database_utils/datebase_utils.dart';
 import 'package:mandob/widgets/customer_history_item.dart';
-import 'package:mandob/widgets/view_order.dart';
 
 class CustomerHistory extends StatefulWidget {
   const CustomerHistory({super.key});

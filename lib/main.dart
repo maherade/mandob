@@ -7,11 +7,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
-import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
+import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
-import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
-import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
+import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 
@@ -20,6 +19,8 @@ import 'firebase_options.dart';
 import 'presentation/screens/register_screen/register_screen.dart';
 
 void main() async {
+  ProductModel model;
+
   WidgetsFlutterBinding.ensureInitialized();
   await CashHelper.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -41,14 +42,15 @@ class MyApp extends StatelessWidget {
         builder: (context,state){
           return  MaterialApp(
             theme: ThemeData(
-                appBarTheme: const AppBarTheme(
-              systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarIconBrightness: Brightness.dark,
-                statusBarColor: ColorManager.lightColor,
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarIconBrightness: Brightness.dark,
+                  statusBarColor: ColorManager.lightColor,
+                ),
               ),
-            )),
+            ),
             debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
+            home: const MandobScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -58,7 +60,7 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: const [
               Locale("en", ""),
-              Locale("ar",""),
+              Locale("ar", ""),
             ],
             locale: LocalizationCubit.get(context).appLocal,
             localeResolutionCallback: (currentLang, supportLang) {

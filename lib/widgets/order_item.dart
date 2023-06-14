@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mandob/data/modles/product_model.dart';
+import 'package:mandob/presentation/screens/mandob/order_details_screen/order_details.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
 import '../styles/color_manager.dart';
@@ -115,7 +116,11 @@ class _OrderItemState extends State<OrderItem> {
                         color: ColorManager.gold,
                         color2: ColorManager.gold,
                         textColor: ColorManager.textColor,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) =>
+                                  OrderDetails(widget.productModel)));
+                        },
                       ),
                     ),
                   ],
