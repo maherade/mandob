@@ -13,6 +13,7 @@ import 'package:mandob/widgets/order_item.dart';
 
 import '../../../uitiles/local/cash_helper.dart';
 import '../login_screen/login_screen.dart';
+import 'packages/packedges.dart';
 
 class MandobScreen extends StatefulWidget {
   const MandobScreen({super.key});
@@ -178,10 +179,9 @@ class _MandobScreenState extends State<MandobScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  // cubit.getCustomerHistory();
-                  // Navigator.push(context, MaterialPageRoute(builder: (_){
-                  //   return const CustomerHistory();
-                  // }));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return const Packages();
+                  }));
                 },
                 child: Padding(
                   padding:
@@ -193,7 +193,7 @@ class _MandobScreenState extends State<MandobScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text('باقات التوصيل',
+                      Text('شراء باقات توصيل',
                           style: GoogleFonts.cairo(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w700,
