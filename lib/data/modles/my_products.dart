@@ -1,6 +1,5 @@
-class ProductModel {
-  static const String collectionName = 'products';
-
+class MyProduct {
+  String? productUid;
   String? productAddress;
   String? productPrice;
   String? productWeight;
@@ -14,9 +13,8 @@ class ProductModel {
   String? userEmail;
   String? userImage;
   String? userUid;
-  bool? isAccepted;
 
-  ProductModel({
+  MyProduct({
     required this.productAddress,
     required this.productPrice,
     required this.productWeight,
@@ -30,25 +28,26 @@ class ProductModel {
     required this.userEmail,
     required this.userImage,
     required this.userUid,
-    this.isAccepted = false,
+    required this.productUid,
   });
 
-  ProductModel.fromJson(Map<String, dynamic> json)
+  MyProduct.fromJson(Map<String, dynamic> json)
       : this(
-    productAddress: json["productAddress"],
-    productPrice: json["productPrice"],
-    productWeight: json["productWeight"],
-    productNotes: json["productNotes"],
-    productFrom: json["productFrom"],
-    productTo: json["productTo"],
-    productImage: json["productImage"],
-    productGovernment: json["productGovernment"],
-    userName: json["userName"],
-    userPhone: json["userPhone"],
-    userEmail: json["userEmail"],
-    userImage: json["userImage"],
-    userUid: json["userUid"],
-      isAccepted: json["isAccepted"]);
+          productAddress: json["productAddress"],
+          productPrice: json["productPrice"],
+          productWeight: json["productWeight"],
+          productNotes: json["productNotes"],
+          productFrom: json["productFrom"],
+          productTo: json["productTo"],
+          productImage: json["productImage"],
+          productGovernment: json["productGovernment"],
+          userName: json["userName"],
+          userPhone: json["userPhone"],
+          userEmail: json["userEmail"],
+          userImage: json["userImage"],
+          userUid: json["userUid"],
+          productUid: json["productUid"],
+        );
 
   Map<String, dynamic> toJson() {
     return {
@@ -65,7 +64,7 @@ class ProductModel {
       "userEmail": userEmail,
       "userImage": userImage,
       "userUid": userUid,
-      "isAccepted": isAccepted,
+      "userUid": productUid,
     };
   }
 }

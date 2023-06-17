@@ -69,6 +69,12 @@ class GetUserSuccessState extends MandoobStates {}
 
 class GetUserErrorState extends MandoobStates {}
 
+class GetUserDetailsLoadingState extends MandoobStates {}
+
+class GetUserDetailsSuccessState extends MandoobStates {}
+
+class GetUserDetailsErrorState extends MandoobStates {}
+
 class GetCustomerHistoryLoadingState extends MandoobStates {}
 
 class GetCustomerHistorySuccessState extends MandoobStates {}
@@ -80,3 +86,9 @@ class GetMandoobHistoryLoadingState extends MandoobStates {}
 class GetMandoobHistorySuccessState extends MandoobStates {}
 
 class GetMandoobHistoryErrorState extends MandoobStates {}
+
+class OnOrderAcceptedLoadingState extends MandoobStates {}
+
+class OnOrderAcceptedSuccessState extends MandoobStates {}
+
+class OnOrderAcceptedErrorState extends MandoobStates {}

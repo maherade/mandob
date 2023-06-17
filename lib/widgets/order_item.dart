@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
+import 'package:mandob/data/modles/my_products.dart';
 import 'package:mandob/data/modles/product_model.dart';
+import 'package:mandob/presentation/screens/customer/customer_details/customer_details.dart';
 import 'package:mandob/presentation/screens/mandob/order_details_screen/order_details.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
@@ -8,8 +11,9 @@ import '../styles/color_manager.dart';
 
 class OrderItem extends StatefulWidget {
   ProductModel productModel;
+  MyProduct? myProduct;
 
-  OrderItem(this.productModel, {super.key});
+  OrderItem({required this.productModel, this.myProduct});
 
   @override
   State<OrderItem> createState() => _OrderItemState();
@@ -104,7 +108,34 @@ class _OrderItemState extends State<OrderItem> {
                         buttonText: "موافق",
                         color: ColorManager.primaryColor,
                         color2: ColorManager.primaryColor,
-                        onPressed: () {},
+                        onPressed: () {
+                          widget.productModel.isAccepted = true;
+                          MandoobCubit.get(context)
+                              .onOrderAccepted(
+                            widget.productModel.productAddress,
+                            widget.productModel.productPrice,
+                            widget.productModel.productWeight,
+                            widget.productModel.productNotes,
+                            widget.productModel.productFrom,
+                            widget.productModel.productTo,
+                            widget.productModel.productImage,
+                            widget.productModel.productGovernment,
+                            widget.productModel.userName,
+                            widget.productModel.userPhone,
+                            widget.productModel.userEmail,
+                            widget.productModel.userImage,
+                            widget.productModel.userUid,
+                          )
+                              .then((value) {
+                            MandoobCubit.get(context).getUserDetails();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => CustomerDetailsScreen(
+                                      name: widget.productModel.userName!,
+                                      phone: widget.productModel.userPhone!,
+                                      pic: widget.productModel.userImage!,
+                                    )));
+                          });
+                        },
                       ),
                     ),
                     SizedBox(

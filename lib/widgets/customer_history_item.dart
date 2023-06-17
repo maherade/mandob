@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mandob/data/modles/product_model.dart';
 
 import '../styles/color_manager.dart';
 
 class CustomerHistoryItem extends StatefulWidget {
-  ProductModel productModel;
+  var productModel;
 
   CustomerHistoryItem(this.productModel, {super.key});
 

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
+import 'package:mandob/data/modles/my_products.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/data/modles/user_model.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -50,7 +51,8 @@ class MandoobCubit extends Cubit<MandoobStates> {
           name: name,
           email: email,
           phone: phone,
-          pic: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
+          pic:
+              'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
           isCustomer: CashHelper.getData(key: 'isCustomer'));
       await addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
@@ -99,8 +101,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     }
   }
 
-
-  List<String> governmentName=[
+  List<String> governmentName = [
     'محافظة الداخلية',
     'محافظة الظاهرة',
     'محافظة شمال الباطنة',
@@ -113,7 +114,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
     'محافظة مسقط',
     'محافظة مسندم'
   ];
-
 
   // upload product image
 
@@ -137,11 +137,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
       debugPrint('No Image selected.');
       emit(PickProductImageErrorState());
     }
-
   }
 
-
-  String ?productPath;
+  String? productPath;
 
   Future uploadProductImage({
     required String productAddress,
@@ -151,20 +149,20 @@ class MandoobCubit extends Cubit<MandoobStates> {
     required String productFrom,
     required String productTo,
     required String productGovernment,
-    required String ?userName,
-    required String ?userPhone,
-    required String ?userEmail,
-    required String ?userImage,
-    required String ?userUid,
-  }){
-
+    required String? userName,
+    required String? userPhone,
+    required String? userEmail,
+    required String? userImage,
+    required String? userUid,
+  }) {
     emit(UploadProductImageLoadingState());
-    return firebase_storage.FirebaseStorage.instance.ref()
-        .child('productImages/${Uri.file(productImage!.path).pathSegments.last}')
-        .putFile(productImage!).then((value) {
-
+    return firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child(
+            'productImages/${Uri.file(productImage!.path).pathSegments.last}')
+        .putFile(productImage!)
+        .then((value) {
       value.ref.getDownloadURL().then((value) {
-
         debugPrint('Upload Success');
         productPath = value;
 
@@ -181,28 +179,20 @@ class MandoobCubit extends Cubit<MandoobStates> {
             userImage: userImage,
             userName: userName,
             userPhone: userPhone,
-            userUid: userUid
-
-        );
+            userUid: userUid);
 
         emit(UploadProductImageSuccessState());
-
-      }).catchError((error){
-
+      }).catchError((error) {
         debugPrint('Error in Upload profileImage ${error.toString()}');
         emit(UploadProductImageErrorState());
-
       });
-
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in Upload profileImage ${error.toString()}');
       emit(UploadProductImageErrorState());
     });
   }
 
   void uploadProduct({
-
     required String productAddress,
     required String productPrice,
     required String productWeight,
@@ -211,17 +201,15 @@ class MandoobCubit extends Cubit<MandoobStates> {
     required String productTo,
     required String productImage,
     required String productGovernment,
-    required String ?userName,
-    required String ?userPhone,
-    required String ?userEmail,
-    required String ?userImage,
-    required String ?userUid,
-
-  }){
-
+    required String? userName,
+    required String? userPhone,
+    required String? userEmail,
+    required String? userImage,
+    required String? userUid,
+  }) {
     emit(AddProductLoadingStates());
 
-    ProductModel productModel =ProductModel(
+    ProductModel productModel = ProductModel(
         productAddress: productAddress,
         productFrom: productFrom,
         productNotes: productNotes,
@@ -234,8 +222,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
         userImage: userImage,
         userName: userName,
         userPhone: userPhone,
-        userUid: userUid
-    );
+        userUid: userUid);
 
     FirebaseFirestore.instance
         .collection('Products')
@@ -256,7 +243,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
             fromFirestore: (snapshot, options) =>
                 ProductModel.fromJson(snapshot.data()!),
             toFirestore: (product, options) => product.toJson());
-
   }
 
   Stream<QuerySnapshot<ProductModel>> getProductsFromFireStore() {
@@ -275,17 +261,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
       user = MyUser.fromJson(value.data()!);
       print(user!.name);
       emit(GetUserSuccessState());
-
-    }).catchError((error){
-
-
+    }).catchError((error) {
       emit(GetUserErrorState());
-
     });
-    
-    
-    
-    
   }
 
   // upload user image
@@ -310,66 +288,50 @@ class MandoobCubit extends Cubit<MandoobStates> {
       debugPrint('No Image selected.');
       emit(PickProfileImageErrorState());
     }
-
   }
 
+  String? profilePath;
 
-  String ?profilePath;
-
-  Future uploadUserImage(){
-
+  Future uploadUserImage() {
     emit(UploadProfileImageLoadingState());
-    return firebase_storage.FirebaseStorage.instance.ref()
+    return firebase_storage.FirebaseStorage.instance
+        .ref()
         .child('usersImage/${Uri.file(profileImage!.path).pathSegments.last}')
-        .putFile(profileImage!).then((value) {
-
+        .putFile(profileImage!)
+        .then((value) {
       value.ref.getDownloadURL().then((value) {
-
         debugPrint('Upload Success');
         profilePath = value;
 
-        FirebaseFirestore.instance.collection('users').doc(CashHelper.getData(key: 'isUid')).update({
-          'pic':'$profilePath'
-        }).then((value) {
-
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(CashHelper.getData(key: 'isUid'))
+            .update({'pic': '$profilePath'}).then((value) {
           debugPrint('Image Updates');
         });
 
         getUser();
         emit(UploadProfileImageSuccessState());
-
-      }).catchError((error){
-
+      }).catchError((error) {
         debugPrint('Error in Upload profileImage ${error.toString()}');
         emit(UploadProfileImageErrorState());
-
       });
-
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in Upload profileImage ${error.toString()}');
       emit(UploadProfileImageErrorState());
     });
   }
 
-  List<ProductModel> customerHistory=[];
+  List<ProductModel> customerHistory = [];
 
-  void getCustomerHistory(){
-
+  void getCustomerHistory() {
     emit(GetCustomerHistoryLoadingState());
-    customerHistory=[];
+    customerHistory = [];
     FirebaseFirestore.instance.collection('Products').get().then((value) {
-
       value.docs.forEach((element) {
-
-        if(element['userUid']==CashHelper.getData(key: 'isUid')){
-
+        if (element['userUid'] == CashHelper.getData(key: 'isUid')) {
           customerHistory.add(ProductModel.fromJson(element.data()));
-
-        }else{
-
-        }
-
+        } else {}
       });
 
       print(customerHistory.length);
@@ -384,5 +346,68 @@ class MandoobCubit extends Cubit<MandoobStates> {
 
   void getMandoobHistory() {
     emit(GetMandoobHistoryLoadingState());
+  }
+
+  Future<void> onOrderAccepted(
+    String? productAddress,
+    String? productPrice,
+    String? productWeight,
+    String? productNotes,
+    String? productFrom,
+    String? productTo,
+    String? productImage,
+    String? productGovernment,
+    String? userName,
+    String? userPhone,
+    String? userEmail,
+    String? userImage,
+    String? userUid,
+  ) async {
+    emit(OnOrderAcceptedLoadingState());
+    await FirebaseFirestore.instance
+        .collection('myProducts')
+        .doc('${CashHelper.getData(key: 'isUid')}')
+        .collection('orders')
+        .add({
+      "productAddress": productAddress,
+      "productPrice": productPrice,
+      "productWeight": productWeight,
+      "productNotes": productNotes,
+      "productFrom": productFrom,
+      "productTo": productTo,
+      "productImage": productImage,
+      "productGovernment": productGovernment,
+      "userName": userName,
+      "userPhone": userPhone,
+      "userEmail": userEmail,
+      "userImage": userImage,
+      "userUid": userUid,
+    }).then((value) {
+      emit(OnOrderAcceptedSuccessState());
+    }).catchError((error) {
+      print('Error in accept order is ${error.toString()}');
+      emit(OnOrderAcceptedErrorState());
+    });
+  }
+
+  List<MyProduct> myProduct = [];
+
+  Future<void> getUserDetails() async {
+    emit(GetUserDetailsLoadingState());
+    myProduct = [];
+    await FirebaseFirestore.instance
+        .collection('myProducts')
+        .doc('${CashHelper.getData(key: 'isUid')}')
+        .collection('orders')
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        myProduct.add(MyProduct.fromJson(element.data()));
+      });
+
+      emit(GetUserDetailsSuccessState());
+    }).catchError((error) {
+      emit(GetUserDetailsErrorState());
+    });
   }
 }

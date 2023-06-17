@@ -6,7 +6,6 @@ class MyUser {
   String? email;
   bool? isCustomer;
   String? pic;
-
   MyUser(
       {required this.uId,
       required this.name,

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,19 +16,14 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  BlocConsumer<MandoobCubit,MandoobStates>(
       listener: (context,state){
-
         if(state is PickProfileImageSuccessState){
-
           Navigator.push(context, MaterialPageRoute(builder: (_){
              return OpenProfileImage();
           }));
         }
-
       },
       builder: (context,state){
-
         var cubit=MandoobCubit.get(context);
-
         return Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(

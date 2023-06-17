@@ -132,7 +132,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                   filled: true,
                   prefixIcon: Icon(
                     widget.prefixIcon,
-                    color: ColorManager.primaryColor,
+                    color: Colors.grey,
                   ),
                   suffixIcon: widget.isPass == true
                       ? IconButton(
@@ -143,12 +143,12 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                           },
                           icon: isChecked == true
                               ? const Icon(
-                                  Icons.visibility_off,
-                                  color: ColorManager.primaryColor,
+                            Icons.visibility_off,
+                                  color: Colors.grey,
                                 )
                               : const Icon(
-                                  Icons.visibility,
-                                  color: ColorManager.primaryColor,
+                            Icons.visibility,
+                                  color: Colors.grey,
                                 ),
                         )
                       : IconButton(

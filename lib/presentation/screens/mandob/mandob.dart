@@ -18,8 +18,8 @@ import 'packages/packedges.dart';
 class MandobScreen extends StatefulWidget {
   const MandobScreen({super.key});
 
-  static String government='';
-  static List <ProductModel>allProducts=[];
+  static String government = '';
+  static List<ProductModel> allProducts = [];
 
   @override
   State<MandobScreen> createState() => _MandobScreenState();
@@ -296,157 +296,100 @@ class _MandobScreenState extends State<MandobScreen> {
                         MandobScreen.allProducts.add(element);
                       }
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة الظاهرة'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة الظاهرة') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة الظاهرة'){
+                      if (element.productGovernment == 'محافظة الظاهرة') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة شمال الباطنة'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة شمال الباطنة') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة شمال الباطنة'){
+                      if (element.productGovernment == 'محافظة شمال الباطنة') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة جنوب الباطنة'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة جنوب الباطنة') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة جنوب الباطنة'){
+                      if (element.productGovernment == 'محافظة جنوب الباطنة') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة البريمي'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة البريمي') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة البريمي'){
+                      if (element.productGovernment == 'محافظة البريمي') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة شمال الشرقية'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة شمال الشرقية') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة شمال الشرقية'){
+                      if (element.productGovernment == 'محافظة شمال الشرقية') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة الوسطى'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة الوسطى') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة الوسطى'){
+                      if (element.productGovernment == 'محافظة الوسطى') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة جنوب الشرقية'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة جنوب الشرقية') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة جنوب الشرقية'){
+                      if (element.productGovernment == 'محافظة جنوب الشرقية') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة ظفار'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة ظفار') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة ظفار'){
+                      if (element.productGovernment == 'محافظة ظفار') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة مسقط'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة مسقط') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة مسقط'){
+                      if (element.productGovernment == 'محافظة مسقط') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة مسندم'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة مسندم') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة مسندم'){
+                      if (element.productGovernment == 'محافظة مسندم') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else {
-
-                    MandobScreen.allProducts=[];
+                  } else {
+                    MandobScreen.allProducts = [];
                     product.forEach((element) {
-
-                        MandobScreen.allProducts.add(element);
-
+                      MandobScreen.allProducts.add(element);
                     });
-
                   }
 
-
-
-                  if (MandobScreen.allProducts.isEmpty ) {
+                  if (MandobScreen.allProducts.isEmpty) {
                     return Center(
                       child: Column(
                         children: [
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                          ),
                           Lottie.asset(
                             "assets/images/empty.json",
                             fit: BoxFit.fill,
@@ -467,7 +410,9 @@ class _MandobScreenState extends State<MandobScreen> {
                     child: ListView.builder(
                         itemCount: MandobScreen.allProducts.length,
                         itemBuilder: (context, index) {
-                          return OrderItem(MandobScreen.allProducts[index]);
+                          return OrderItem(
+                            productModel: MandobScreen.allProducts[index],
+                          );
                         }),
                   );
                 })
