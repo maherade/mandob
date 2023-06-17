@@ -256,6 +256,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
             fromFirestore: (snapshot, options) =>
                 ProductModel.fromJson(snapshot.data()!),
             toFirestore: (product, options) => product.toJson());
+
   }
 
   Stream<QuerySnapshot<ProductModel>> getProductsFromFireStore() {
@@ -380,9 +381,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
 
     });
 
-
-
   }
+
+
 
 
 
