@@ -63,12 +63,20 @@ class UploadProfileImageSuccessState extends MandoobStates {}
 class UploadProfileImageErrorState extends MandoobStates {}
 
 //Get User
-class GetUserLoadingState  extends MandoobStates{}
-class GetUserSuccessState  extends MandoobStates{}
-class GetUserErrorState  extends MandoobStates{}
+class GetUserLoadingState extends MandoobStates {}
 
-class GetCustomerHistoryLoadingState  extends MandoobStates{}
-class GetCustomerHistorySuccessState  extends MandoobStates{}
-class GetCustomerHistoryErrorState  extends MandoobStates{}
+class GetUserSuccessState extends MandoobStates {}
 
+class GetUserErrorState extends MandoobStates {}
 
+class GetCustomerHistoryLoadingState extends MandoobStates {}
+
+class GetCustomerHistorySuccessState extends MandoobStates {}
+
+class GetCustomerHistoryErrorState extends MandoobStates {}
+
+class GetMandoobHistoryLoadingState extends MandoobStates {}
+
+class GetMandoobHistorySuccessState extends MandoobStates {}
+
+class GetMandoobHistoryErrorState extends MandoobStates {}

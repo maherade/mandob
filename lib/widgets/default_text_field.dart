@@ -114,10 +114,13 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                       fontSize: 16.0, color: widget.hintColor),
                   border: InputBorder.none,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                      borderRadius: BorderRadius.circular(
+                        12,
+                      ),
+                      borderSide: const BorderSide(color: Colors.white)),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white)),
                   errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

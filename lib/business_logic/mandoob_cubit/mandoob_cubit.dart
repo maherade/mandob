@@ -374,17 +374,15 @@ class MandoobCubit extends Cubit<MandoobStates> {
 
       print(customerHistory.length);
       emit(GetCustomerHistorySuccessState());
-    }).catchError((error){
-
+    }).catchError((error) {
       print('Error in getCustomerHistory is ${error.toString()}');
       emit(GetCustomerHistoryErrorState());
-
     });
-
   }
 
+  List<ProductModel> mandoobHistory = [];
 
-
-
-
+  void getMandoobHistory() {
+    emit(GetMandoobHistoryLoadingState());
+  }
 }

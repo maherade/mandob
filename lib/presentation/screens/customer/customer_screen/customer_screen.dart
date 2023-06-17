@@ -7,7 +7,7 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/customer/customer_history/customer_history.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
-import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
+import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/default_text_field.dart';
@@ -162,8 +162,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       onTap: (){
                         CashHelper.removeData(key: 'isUid');
                         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                        const LoginScreen()
-                        ), (Route<dynamic> route) => false);
+                        const StartScreen()), (Route<dynamic> route) => false);
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),

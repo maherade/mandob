@@ -4,16 +4,16 @@ import 'package:mandob/data/modles/product_model.dart';
 
 import '../styles/color_manager.dart';
 
-class CustomerHistoryItem extends StatefulWidget {
+class MandoobHistoryItem extends StatefulWidget {
   ProductModel productModel;
 
-  CustomerHistoryItem(this.productModel, {super.key});
+  MandoobHistoryItem(this.productModel, {super.key});
 
   @override
-  State<CustomerHistoryItem> createState() => _CustomerHistoryItemState();
+  State<MandoobHistoryItem> createState() => _MandoobHistoryItemState();
 }
 
-class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
+class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +41,7 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: SizedBox(
+            child: Container(
               width: double.infinity,
               child: Image.network(
                 '${widget.productModel.productImage}',
@@ -53,8 +53,9 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
-
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .01,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -70,8 +71,9 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
-
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .01,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -87,8 +89,9 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
-
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .01,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -103,8 +106,9 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.sizeOf(context).height*.01,),
-
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .01,
+              ),
               Row(
                 children: [
                   Expanded(
