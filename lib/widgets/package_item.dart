@@ -18,41 +18,50 @@ class PackageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
-    return MaterialButton(
-      onPressed: () {
-        onPressed();
-      },
-      height: mediaQuery.height * .2,
-      minWidth: mediaQuery.width * .6,
-      child: Container(
-        // width: mediaQuery.width * .55,
-        // height: mediaQuery.height * .2,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: backgroundColor),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-                child: Text(
-              "$tittle",
-              style: GoogleFonts.cairo(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w700,
-                color: textColor,
-              ),
-              textAlign: TextAlign.center,
-            )),
-            Center(
-                child: Text(
-              "$price",
-              style: GoogleFonts.cairo(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w700,
-                color: textColor,
-              ),
-              textAlign: TextAlign.center,
-            )),
-          ],
+    return Material(
+      elevation: 10,
+      color: backgroundColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+      ),
+
+      child: MaterialButton(
+        elevation: 10,
+        onPressed: () {
+          onPressed();
+        },
+        height: mediaQuery.height * .2,
+        minWidth: mediaQuery.width * .6,
+        child: Container(
+          // width: mediaQuery.width * .55,
+          // height: mediaQuery.height * .2,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), color: backgroundColor),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Text(
+                "$tittle",
+                style: GoogleFonts.cairo(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700,
+                  color: textColor,
+                ),
+                textAlign: TextAlign.center,
+              )),
+              Center(
+                  child: Text(
+                "$price",
+                style: GoogleFonts.cairo(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700,
+                  color: textColor,
+                ),
+                textAlign: TextAlign.center,
+              )),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
+import 'package:mandob/presentation/screens/admin/admin_screen.dart';
 import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
 import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/presentation/screens/register_screen/register_screen.dart';
@@ -84,11 +85,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     if (CashHelper.getData(key: 'isCustomer') ==
                                         true) {
-                                      validateForm(const CustomerScreen());
+                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
+                                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                                          return AdminScreen();
+                                        }));
+                                      }
+                                      else{
+                                        validateForm(const CustomerScreen());
+                                      }
                                     } else if (CashHelper.getData(
                                             key: 'isCustomer') ==
                                         false) {
-                                      validateForm(const MandobScreen());
+                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
+                                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                                          return AdminScreen();
+                                        }));
+                                      }
+                                      else{
+                                        validateForm(const MandobScreen());
+
+                                      }
                                     }
                                   },
                                   width: mediaQuery.width * .6,
@@ -158,11 +174,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     if (CashHelper.getData(key: 'isCustomer') ==
                                         true) {
-                                      validateForm(const CustomerScreen());
+                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
+                                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                                          return AdminScreen();
+                                        }));
+                                      }
+                                      else{
+                                        validateForm(const CustomerScreen());
+                                      }
                                     } else if (CashHelper.getData(
-                                            key: 'isCustomer') ==
+                                        key: 'isCustomer') ==
                                         false) {
-                                      validateForm(const MandobScreen());
+                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
+                                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                                          return AdminScreen();
+                                        }));
+                                      }
+                                      else{
+                                        validateForm(const MandobScreen());
+
+                                      }
                                     }
                                   },
                                   width: mediaQuery.width * .6,
@@ -210,6 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void validateForm(Widget widget) {
     if (formKey.currentState!.validate()) {
+
       MandoobCubit.get(context).loginWithFirebaseAuth(
         emailController.text,
         passwordController.text,

@@ -87,8 +87,39 @@ class GetMandoobHistorySuccessState extends MandoobStates {}
 
 class GetMandoobHistoryErrorState extends MandoobStates {}
 
+
+
+class PickPayImageSuccessState extends MandoobStates {}
+
+class PickPayImageErrorState extends MandoobStates {}
+
+class UploadPayImageLoadingState extends MandoobStates {}
+
+class UploadPayImageSuccessState extends MandoobStates {}
+
+class UploadPayImageErrorState extends MandoobStates {}
+
+class GetScreensLoadingState extends MandoobStates {}
+
+class GetScreensSuccessState extends MandoobStates {}
+
+class GetScreensErrorState extends MandoobStates {}
+
+class IsAcceptedLoadingState extends MandoobStates {}
+
+class IsAcceptedSuccessState extends MandoobStates {}
+
+class IsAcceptedErrorState extends MandoobStates {}
+
+class IsRefusedLoadingState extends MandoobStates {}
+
+class IsRefusedSuccessState extends MandoobStates {}
+
+class IsRefusedErrorState extends MandoobStates {}
+
 class OnOrderAcceptedLoadingState extends MandoobStates {}
 
 class OnOrderAcceptedSuccessState extends MandoobStates {}
 
 class OnOrderAcceptedErrorState extends MandoobStates {}
+

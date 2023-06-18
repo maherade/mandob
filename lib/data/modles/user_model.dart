@@ -4,6 +4,7 @@ class MyUser {
   String? name;
   String? phone;
   String? email;
+  int? count;
   bool? isCustomer;
   String? pic;
   MyUser(
@@ -11,6 +12,7 @@ class MyUser {
       required this.name,
       required this.phone,
       required this.email,
+      required this.count,
       this.isCustomer = false,
       required this.pic
       });
@@ -21,6 +23,7 @@ class MyUser {
           name: json["name"],
           phone: json["phone"],
           email: json["email"],
+          count: json["count"],
           isCustomer: json["isCustomer"],
           pic: json["pic"],
         );
@@ -31,6 +34,7 @@ class MyUser {
       "name": name,
       "phone": phone,
       "email": email,
+      "count": count,
       "isCustomer": isCustomer,
       "pic": pic,
     };

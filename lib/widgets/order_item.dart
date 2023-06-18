@@ -11,9 +11,8 @@ import '../styles/color_manager.dart';
 
 class OrderItem extends StatefulWidget {
   ProductModel productModel;
-  MyProduct? myProduct;
 
-  OrderItem({required this.productModel, this.myProduct});
+  OrderItem({required this.productModel});
 
   @override
   State<OrderItem> createState() => _OrderItemState();

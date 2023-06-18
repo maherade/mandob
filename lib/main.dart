@@ -8,8 +8,10 @@ import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/data/modles/product_model.dart';
+import 'package:mandob/presentation/screens/admin/admin_screen.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
+import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
@@ -34,14 +36,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (BuildContext context) => MandoobCubit()
-              ..getUser()
-              ..getCustomerHistory()
-              ..getUserDetails()),
-        BlocProvider(
-            create: (BuildContext context) =>
-                LocalizationCubit()..fetchLocalization()),
+        BlocProvider(create: (BuildContext context) => MandoobCubit()..getUser()..getCustomerHistory()..getPayScreens()),
+        BlocProvider(create: (BuildContext context) => LocalizationCubit()..fetchLocalization()),
       ],
       child: BlocConsumer<LocalizationCubit,LocalizationStates>(
         listener: (context,state){},

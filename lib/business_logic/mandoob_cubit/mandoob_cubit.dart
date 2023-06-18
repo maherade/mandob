@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/data/modles/my_products.dart';
+import 'package:mandob/data/modles/pay_model.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/data/modles/user_model.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -53,7 +54,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
           phone: phone,
           pic:
               'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
-          isCustomer: CashHelper.getData(key: 'isCustomer'));
+          isCustomer: CashHelper.getData(key: 'isCustomer'),
+          count: 100
+      );
       await addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
         customToast(
@@ -410,4 +413,205 @@ class MandoobCubit extends Cubit<MandoobStates> {
       emit(GetUserDetailsErrorState());
     });
   }
+
+
+
+
+  // upload pay Screen shot
+
+  File? payImage;
+
+  ImageProvider pay = const AssetImage('assets/images/money.jpg');
+
+  var picker3 = ImagePicker();
+
+  Future<void> getPayImage() async {
+    final pickedFile = await picker3.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      payImage = File(pickedFile.path);
+      pay = FileImage(payImage!);
+      debugPrint('Path is ${pickedFile.path}');
+      emit(PickPayImageSuccessState());
+    } else {
+      debugPrint('No Image selected.');
+      emit(PickPayImageErrorState());
+    }
+
+  }
+
+
+  String ?payPath;
+
+  Future uploadPayImage({
+    required int num
+  }){
+
+    emit(UploadPayImageLoadingState());
+    return firebase_storage.FirebaseStorage.instance.ref()
+        .child('payImages/${Uri.file(payImage!.path).pathSegments.last}')
+        .putFile(payImage!).then((value) {
+
+      value.ref.getDownloadURL().then((value) {
+
+        debugPrint('Upload Success');
+        payPath = value;
+
+
+        uploadPayModel(screen: payPath!,num: num);
+
+        getPayScreens();
+        emit(UploadPayImageSuccessState());
+
+      }).catchError((error){
+
+        debugPrint('Error in Upload profileImage ${error.toString()}');
+        emit(UploadPayImageErrorState());
+
+      });
+
+    }).catchError((error){
+
+      debugPrint('Error in Upload profileImage ${error.toString()}');
+      emit(UploadPayImageErrorState());
+    });
+  }
+
+
+  void uploadPayModel({
+    required String screen,
+    required int num
+  }){
+
+    emit(UploadPayImageLoadingState());
+
+    PayModel payModel= PayModel(
+        uId: '${CashHelper.getData(key: 'isUid')}',
+        name: user!.name,
+        phone: user!.phone,
+        isVerified: false,
+        isRefuse: false,
+        num: num,
+        count: user!.count,
+        screen: screen,
+        pic: user!.pic
+    );
+
+
+    FirebaseFirestore.instance
+        .collection('ScreenShots')
+        .doc('${CashHelper.getData(key: 'isUid')}').set(payModel.toJson()).then((value) {
+
+      emit(UploadPayImageSuccessState());
+
+    }).catchError((error){
+      print('Error is ${error.toString()}');
+
+      emit(UploadPayImageErrorState());
+    });
+
+
+  }
+
+
+  List<PayModel> screenShotList=[];
+
+  void getPayScreens(){
+
+    emit(GetScreensLoadingState());
+    screenShotList=[];
+    FirebaseFirestore.instance
+        .collection('ScreenShots')
+        .get().then((value) {
+
+      value.docs.forEach((element) {
+
+        if(element['isVerified']!=true && element['isRefuse']!=true)
+        {
+          screenShotList.add(PayModel.fromJson(element.data()));
+        }
+
+
+      });
+
+      emit(GetScreensSuccessState());
+
+
+    }).catchError((error){
+      print('Error is ${error.toString()}');
+
+      emit(GetScreensErrorState());
+    });
+
+
+  }
+
+  Future isAcceptedPay({
+    required String uId,
+    required int num,
+    required int count,
+  })async{
+
+    emit(IsAcceptedLoadingState());
+
+    FirebaseFirestore.instance.collection('ScreenShots').doc(uId).update({
+      'isVerified':true
+    }).then((value) {
+
+      FirebaseFirestore.instance.collection('users').doc(uId).update({
+        'count':count+num
+      });
+      getPayScreens();
+
+      emit(IsAcceptedSuccessState());
+
+
+    }).catchError((error){
+
+      print('Error is ${error.toString()}');
+
+      emit(IsAcceptedErrorState());
+
+    });
+
+
+
+  }
+
+  Future isRefusedPay({
+    required String uId,
+  })async{
+
+    emit(IsRefusedLoadingState());
+
+    FirebaseFirestore.instance.collection('ScreenShots').doc(uId).update({
+      'isRefuse':true
+    }).then((value) {
+
+      getPayScreens();
+      emit(IsRefusedSuccessState());
+
+    }).catchError((error){
+
+      print('Error is ${error.toString()}');
+
+      emit(IsRefusedErrorState());
+
+    });
+
+  }
+
+  Future<void> toPayPal() async {
+    String url =
+        "https://www.paypal.com/paypalme/MaherA884";
+    await launch(url, forceSafariVC: false);
+    emit(LaunchState());
+  }
+
+
+
+
+
 }
