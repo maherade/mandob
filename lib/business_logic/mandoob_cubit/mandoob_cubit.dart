@@ -558,17 +558,15 @@ class MandoobCubit extends Cubit<MandoobStates> {
   }
 
   Future<void> toPayPal() async {
-    String url = "https://www.paypal.com/paypalme/MaherA884";
+    String url = "https://www.paypal.com/paypalme/alsawafi65";
     await launch(url, forceSafariVC: false);
     emit(LaunchState());
   }
 
-  final int num = 1;
-
   Future<void> updateMandoobCounter() {
     CollectionReference updateRef = getUsersCollection();
     return updateRef.doc(user!.uId).update({
-      "count": (user!.count)! - num,
+      "count": (user!.count)! - 1,
     });
   }
 

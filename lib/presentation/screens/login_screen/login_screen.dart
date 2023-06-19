@@ -226,7 +226,34 @@ class _LoginScreenState extends State<LoginScreen> {
                                             color: ColorManager.primaryColor),
                                       )),
                                 ],
-                              )
+                              ),
+                              // TextButton(
+                              //   onPressed: (){
+                              //     MandoobCubit.get(context).getUser(uid: 'NFbh7U5BonVDKTIjT2t1');
+                              //     Navigator.push(context, MaterialPageRoute(builder: (_){
+                              //
+                              //       return const DriverScreen();
+                              //
+                              //     }));
+                              //
+                              //     // if (cubit.isCheckBoxTrue == true) {
+                              //     //
+                              //     //
+                              //     //
+                              //     // } else{
+                              //     //   customToast(title:AppLocalizations.of(context)!.translate('privacyToast').toString(), color: Colors.red);
+                              //     // }
+                              //   },
+                              //   child: Text(
+                              //     AppLocalizations.of(context)!.translate('loginAsAGuest').toString(),
+                              //     style: GoogleFonts.almarai(
+                              //         fontSize: 17.0,
+                              //         fontWeight: FontWeight.w700,
+                              //         color: ColorManager.textColor,
+                              //         decoration: TextDecoration.underline
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

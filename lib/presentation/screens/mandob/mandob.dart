@@ -35,16 +35,13 @@ class _MandobScreenState extends State<MandobScreen> {
 
   @override
   void initState() {
-    setState(() {
-      MandoobCubit.get(context).updateMandoobCounter();
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final Uri iosWhatsapp = Uri.parse('whatsapp://wa.me/+96896519951');
-    final Uri androidWhatsapp = Uri.parse('whatsapp://send?phone=+96896519951');
+    final Uri iosWhatsapp = Uri.parse('whatsapp://wa.me/+96872261622');
+    final Uri androidWhatsapp = Uri.parse('whatsapp://send?phone=+96872261622');
     var cubit = MandoobCubit.get(context);
 
     return Scaffold(
@@ -81,8 +78,8 @@ class _MandobScreenState extends State<MandobScreen> {
                               onTap: () {
                                 setState(() {
                                   MandobScreen.government =
-                                  MandoobCubit.get(context)
-                                      .governmentName[index];
+                                      MandoobCubit.get(context)
+                                          .governmentName[index];
                                 });
                                 Navigator.pop(context);
                               },
@@ -106,7 +103,7 @@ class _MandobScreenState extends State<MandobScreen> {
                             );
                           },
                           itemCount:
-                          MandoobCubit.get(context).governmentName.length),
+                              MandoobCubit.get(context).governmentName.length),
                     );
                   }).then((value) {});
             },
@@ -163,7 +160,6 @@ class _MandobScreenState extends State<MandobScreen> {
               const SizedBox(
                 height: 5,
               ),
-
               // حسابي
               GestureDetector(
                 onTap: () {
@@ -173,11 +169,11 @@ class _MandobScreenState extends State<MandobScreen> {
                 },
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(Icons.person),
+                      const Icon(Icons.person_2_outlined),
                       const SizedBox(
                         width: 10,
                       ),
@@ -191,7 +187,6 @@ class _MandobScreenState extends State<MandobScreen> {
                   ),
                 ),
               ),
-
               // عدد الباقات المتبقية
               Padding(
                 padding:
@@ -199,7 +194,7 @@ class _MandobScreenState extends State<MandobScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(Icons.backpack),
+                    const Icon(Icons.backpack_outlined),
                     const SizedBox(
                       width: 10,
                     ),
@@ -212,34 +207,29 @@ class _MandobScreenState extends State<MandobScreen> {
                   ],
                 ),
               ),
-
               //شراء الباقات
               GestureDetector(
                 onTap: () {
                   showDialog<String>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
-                      title: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image(
-                          height: MediaQuery.of(context).size.height * .07,
-                          // width: MediaQuery.of(context).size.height * .04,
-                          color: ColorManager.primaryColor,
-                          image: const AssetImage('assets/images/check.png'),
-                        ),
-                      ),
-                      content: Text(
-                        "اختر طريقة الدفع المناسبة لك",
-                        style: GoogleFonts.almarai(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w500,
-                            color: ColorManager.textColor),
-                      ),
+                      title: Lottie.asset("assets/images/money.json",
+                          height: MediaQuery.sizeOf(context).height * .25),
                       actions: [
                         Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Text(
+                                "اختر طريقة الدفع المناسبة لك",
+                                style: GoogleFonts.almarai(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: ColorManager.textColor),
+                              ),
+                              SizedBox(
+                                height: MediaQuery.sizeOf(context).height * .02,
+                              ),
                               ElevatedButton(
                                   onPressed: () {
                                     MandoobCubit.get(context).getUserDetails();
@@ -249,7 +239,7 @@ class _MandobScreenState extends State<MandobScreen> {
                                     ));
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.blue.shade900,
+                                    backgroundColor: Colors.blue.shade900,
                                   ),
                                   child: Text(
                                     "الدفع عن طريق باي بال",
@@ -258,6 +248,9 @@ class _MandobScreenState extends State<MandobScreen> {
                                         fontWeight: FontWeight.w300,
                                         color: Colors.white),
                                   )),
+                              SizedBox(
+                                height: MediaQuery.sizeOf(context).height * .01,
+                              ),
                               ElevatedButton(
                                   onPressed: () {
                                     Platform.isIOS
@@ -265,7 +258,7 @@ class _MandobScreenState extends State<MandobScreen> {
                                         : launchUrl(androidWhatsapp);
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.green.shade900,
+                                    backgroundColor: Colors.green.shade900,
                                   ),
                                   child: Text(
                                     "التواصل مع المسئول للدفع",
@@ -283,7 +276,7 @@ class _MandobScreenState extends State<MandobScreen> {
                 },
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -293,7 +286,7 @@ class _MandobScreenState extends State<MandobScreen> {
                       ),
                       Text('شراء باقات توصيل',
                           style: GoogleFonts.cairo(
-                            fontSize: 16.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w700,
                             color: ColorManager.textColor,
                           )),
@@ -301,7 +294,6 @@ class _MandobScreenState extends State<MandobScreen> {
                   ),
                 ),
               ),
-
               // مرجعي
               GestureDetector(
                 onTap: () {
@@ -312,7 +304,7 @@ class _MandobScreenState extends State<MandobScreen> {
                 },
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -322,7 +314,7 @@ class _MandobScreenState extends State<MandobScreen> {
                       ),
                       Text('مرجعي',
                           style: GoogleFonts.cairo(
-                            fontSize: 16.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w700,
                             color: ColorManager.textColor,
                           )),
@@ -330,7 +322,34 @@ class _MandobScreenState extends State<MandobScreen> {
                   ),
                 ),
               ),
-
+              //الابلاغ عن مشكلة
+              GestureDetector(
+                onTap: () {
+                  cubit.getCustomerHistory();
+                  Platform.isIOS
+                      ? launchUrl(iosWhatsapp)
+                      : launchUrl(androidWhatsapp);
+                },
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.report_problem_outlined),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text('الابلاغ عن مشكلة',
+                          style: GoogleFonts.cairo(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w700,
+                            color: ColorManager.textColor,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
               // تسجيل الخروج
               GestureDetector(
                 onTap: () {
@@ -338,11 +357,11 @@ class _MandobScreenState extends State<MandobScreen> {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (context) => const StartScreen()),
-                          (Route<dynamic> route) => false);
+                      (Route<dynamic> route) => false);
                 },
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -352,7 +371,7 @@ class _MandobScreenState extends State<MandobScreen> {
                       ),
                       Text('تسجيل الخروج',
                           style: GoogleFonts.cairo(
-                            fontSize: 16.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w700,
                             color: ColorManager.textColor,
                           )),
