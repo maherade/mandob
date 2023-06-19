@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mandob/styles/color_manager.dart';
+import 'package:mandob/widgets/defualtButton.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../widgets/default_text_field.dart';
 import '../../mandob/mandob.dart';
@@ -12,11 +16,12 @@ class CustomerDetailsScreen extends StatelessWidget {
   final String phone;
   final String pic;
 
-  const CustomerDetailsScreen(
-      {super.key, required this.pic, required this.phone, required this.name});
+  const CustomerDetailsScreen({super.key, required this.pic, required this.phone, required this.name});
 
   @override
   Widget build(BuildContext context) {
+    final Uri iosWhatsapp = Uri.parse('whatsapp://wa.me/+968$phone');
+    final Uri androidWhatsapp = Uri.parse('whatsapp://send?phone=+968$phone');
     return Scaffold(
       backgroundColor: ColorManager.lightColor,
       appBar: AppBar(
@@ -29,11 +34,13 @@ class CustomerDetailsScreen extends StatelessWidget {
           statusBarColor: ColorManager.lightColor,
         ),
         leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => const MandobScreen()));
-            },
-            icon: const Icon(Icons.arrow_back_ios)),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const MandobScreen()),
+            );
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         title: Text(
           'تفاصيل الزبون',
           style: GoogleFonts.cairo(
@@ -52,10 +59,11 @@ class CustomerDetailsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
+                height: MediaQuery.sizeOf(context).height * .5,
                 child: Image.network(
-                  "${pic}",
+                  pic,
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -73,7 +81,7 @@ class CustomerDetailsScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               DefaultTextField(
-                  hintText: "${name}",
+                  hintText: name,
                   isPass: false,
                   isEnabled: false,
                   prefixIcon: Icons.drive_file_rename_outline,
@@ -82,7 +90,6 @@ class CustomerDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * .015,
               ),
-
               Text(
                 'رقم الهاتف',
                 style: GoogleFonts.cairo(
@@ -94,7 +101,7 @@ class CustomerDetailsScreen extends StatelessWidget {
               ),
               Container(
                 padding:
-                    EdgeInsets.all(MediaQuery.sizeOf(context).height * .02),
+                EdgeInsets.all(MediaQuery.sizeOf(context).height * .02),
                 alignment: AlignmentDirectional.centerStart,
                 height: MediaQuery.sizeOf(context).height * .07,
                 width: double.infinity,
@@ -111,7 +118,7 @@ class CustomerDetailsScreen extends StatelessWidget {
                       width: MediaQuery.sizeOf(context).height * .01,
                     ),
                     Text(
-                      "${phone}",
+                      phone,
                       style: GoogleFonts.almarai(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w300,
@@ -120,6 +127,22 @@ class CustomerDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .04,
+              ),
+              DefaultButton(
+                buttonText: "تواصل عبر الواتساب",
+                onPressed: () {
+                  if (Platform.isIOS) {
+                    return launchUrl(iosWhatsapp);
+                  } else {
+                    return launchUrl(androidWhatsapp);
+                  }
+                },
+                color: Colors.green.shade700,
+                color2: Colors.green.shade700,
+                width: MediaQuery.sizeOf(context).width * .3,
+              )
             ],
           ),
         ),

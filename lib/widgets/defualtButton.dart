@@ -13,16 +13,16 @@ class DefaultButton extends StatelessWidget {
   String ?icon;
   double ? width;
 
-  DefaultButton({
-    required this.buttonText,
-    required this.onPressed,
-    this.icon,
-    this.radies=7,
-    this.color = ColorManager.primaryColor,
-    this.color2 = ColorManager.white,
-    this.textColor = Colors.white,
-    this.width = double.infinity,
-    Key? key}) : super(key: key);
+  DefaultButton(
+      {required this.buttonText,
+      required this.onPressed,
+      this.icon,
+      this.radies = 7,
+      this.color = ColorManager.primaryColor,
+      this.color2 = ColorManager.white,
+      this.textColor = Colors.white,
+      this.width,
+      Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

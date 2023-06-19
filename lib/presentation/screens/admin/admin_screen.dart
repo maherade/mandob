@@ -39,122 +39,133 @@ class AdminScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              title: Text(
-                'صفحه الادمن',
-                style: GoogleFonts.cairo(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
-                  color: ColorManager.textColor,
-                ),
-                textAlign: TextAlign.center,
+            title: Text(
+              'صفحه الادمن',
+              style: GoogleFonts.cairo(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+                color: ColorManager.textColor,
               ),
+              textAlign: TextAlign.center,
             ),
-            body: Container(
-              child: Column(
-                children: [
-                  cubit.screenShotList.isEmpty?
-                  Center(
-                    child: Column(
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.18,),
-                        Lottie.asset(
-                          "assets/images/empty.json",
-                          fit: BoxFit.fill,
-                          width: MediaQuery.of(context).size.height * 0.25,
-                          height: MediaQuery.of(context).size.height * 0.25,
-                        ),
-
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("لا يوجد طلبات في حاجه الي تاكيد حتي الان",
-                              style: GoogleFonts.cairo(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w700,
-                                color: ColorManager.textColor,
-                              ),
-                              textAlign: TextAlign.center
+          ),
+          body: Column(
+            children: [
+              cubit.screenShotList.isEmpty
+                  ? Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.18,
                           ),
-                        )
-                      ],
-                    ),
-                  ):
-                  Expanded(
-                    child: ListView.separated(
-
-                        itemBuilder: (context,index){
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (_){
-                                  return AdminVerifiedScreen(
-                                    screen: '${cubit.screenShotList[index].screen}',
-                                    uId: cubit.screenShotList[index].uId!,
-                                    count: cubit.screenShotList[index].count!,
-                                    num: cubit.screenShotList[index].num!,
-                                  );
-                                }));
-                              },
-                              child: Material(
-                                borderRadius:BorderRadius.circular(12) ,
-                                color: ColorManager.lightColor2,
-                                elevation: 10,
-                                child: Container(
-                                  height: MediaQuery.sizeOf(context).height*.15,
-                                  decoration: BoxDecoration(
-                                      color: ColorManager.lightColor2,
-                                      borderRadius: BorderRadius.circular(12)
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundImage:NetworkImage('${cubit.screenShotList[index].pic}'),
-                                        radius: 35,
-                                      ),
-                                      SizedBox(width: 15,),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(" الاسم :  ${cubit.screenShotList[index].name}",
-                                              style: GoogleFonts.cairo(
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.w700,
-                                                color: ColorManager.textColor,
-                                              ),
-                                              textAlign: TextAlign.center
-                                          ),
-                                          SizedBox(height: 10,),
-                                          Text(" رقم الهاتف :  ${cubit.screenShotList[index].phone}",
-                                              style: GoogleFonts.cairo(
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.w700,
-                                                color: ColorManager.textColor,
-                                              ),
-                                              textAlign: TextAlign.center
-                                          ),
-
-
-                                        ],
-                                      )
-                                    ],
+                          Lottie.asset(
+                            "assets/images/empty.json",
+                            fit: BoxFit.fill,
+                            width: MediaQuery.of(context).size.height * 0.25,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.04,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:
+                                Text("لا يوجد طلبات في حاجه الي تاكيد حتي الان",
+                                    style: GoogleFonts.cairo(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w700,
+                                      color: ColorManager.textColor,
+                                    ),
+                                    textAlign: TextAlign.center),
+                          )
+                        ],
+                      ),
+                    )
+                  : Expanded(
+                      child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (_) {
+                                    return AdminVerifiedScreen(
+                                      screen:
+                                          '${cubit.screenShotList[index].screen}',
+                                      uId: cubit.screenShotList[index].uId!,
+                                      count: cubit.screenShotList[index].count!,
+                                      num: cubit.screenShotList[index].num!,
+                                    );
+                                  }));
+                                },
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: ColorManager.lightColor2,
+                                  elevation: 10,
+                                  child: Container(
+                                    height:
+                                        MediaQuery.sizeOf(context).height * .15,
+                                    decoration: BoxDecoration(
+                                        color: ColorManager.lightColor2,
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              '${cubit.screenShotList[index].pic}'),
+                                          radius: 35,
+                                        ),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                " الاسم :  ${cubit.screenShotList[index].name}",
+                                                style: GoogleFonts.cairo(
+                                                  fontSize: 15.0,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: ColorManager.textColor,
+                                                ),
+                                                textAlign: TextAlign.center),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                                " رقم الهاتف :  ${cubit.screenShotList[index].phone}",
+                                                style: GoogleFonts.cairo(
+                                                  fontSize: 15.0,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: ColorManager.textColor,
+                                                ),
+                                                textAlign: TextAlign.center),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context,index){
-                          return SizedBox(height: 15,);
-                        },
-                        itemCount: cubit.screenShotList.length
-                    ),
-                  )
-                ],
-              ),
-            ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 15,
+                            );
+                          },
+                          itemCount: cubit.screenShotList.length),
+                    )
+            ],
+          ),
           );
         },
     );

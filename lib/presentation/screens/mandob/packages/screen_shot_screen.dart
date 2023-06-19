@@ -108,7 +108,6 @@ class ScreenShotScreen extends StatelessWidget {
 
                               ),
                             ).then((value) {
-
                               Navigator.of(context).pop();
                             });
 

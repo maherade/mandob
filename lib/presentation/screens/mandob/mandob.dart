@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +13,7 @@ import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/database_utils/datebase_utils.dart';
 import 'package:mandob/widgets/order_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../uitiles/local/cash_helper.dart';
 import 'packages/packedges.dart';
@@ -18,8 +21,8 @@ import 'packages/packedges.dart';
 class MandobScreen extends StatefulWidget {
   const MandobScreen({super.key});
 
-  static String government='';
-  static List <ProductModel>allProducts=[];
+  static String government = '';
+  static List<ProductModel> allProducts = [];
 
   @override
   State<MandobScreen> createState() => _MandobScreenState();
@@ -31,7 +34,17 @@ class _MandobScreenState extends State<MandobScreen> {
       .snapshots(includeMetadataChanges: true);
 
   @override
+  void initState() {
+    setState(() {
+      MandoobCubit.get(context).updateMandoobCounter();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final Uri iosWhatsapp = Uri.parse('whatsapp://wa.me/+96896519951');
+    final Uri androidWhatsapp = Uri.parse('whatsapp://send?phone=+96896519951');
     var cubit = MandoobCubit.get(context);
 
     return Scaffold(
@@ -56,7 +69,6 @@ class _MandobScreenState extends State<MandobScreen> {
           ),
           IconButton(
             onPressed: () {
-              // TODO filtration
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
@@ -69,8 +81,8 @@ class _MandobScreenState extends State<MandobScreen> {
                               onTap: () {
                                 setState(() {
                                   MandobScreen.government =
-                                      MandoobCubit.get(context)
-                                          .governmentName[index];
+                                  MandoobCubit.get(context)
+                                      .governmentName[index];
                                 });
                                 Navigator.pop(context);
                               },
@@ -94,7 +106,7 @@ class _MandobScreenState extends State<MandobScreen> {
                             );
                           },
                           itemCount:
-                              MandoobCubit.get(context).governmentName.length),
+                          MandoobCubit.get(context).governmentName.length),
                     );
                   }).then((value) {});
             },
@@ -120,7 +132,7 @@ class _MandobScreenState extends State<MandobScreen> {
                 height: MediaQuery.sizeOf(context).height * .01,
               ),
               Container(
-                height: MediaQuery.sizeOf(context).height * .32,
+                height: MediaQuery.sizeOf(context).height * .3,
                 width: double.infinity,
                 color: ColorManager.lightColor2,
                 child: Column(
@@ -153,7 +165,6 @@ class _MandobScreenState extends State<MandobScreen> {
               ),
 
               // حسابي
-
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -162,7 +173,7 @@ class _MandobScreenState extends State<MandobScreen> {
                 },
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -180,15 +191,99 @@ class _MandobScreenState extends State<MandobScreen> {
                   ),
                 ),
               ),
+
+              // عدد الباقات المتبقية
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.backpack),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('متبقي ${cubit.user!.count!} توصيلة ',
+                        style: GoogleFonts.cairo(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w700,
+                          color: ColorManager.textColor,
+                        )),
+                  ],
+                ),
+              ),
+
+              //شراء الباقات
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return const Packages();
-                  }));
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image(
+                          height: MediaQuery.of(context).size.height * .07,
+                          // width: MediaQuery.of(context).size.height * .04,
+                          color: ColorManager.primaryColor,
+                          image: const AssetImage('assets/images/check.png'),
+                        ),
+                      ),
+                      content: Text(
+                        "اختر طريقة الدفع المناسبة لك",
+                        style: GoogleFonts.almarai(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                            color: ColorManager.textColor),
+                      ),
+                      actions: [
+                        Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    MandoobCubit.get(context).getUserDetails();
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (_) => const Packages(),
+                                    ));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue.shade900,
+                                  ),
+                                  child: Text(
+                                    "الدفع عن طريق باي بال",
+                                    style: GoogleFonts.almarai(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.white),
+                                  )),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Platform.isIOS
+                                        ? launchUrl(iosWhatsapp)
+                                        : launchUrl(androidWhatsapp);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.green.shade900,
+                                  ),
+                                  child: Text(
+                                    "التواصل مع المسئول للدفع",
+                                    style: GoogleFonts.almarai(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.white),
+                                  )),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ).then((value) => Navigator.pop(context));
                 },
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -217,7 +312,7 @@ class _MandobScreenState extends State<MandobScreen> {
                 },
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -243,11 +338,11 @@ class _MandobScreenState extends State<MandobScreen> {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (context) => const StartScreen()),
-                      (Route<dynamic> route) => false);
+                          (Route<dynamic> route) => false);
                 },
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -296,156 +391,100 @@ class _MandobScreenState extends State<MandobScreen> {
                         MandobScreen.allProducts.add(element);
                       }
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة الظاهرة'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة الظاهرة') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة الظاهرة'){
+                      if (element.productGovernment == 'محافظة الظاهرة') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة شمال الباطنة'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة شمال الباطنة') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة شمال الباطنة'){
+                      if (element.productGovernment == 'محافظة شمال الباطنة') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة جنوب الباطنة'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة جنوب الباطنة') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة جنوب الباطنة'){
+                      if (element.productGovernment == 'محافظة جنوب الباطنة') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة البريمي'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة البريمي') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة البريمي'){
+                      if (element.productGovernment == 'محافظة البريمي') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة شمال الشرقية'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة شمال الشرقية') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة شمال الشرقية'){
+                      if (element.productGovernment == 'محافظة شمال الشرقية') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة الوسطى'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة الوسطى') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة الوسطى'){
+                      if (element.productGovernment == 'محافظة الوسطى') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة جنوب الشرقية'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة جنوب الشرقية') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة جنوب الشرقية'){
+                      if (element.productGovernment == 'محافظة جنوب الشرقية') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة ظفار'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة ظفار') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة ظفار'){
+                      if (element.productGovernment == 'محافظة ظفار') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة مسقط'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة مسقط') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة مسقط'){
+                      if (element.productGovernment == 'محافظة مسقط') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else if(MandobScreen.government=='محافظة مسندم'){
-                    MandobScreen.allProducts=[];
+                  } else if (MandobScreen.government == 'محافظة مسندم') {
+                    MandobScreen.allProducts = [];
 
                     product.forEach((element) {
-
-                      if(element.productGovernment=='محافظة مسندم'){
+                      if (element.productGovernment == 'محافظة مسندم') {
                         MandobScreen.allProducts.add(element);
                       }
-
                     });
-
-                  }
-
-                  else {
-
-                    MandobScreen.allProducts=[];
+                  } else {
+                    MandobScreen.allProducts = [];
                     product.forEach((element) {
-
-                        MandobScreen.allProducts.add(element);
-
+                      MandobScreen.allProducts.add(element);
                     });
-
                   }
 
-
-                  if (MandobScreen.allProducts.isEmpty ) {
+                  if (MandobScreen.allProducts.isEmpty) {
                     return Center(
                       child: Column(
                         children: [
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                          ),
                           Lottie.asset(
                             "assets/images/empty.json",
                             fit: BoxFit.fill,
@@ -461,32 +500,32 @@ class _MandobScreenState extends State<MandobScreen> {
                         ],
                       ),
                     );
-                  }
-
-                  else if (MandoobCubit.get(context).user!.count==0 ) {
+                  } else if (MandoobCubit.get(context).user!.count == 0) {
                     return Center(
                       child: Column(
                         children: [
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.18,),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.18,
+                          ),
                           Lottie.asset(
                             "assets/images/card.json",
                             fit: BoxFit.fill,
                             width: MediaQuery.of(context).size.height * 0.25,
                             height: MediaQuery.of(context).size.height * 0.25,
                           ),
-
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
-
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.04,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("انتا استهلكت كل التوصيلات المجانيه لاستمرار اشترك في احدي الباقات المتاحه",
+                            child: Text(
+                                "انتا استهلكت كل التوصيلات المجانيه لاستمرار اشترك في احدي الباقات المتاحه",
                                 style: GoogleFonts.cairo(
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w700,
                                   color: ColorManager.textColor,
                                 ),
-                            textAlign: TextAlign.center
-                            ),
+                                textAlign: TextAlign.center),
                           )
                         ],
                       ),
@@ -497,7 +536,8 @@ class _MandobScreenState extends State<MandobScreen> {
                     child: ListView.builder(
                         itemCount: MandobScreen.allProducts.length,
                         itemBuilder: (context, index) {
-                          return OrderItem(productModel: MandobScreen.allProducts[index],);
+                          return OrderItem(
+                              productModel: MandobScreen.allProducts[index]);
                         }),
                   );
                 })

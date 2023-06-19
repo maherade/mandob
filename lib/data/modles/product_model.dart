@@ -1,6 +1,6 @@
 class ProductModel {
   static const String collectionName = 'products';
-
+  String? productId;
   String? productAddress;
   String? productPrice;
   String? productWeight;
@@ -17,6 +17,7 @@ class ProductModel {
   bool? isAccepted;
 
   ProductModel({
+    this.productId = "",
     required this.productAddress,
     required this.productPrice,
     required this.productWeight,
@@ -35,23 +36,25 @@ class ProductModel {
 
   ProductModel.fromJson(Map<String, dynamic> json)
       : this(
-    productAddress: json["productAddress"],
-    productPrice: json["productPrice"],
-    productWeight: json["productWeight"],
-    productNotes: json["productNotes"],
-    productFrom: json["productFrom"],
-    productTo: json["productTo"],
-    productImage: json["productImage"],
-    productGovernment: json["productGovernment"],
-    userName: json["userName"],
-    userPhone: json["userPhone"],
-    userEmail: json["userEmail"],
-    userImage: json["userImage"],
-    userUid: json["userUid"],
-      isAccepted: json["isAccepted"]);
+            productId: json["productId"],
+            productAddress: json["productAddress"],
+            productPrice: json["productPrice"],
+            productWeight: json["productWeight"],
+            productNotes: json["productNotes"],
+            productFrom: json["productFrom"],
+            productTo: json["productTo"],
+            productImage: json["productImage"],
+            productGovernment: json["productGovernment"],
+            userName: json["userName"],
+            userPhone: json["userPhone"],
+            userEmail: json["userEmail"],
+            userImage: json["userImage"],
+            userUid: json["userUid"],
+            isAccepted: json["isAccepted"]);
 
   Map<String, dynamic> toJson() {
     return {
+      "productId": productId,
       "productAddress": productAddress,
       "productPrice": productPrice,
       "productWeight": productWeight,

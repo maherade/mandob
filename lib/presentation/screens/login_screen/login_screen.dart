@@ -187,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         false) {
                                       if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
                                         Navigator.push(context, MaterialPageRoute(builder: (_){
-                                          return AdminScreen();
+                                          return const AdminScreen();
                                         }));
                                       }
                                       else{

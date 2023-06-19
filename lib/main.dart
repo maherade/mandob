@@ -7,11 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/localization_cubit/localization_states.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
-import 'package:mandob/data/modles/product_model.dart';
-import 'package:mandob/presentation/screens/admin/admin_screen.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
-import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
@@ -21,7 +18,6 @@ import 'firebase_options.dart';
 import 'presentation/screens/register_screen/register_screen.dart';
 
 void main() async {
-  ProductModel model;
 
   WidgetsFlutterBinding.ensureInitialized();
   await CashHelper.init();

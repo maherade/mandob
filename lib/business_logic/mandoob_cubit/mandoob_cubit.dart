@@ -55,8 +55,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
           pic:
               'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
           isCustomer: CashHelper.getData(key: 'isCustomer'),
-          count: 100
-      );
+          count: 100);
       await addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
         customToast(
@@ -195,7 +194,16 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
-  void uploadProduct({
+  CollectionReference<ProductModel> getProductsCollection() {
+    return FirebaseFirestore.instance
+        .collection('Products')
+        .withConverter<ProductModel>(
+            fromFirestore: (snapshot, options) =>
+                ProductModel.fromJson(snapshot.data()!),
+            toFirestore: (productModel, options) => productModel.toJson());
+  }
+
+  Future<void> uploadProduct({
     required String productAddress,
     required String productPrice,
     required String productWeight,
@@ -209,7 +217,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     required String? userEmail,
     required String? userImage,
     required String? userUid,
-  }) {
+  }) async {
     emit(AddProductLoadingStates());
 
     ProductModel productModel = ProductModel(
@@ -226,26 +234,20 @@ class MandoobCubit extends Cubit<MandoobStates> {
         userName: userName,
         userPhone: userPhone,
         userUid: userUid);
+    var collection = getProductsCollection();
+    var docRef = collection.doc();
+    productModel.productId = docRef.id;
+    return docRef.set(productModel);
 
-    FirebaseFirestore.instance
-        .collection('Products')
-        .add(productModel.toJson())
-        .then((value) {
-      debugPrint('Add Product Success');
-      emit(AddProductSuccessStates());
-    }).catchError((error) {
-      debugPrint('Error in Add Product is:${error.toString()}');
-      emit(AddProductErrorStates());
-    });
-  }
-
-  CollectionReference<ProductModel> getProductsCollection() {
-    return FirebaseFirestore.instance
-        .collection('products')
-        .withConverter<ProductModel>(
-            fromFirestore: (snapshot, options) =>
-                ProductModel.fromJson(snapshot.data()!),
-            toFirestore: (product, options) => product.toJson());
+    // FirebaseFirestore.instance
+    //     .collection('Products').doc("id").set(productModel.toJson())
+    //     .then((value) {
+    //   debugPrint('Add Product Success');
+    //   emit(AddProductSuccessStates());
+    // }).catchError((error) {
+    //   debugPrint('Error in Add Product is:${error.toString()}');
+    //   emit(AddProductErrorStates());
+    // });
   }
 
   Stream<QuerySnapshot<ProductModel>> getProductsFromFireStore() {
@@ -414,9 +416,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
-
-
-
   // upload pay Screen shot
 
   File? payImage;
@@ -439,55 +438,39 @@ class MandoobCubit extends Cubit<MandoobStates> {
       debugPrint('No Image selected.');
       emit(PickPayImageErrorState());
     }
-
   }
 
+  String? payPath;
 
-  String ?payPath;
-
-  Future uploadPayImage({
-    required int num
-  }){
-
+  Future uploadPayImage({required int num}) {
     emit(UploadPayImageLoadingState());
-    return firebase_storage.FirebaseStorage.instance.ref()
+    return firebase_storage.FirebaseStorage.instance
+        .ref()
         .child('payImages/${Uri.file(payImage!.path).pathSegments.last}')
-        .putFile(payImage!).then((value) {
-
+        .putFile(payImage!)
+        .then((value) {
       value.ref.getDownloadURL().then((value) {
-
         debugPrint('Upload Success');
         payPath = value;
 
-
-        uploadPayModel(screen: payPath!,num: num);
+        uploadPayModel(screen: payPath!, num: num);
 
         getPayScreens();
         emit(UploadPayImageSuccessState());
-
-      }).catchError((error){
-
+      }).catchError((error) {
         debugPrint('Error in Upload profileImage ${error.toString()}');
         emit(UploadPayImageErrorState());
-
       });
-
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in Upload profileImage ${error.toString()}');
       emit(UploadPayImageErrorState());
     });
   }
 
-
-  void uploadPayModel({
-    required String screen,
-    required int num
-  }){
-
+  void uploadPayModel({required String screen, required int num}) {
     emit(UploadPayImageLoadingState());
 
-    PayModel payModel= PayModel(
+    PayModel payModel = PayModel(
         uId: '${CashHelper.getData(key: 'isUid')}',
         name: user!.name,
         phone: user!.phone,
@@ -496,122 +479,103 @@ class MandoobCubit extends Cubit<MandoobStates> {
         num: num,
         count: user!.count,
         screen: screen,
-        pic: user!.pic
-    );
-
+        pic: user!.pic);
 
     FirebaseFirestore.instance
         .collection('ScreenShots')
-        .doc('${CashHelper.getData(key: 'isUid')}').set(payModel.toJson()).then((value) {
-
+        .doc('${CashHelper.getData(key: 'isUid')}')
+        .set(payModel.toJson())
+        .then((value) {
       emit(UploadPayImageSuccessState());
-
-    }).catchError((error){
+    }).catchError((error) {
       print('Error is ${error.toString()}');
 
       emit(UploadPayImageErrorState());
     });
-
-
   }
 
+  List<PayModel> screenShotList = [];
 
-  List<PayModel> screenShotList=[];
-
-  void getPayScreens(){
-
+  void getPayScreens() {
     emit(GetScreensLoadingState());
-    screenShotList=[];
-    FirebaseFirestore.instance
-        .collection('ScreenShots')
-        .get().then((value) {
-
+    screenShotList = [];
+    FirebaseFirestore.instance.collection('ScreenShots').get().then((value) {
       value.docs.forEach((element) {
-
-        if(element['isVerified']!=true && element['isRefuse']!=true)
-        {
+        if (element['isVerified'] != true && element['isRefuse'] != true) {
           screenShotList.add(PayModel.fromJson(element.data()));
         }
-
-
       });
 
       emit(GetScreensSuccessState());
-
-
-    }).catchError((error){
+    }).catchError((error) {
       print('Error is ${error.toString()}');
 
       emit(GetScreensErrorState());
     });
-
-
   }
 
   Future isAcceptedPay({
     required String uId,
     required int num,
     required int count,
-  })async{
-
+  }) async {
     emit(IsAcceptedLoadingState());
 
-    FirebaseFirestore.instance.collection('ScreenShots').doc(uId).update({
-      'isVerified':true
-    }).then((value) {
-
-      FirebaseFirestore.instance.collection('users').doc(uId).update({
-        'count':count+num
-      });
+    FirebaseFirestore.instance
+        .collection('ScreenShots')
+        .doc(uId)
+        .update({'isVerified': true}).then((value) {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(uId)
+          .update({'count': count + num});
       getPayScreens();
 
       emit(IsAcceptedSuccessState());
-
-
-    }).catchError((error){
-
+    }).catchError((error) {
       print('Error is ${error.toString()}');
 
       emit(IsAcceptedErrorState());
-
     });
-
-
-
   }
 
   Future isRefusedPay({
     required String uId,
-  })async{
-
+  }) async {
     emit(IsRefusedLoadingState());
 
-    FirebaseFirestore.instance.collection('ScreenShots').doc(uId).update({
-      'isRefuse':true
-    }).then((value) {
-
+    FirebaseFirestore.instance
+        .collection('ScreenShots')
+        .doc(uId)
+        .update({'isRefuse': true}).then((value) {
       getPayScreens();
       emit(IsRefusedSuccessState());
-
-    }).catchError((error){
-
+    }).catchError((error) {
       print('Error is ${error.toString()}');
 
       emit(IsRefusedErrorState());
-
     });
-
   }
 
   Future<void> toPayPal() async {
-    String url =
-        "https://www.paypal.com/paypalme/MaherA884";
+    String url = "https://www.paypal.com/paypalme/MaherA884";
     await launch(url, forceSafariVC: false);
     emit(LaunchState());
   }
 
+  final int num = 1;
 
+  Future<void> updateMandoobCounter() {
+    CollectionReference updateRef = getUsersCollection();
+    return updateRef.doc(user!.uId).update({
+      "count": (user!.count)! - num,
+    });
+  }
 
-
-
+  Future<void> updateProductsList(ProductModel productModel) {
+    CollectionReference updateRef = getProductsCollection();
+    return updateRef.doc(productModel.productId).update({
+      "isAccepted": true,
+    });
+  }
 }

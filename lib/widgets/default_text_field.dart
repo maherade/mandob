@@ -49,11 +49,12 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
               borderRadius: BorderRadius.circular(15),
             ),
             child: TextFormField(
+              textInputAction: TextInputAction.next,
               style: GoogleFonts.almarai(
                 fontSize: 16.0,
                 color: ColorManager.textColor,
               ),
-        decoration: InputDecoration(
+              decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: GoogleFonts.almarai(
                     fontSize: 16.0,
@@ -104,9 +105,10 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
               borderRadius: BorderRadius.circular(7),
             ),
             child: TextFormField(
+              textInputAction: TextInputAction.done,
               style: GoogleFonts.almarai(
                 fontSize: 15.0,
-                color: ColorManager.primaryColor,
+                color: ColorManager.textColor,
               ),
               decoration: InputDecoration(
                   hintText: widget.hintText,
@@ -136,33 +138,33 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                   ),
                   suffixIcon: widget.isPass == true
                       ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isChecked = !isChecked;
-                            });
-                          },
-                          icon: isChecked == true
-                              ? const Icon(
-                            Icons.visibility_off,
-                                  color: Colors.grey,
-                                )
-                              : const Icon(
-                            Icons.visibility,
-                                  color: Colors.grey,
-                                ),
-                        )
+                    onPressed: () {
+                      setState(() {
+                        isChecked = !isChecked;
+                      });
+                    },
+                    icon: isChecked == true
+                        ? const Icon(
+                      Icons.visibility_off,
+                      color: Colors.grey,
+                    )
+                        : const Icon(
+                      Icons.visibility,
+                      color: Colors.grey,
+                    ),
+                  )
                       : IconButton(
-                          onPressed: () {},
-                          icon: widget.suffixIcon != null
-                              ? Icon(
-                                  widget.suffixIcon,
-                                  color: ColorManager.primaryColor,
-                                )
-                              : const SizedBox(
-                                  height: 1,
-                                  width: 1,
-                                ),
-                        )),
+                    onPressed: () {},
+                    icon: widget.suffixIcon != null
+                        ? Icon(
+                      widget.suffixIcon,
+                      color: ColorManager.primaryColor,
+                    )
+                        : const SizedBox(
+                      height: 1,
+                      width: 1,
+                    ),
+                  )),
               keyboardType: widget.textInputType,
               controller: widget.controller,
               enabled: widget.isEnabled,

@@ -175,19 +175,48 @@ class ProfileScreen extends StatelessWidget {
                                   style:GoogleFonts.almarai(
                                       color: ColorManager.textColor,
                                       fontWeight: FontWeight.w500,
-                                      fontSize: MediaQuery.of(context).size.height*.022
-                                  ),
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              .022),
                                   overflow: TextOverflow.ellipsis,
-
                                 ),
                               ),
                             ],
                           ),
-
-                          SizedBox(height:  MediaQuery.of(context).size.height*.02,),
-
-
-                          SizedBox(height:  MediaQuery.of(context).size.height*.02,),
+                          //
+                          // SizedBox(height:  MediaQuery.of(context).size.height*.03,),
+                          //
+                          //
+                          // MandoobCubit.get(context).user!.isCustomer==true?
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   children: [
+                          //
+                          //     Text('التوصيلات المتبقية :',
+                          //       style: GoogleFonts.almarai(
+                          //           color: ColorManager.textColor,
+                          //           fontWeight: FontWeight.w500,
+                          //           fontSize: MediaQuery.of(context).size.height*.022
+                          //       ),                              ),
+                          //
+                          //     SizedBox(width: MediaQuery.of(context).size.height*.01,),
+                          //
+                          //     Expanded(
+                          //       child: Text('${cubit.user!.count} توصيلة',
+                          //         style: GoogleFonts.almarai(
+                          //             color: ColorManager.textColor,
+                          //             fontWeight: FontWeight.w500,
+                          //             fontSize: MediaQuery.of(context).size.height*.022
+                          //         ),
+                          //         overflow: TextOverflow.ellipsis,
+                          //
+                          //       ),
+                          //     ),
+                          //
+                          //   ],
+                          // ):SizedBox(),
+                          //
+                          //
 
                           // const Padding(
                           //   padding: EdgeInsets.all(8.0),
