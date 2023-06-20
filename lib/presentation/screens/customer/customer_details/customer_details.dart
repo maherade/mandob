@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -42,7 +43,7 @@ class CustomerDetailsScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
         title: Text(
-          'تفاصيل الزبون',
+          AppLocalizations.of(context)!.translate("customerDetails").toString(),
           style: GoogleFonts.cairo(
             fontSize: 20.0,
             fontWeight: FontWeight.w700,
@@ -72,7 +73,7 @@ class CustomerDetailsScreen extends StatelessWidget {
               ),
               // العنوان
               Text(
-                'الاسم',
+                AppLocalizations.of(context)!.translate("userName").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -91,7 +92,9 @@ class CustomerDetailsScreen extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * .015,
               ),
               Text(
-                'رقم الهاتف',
+                AppLocalizations.of(context)!
+                    .translate("phoneNumber")
+                    .toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -131,7 +134,9 @@ class CustomerDetailsScreen extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * .04,
               ),
               DefaultButton(
-                buttonText: "تواصل عبر الواتساب",
+                buttonText: AppLocalizations.of(context)!
+                    .translate("whatsAppContact")
+                    .toString(),
                 onPressed: () {
                   if (Platform.isIOS) {
                     return launchUrl(iosWhatsapp);

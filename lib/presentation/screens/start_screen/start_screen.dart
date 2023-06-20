@@ -72,9 +72,9 @@ class StartScreen extends StatelessWidget {
             body: Column(
               children: [
                 Image(
-                    image:AssetImage('assets/images/delivery.png'),
-                    height: MediaQuery.of(context).size.height*.2,
-                    width: MediaQuery.of(context).size.height*.2,
+                    image: const AssetImage('assets/images/delivery.png'),
+                  height: MediaQuery.of(context).size.height * .2,
+                  width: MediaQuery.of(context).size.height * .2,
                 ),
 
                 CashHelper.getData(key: CashHelper.languageKey).toString() ==

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/customer_details/customer_details.dart';
@@ -62,7 +63,7 @@ class _OrderItemState extends State<OrderItem> {
                     children: [
                       Expanded(
                         child: Text(
-                          "من: ${widget.productModel.productFrom}",
+                          "${AppLocalizations.of(context)!.translate("from").toString()}: ${widget.productModel.productFrom}",
                           style: GoogleFonts.cairo(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600,
@@ -72,7 +73,7 @@ class _OrderItemState extends State<OrderItem> {
                       ),
                       Expanded(
                           child: Text(
-                        "الي: ${widget.productModel.productTo}",
+                            "${AppLocalizations.of(context)!.translate("to").toString()}: ${widget.productModel.productTo}",
                         style: GoogleFonts.cairo(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w600,
@@ -81,7 +82,7 @@ class _OrderItemState extends State<OrderItem> {
                       )),
                       Expanded(
                         child: Text(
-                          "الوزن: ${widget.productModel.productWeight}",
+                          "${AppLocalizations.of(context)!.translate("weight").toString()}: ${widget.productModel.productWeight}",
                           style: GoogleFonts.cairo(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600,
@@ -91,7 +92,7 @@ class _OrderItemState extends State<OrderItem> {
                       ),
                       Expanded(
                         child: Text(
-                          "السعر: ${widget.productModel.productPrice}",
+                          "${AppLocalizations.of(context)!.translate("price").toString()}: ${widget.productModel.productPrice}",
                           style: GoogleFonts.cairo(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600,
@@ -106,7 +107,9 @@ class _OrderItemState extends State<OrderItem> {
                         children: [
                           Expanded(
                             child: DefaultButton(
-                              buttonText: "موافق",
+                              buttonText: AppLocalizations.of(context)!
+                                  .translate("accept")
+                                  .toString(),
                               color: ColorManager.primaryColor,
                               color2: ColorManager.primaryColor,
                               onPressed: () {
@@ -153,7 +156,9 @@ class _OrderItemState extends State<OrderItem> {
                                                 'assets/images/check.png')),
                                       ),
                                       content: Text(
-                                        'لقد وافقت علي الطلب يمكنك الان التواصل مع صاحب الطلب',
+                                        AppLocalizations.of(context)!
+                                            .translate("orderAccept")
+                                            .toString(),
                                         style: GoogleFonts.almarai(
                                             color: ColorManager.textColor,
                                             fontSize: 16),
@@ -181,7 +186,11 @@ class _OrderItemState extends State<OrderItem> {
                                               style: ElevatedButton.styleFrom(
                                                 primary: Colors.green.shade700,
                                               ),
-                                              child: const Text("OK")),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .translate("ok")
+                                                    .toString(),
+                                              )),
                                         )
                                       ],
                                     ),
@@ -197,7 +206,9 @@ class _OrderItemState extends State<OrderItem> {
                           ),
                           Expanded(
                             child: DefaultButton(
-                              buttonText: "عرض التفاصيل",
+                              buttonText: AppLocalizations.of(context)!
+                                  .translate("viewDetails")
+                                  .toString(),
                               color: ColorManager.gold,
                               color2: ColorManager.gold,
                               textColor: ColorManager.textColor,

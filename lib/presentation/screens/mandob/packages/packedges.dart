@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/mandob/packages/screen_shot_screen.dart';
@@ -42,14 +43,14 @@ class Packages extends StatelessWidget {
                 },
               ),
               title: Text(
-                'شراء باقات توصيل',
-                style: GoogleFonts.cairo(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
-                  color: ColorManager.textColor,
-                ),
-                textAlign: TextAlign.center,
+                AppLocalizations.of(context)!.translate("buyPackages").toString(),
+              style: GoogleFonts.cairo(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+                color: ColorManager.textColor,
               ),
+              textAlign: TextAlign.center,
+            ),
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -60,14 +61,16 @@ class Packages extends StatelessWidget {
                     Lottie.asset("assets/images/pay.json",
                         height: mediaQuery.height * .35),
                     Text(
-                      "اختر باقة التوصيل المناسبة لك",
-                      style: GoogleFonts.cairo(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
-                        color: ColorManager.textColor,
-                      ),
-                      textAlign: TextAlign.center,
+                      AppLocalizations.of(context)!
+                        .translate("choosePackage")
+                        .toString(),
+                    style: GoogleFonts.cairo(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                      color: ColorManager.textColor,
                     ),
+                    textAlign: TextAlign.center,
+                  ),
                     SizedBox(
                       height: mediaQuery.height * .03,
                     ),
@@ -82,56 +85,76 @@ class Packages extends StatelessWidget {
                         children: [
                           PackageItem(
                             onPressed: () {
-
-                              cubit.toPayPal().then((value) {
-                                Navigator.push(context, MaterialPageRoute(builder: (_){
-                                  return ScreenShotScreen(num: 10,);
-                                }));
-                              });
-
-                            },
-                            tittle: "10 توصيلات",
-                            price: "10 دولار",
-                            backgroundColor: ColorManager.primaryColor,
-                            textColor: ColorManager.lightColor2,
-                          ),
+                            cubit.toPayPal().then((value) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return const ScreenShotScreen(
+                                  num: 10,
+                                );
+                              }));
+                            });
+                          },
+                          tittle:
+                              "10 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                          price:
+                              "10 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                          backgroundColor: ColorManager.primaryColor,
+                          textColor: ColorManager.lightColor2,
+                        ),
                           PackageItem(
                             onPressed: () {
-                              cubit.toPayPal().then((value) {
-                                Navigator.push(context, MaterialPageRoute(builder: (_){
-                                  return ScreenShotScreen(num: 20,);
-                                }));
-                              });
-                                                },
-                            tittle: "20 توصيلة",
-                            price: "20 دولار",
-                            backgroundColor: Colors.deepPurple.shade700,
-                            textColor: ColorManager.lightColor2,
-                          ),
+                            cubit.toPayPal().then((value) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return const ScreenShotScreen(
+                                  num: 20,
+                                );
+                              }));
+                            });
+                          },
+                          tittle:
+                              "20 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                          price:
+                              "20 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                          backgroundColor: Colors.deepPurple.shade700,
+                          textColor: ColorManager.lightColor2,
+                        ),
                           PackageItem(
                             onPressed: () {
-                              cubit.toPayPal().then((value) {
-                                Navigator.push(context, MaterialPageRoute(builder: (_){
-                                  return ScreenShotScreen(num: 30,);
-                                }));
-                              });                     },
-                            tittle: "30 توصيلة",
-                            price: "30 دولار",
-                            backgroundColor: Colors.green.shade700,
-                            textColor: ColorManager.lightColor2,
-                          ),
+                            cubit.toPayPal().then((value) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return const ScreenShotScreen(
+                                  num: 30,
+                                );
+                              }));
+                            });
+                          },
+                          tittle:
+                              "30 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                          price:
+                              "30 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                          backgroundColor: Colors.green.shade700,
+                          textColor: ColorManager.lightColor2,
+                        ),
                           PackageItem(
                             onPressed: () {
-                              cubit.toPayPal().then((value) {
-                                Navigator.push(context, MaterialPageRoute(builder: (_){
-                                  return ScreenShotScreen(num: 40,);
-                                }));
-                              });             },
-                            tittle: "40 توصيلة",
-                            price: "40 دولار",
-                            backgroundColor: Colors.blue.shade700,
-                            textColor: ColorManager.lightColor2,
-                          ),
+                            cubit.toPayPal().then((value) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return const ScreenShotScreen(
+                                  num: 40,
+                                );
+                              }));
+                            });
+                          },
+                          tittle:
+                              "40 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                          price:
+                              "40 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                          backgroundColor: Colors.blue.shade700,
+                          textColor: ColorManager.lightColor2,
+                        ),
                         ],
                       ),
                     ),

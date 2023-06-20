@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -37,9 +38,9 @@ class _MandoobHistoryState extends State<MandoobHistory> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(Icons.arrow_back_ios)),
+                child: const Icon(Icons.arrow_back_ios)),
             title: Text(
-              'مرجعي',
+              AppLocalizations.of(context)!.translate("history").toString(),
               style: GoogleFonts.cairo(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
@@ -77,7 +78,10 @@ class _MandoobHistoryState extends State<MandoobHistory> {
                         width: MediaQuery.of(context).size.height * 0.25,
                         height: MediaQuery.of(context).size.height * 0.25,
                       ),
-                      Text("لا يوجد طلبات",
+                      Text(
+                          AppLocalizations.of(context)!
+                              .translate("noOrders")
+                              .toString(),
                           style: GoogleFonts.cairo(
                             fontSize: 15.0,
                             fontWeight: FontWeight.w700,

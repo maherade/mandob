@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/admin/admin_verified.dart';
@@ -40,7 +41,7 @@ class AdminScreen extends StatelessWidget {
                 },
               ),
             title: Text(
-              'صفحه الادمن',
+              AppLocalizations.of(context)!.translate("adminPage").toString(),
               style: GoogleFonts.cairo(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
@@ -70,13 +71,16 @@ class AdminScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child:
-                                Text("لا يوجد طلبات في حاجه الي تاكيد حتي الان",
-                                    style: GoogleFonts.cairo(
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.w700,
-                                      color: ColorManager.textColor,
-                                    ),
-                                    textAlign: TextAlign.center),
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .translate("noOrderNeeds")
+                                    .toString(),
+                                style: GoogleFonts.cairo(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorManager.textColor,
+                                ),
+                                textAlign: TextAlign.center),
                           )
                         ],
                       ),
@@ -130,7 +134,7 @@ class AdminScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                                " الاسم :  ${cubit.screenShotList[index].name}",
+                                                " ${AppLocalizations.of(context)!.translate("userName").toString()} :  ${cubit.screenShotList[index].name}",
                                                 style: GoogleFonts.cairo(
                                                   fontSize: 15.0,
                                                   fontWeight: FontWeight.w700,
@@ -141,7 +145,7 @@ class AdminScreen extends StatelessWidget {
                                               height: 10,
                                             ),
                                             Text(
-                                                " رقم الهاتف :  ${cubit.screenShotList[index].phone}",
+                                                " ${AppLocalizations.of(context)!.translate("phoneNumber").toString()} :  ${cubit.screenShotList[index].phone}",
                                                 style: GoogleFonts.cairo(
                                                   fontSize: 15.0,
                                                   fontWeight: FontWeight.w700,

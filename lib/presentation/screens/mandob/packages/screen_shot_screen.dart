@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -39,14 +40,14 @@ class ScreenShotScreen extends StatelessWidget {
                 },
               ),
               title: Text(
-                'صفحه الدفع',
-                style: GoogleFonts.cairo(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
-                  color: ColorManager.textColor,
-                ),
-                textAlign: TextAlign.center,
+                AppLocalizations.of(context)!.translate("paymentPage").toString(),
+              style: GoogleFonts.cairo(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+                color: ColorManager.textColor,
               ),
+              textAlign: TextAlign.center,
+            ),
             ),
             body: Container(
               color: ColorManager.lightColor,
@@ -81,18 +82,21 @@ class ScreenShotScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: DefaultButton(
                         color: ColorManager.primaryColor,
-                        color2: Colors.red,
-                        buttonText: 'ارسال',
-                        onPressed: (){
-                          cubit.uploadPayImage(num: num).then((value) {
-                            cubit.payImage=null;
+                            color2: Colors.red,
+                            buttonText: AppLocalizations.of(context)!
+                                .translate("send")
+                                .toString(),
+                            onPressed: () {
+                              cubit.uploadPayImage(num: num).then((value) {
+                                cubit.payImage = null;
 
-                            showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                title: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Image(
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Image(
                                       height: MediaQuery.of(context).size.height*.07,
                                       width: MediaQuery.of(context).size.height*.04,
                                       color: ColorManager.primaryColor,

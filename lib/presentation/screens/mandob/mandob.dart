@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
@@ -57,7 +58,8 @@ class _MandobScreenState extends State<MandobScreen> {
         ),
         actions: [
           Center(
-            child: Text("ترتيب حسب",
+            child: Text(
+                AppLocalizations.of(context)!.translate("filter").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 15.0,
                   fontWeight: FontWeight.w700,
@@ -111,7 +113,7 @@ class _MandobScreenState extends State<MandobScreen> {
           )
         ],
         title: Text(
-          'قائمة الطلبات',
+          AppLocalizations.of(context)!.translate("ordersList").toString(),
           style: GoogleFonts.cairo(
             fontSize: 20.0,
             fontWeight: FontWeight.w700,
@@ -177,7 +179,10 @@ class _MandobScreenState extends State<MandobScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text('حسابي',
+                      Text(
+                          AppLocalizations.of(context)!
+                              .translate("myProfile")
+                              .toString(),
                           style: GoogleFonts.cairo(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w700,
@@ -198,7 +203,8 @@ class _MandobScreenState extends State<MandobScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('متبقي ${cubit.user!.count!} توصيلة ',
+                    Text(
+                        '${AppLocalizations.of(context)!.translate("rest").toString()} ${cubit.user!.count!} ${AppLocalizations.of(context)!.translate("delivery").toString()} ',
                         style: GoogleFonts.cairo(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w700,
@@ -221,7 +227,9 @@ class _MandobScreenState extends State<MandobScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "اختر طريقة الدفع المناسبة لك",
+                                AppLocalizations.of(context)!
+                                    .translate("choose")
+                                    .toString(),
                                 style: GoogleFonts.almarai(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.w500,
@@ -242,7 +250,9 @@ class _MandobScreenState extends State<MandobScreen> {
                                     backgroundColor: Colors.blue.shade900,
                                   ),
                                   child: Text(
-                                    "الدفع عن طريق باي بال",
+                                    AppLocalizations.of(context)!
+                                        .translate("payPal")
+                                        .toString(),
                                     style: GoogleFonts.almarai(
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w300,
@@ -261,7 +271,9 @@ class _MandobScreenState extends State<MandobScreen> {
                                     backgroundColor: Colors.green.shade900,
                                   ),
                                   child: Text(
-                                    "التواصل مع المسئول للدفع",
+                                    AppLocalizations.of(context)!
+                                        .translate("connect")
+                                        .toString(),
                                     style: GoogleFonts.almarai(
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w300,
@@ -284,7 +296,10 @@ class _MandobScreenState extends State<MandobScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text('شراء باقات توصيل',
+                      Text(
+                          AppLocalizations.of(context)!
+                              .translate("buyPackages")
+                              .toString(),
                           style: GoogleFonts.cairo(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w700,
@@ -312,7 +327,10 @@ class _MandobScreenState extends State<MandobScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text('مرجعي',
+                      Text(
+                          AppLocalizations.of(context)!
+                              .translate("history")
+                              .toString(),
                           style: GoogleFonts.cairo(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w700,
@@ -340,7 +358,10 @@ class _MandobScreenState extends State<MandobScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text('الابلاغ عن مشكلة',
+                      Text(
+                          AppLocalizations.of(context)!
+                              .translate("reportAProblem")
+                              .toString(),
                           style: GoogleFonts.cairo(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w700,
@@ -369,7 +390,10 @@ class _MandobScreenState extends State<MandobScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text('تسجيل الخروج',
+                      Text(
+                          AppLocalizations.of(context)!
+                              .translate("logOut")
+                              .toString(),
                           style: GoogleFonts.cairo(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w700,
@@ -510,7 +534,10 @@ class _MandobScreenState extends State<MandobScreen> {
                             width: MediaQuery.of(context).size.height * 0.25,
                             height: MediaQuery.of(context).size.height * 0.25,
                           ),
-                          Text("لا يوجد طلبات متاحة",
+                          Text(
+                              AppLocalizations.of(context)!
+                                  .translate("noOrders")
+                                  .toString(),
                               style: GoogleFonts.cairo(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w700,
@@ -538,7 +565,7 @@ class _MandobScreenState extends State<MandobScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                                "انتا استهلكت كل التوصيلات المجانيه لاستمرار اشترك في احدي الباقات المتاحه",
+                                "انت استهلكت كل التوصيلات المجانيه لاستمرار اشترك في احدي الباقات المتاحه",
                                 style: GoogleFonts.cairo(
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w700,

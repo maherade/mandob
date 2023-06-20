@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/presentation/screens/admin/admin_screen.dart';
 import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
@@ -46,218 +47,134 @@ class _LoginScreenState extends State<LoginScreen> {
               flex: 2,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: CashHelper.getData(key: CashHelper.languageKey)
-                              .toString() ==
-                          'en'
-                      ? Form(
-                          key: formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: 'Email',
-                                controller: emailController,
-                                textInputType: TextInputType.emailAddress,
-                                prefixIcon: Icons.email,
-                              ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: 'Password',
-                                controller: passwordController,
-                                textInputType: TextInputType.text,
-                                prefixIcon: Icons.lock,
-                                isPass: true,
-                              ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultButton(
-                                  buttonText: 'Login',
-                                  onPressed: () {
-                                    if (CashHelper.getData(key: 'isCustomer') ==
-                                        true) {
-                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
-                                        Navigator.push(context, MaterialPageRoute(builder: (_){
-                                          return AdminScreen();
-                                        }));
-                                      }
-                                      else{
-                                        validateForm(const CustomerScreen());
-                                      }
-                                    } else if (CashHelper.getData(
-                                            key: 'isCustomer') ==
-                                        false) {
-                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
-                                        Navigator.push(context, MaterialPageRoute(builder: (_){
-                                          return AdminScreen();
-                                        }));
-                                      }
-                                      else{
-                                        validateForm(const MandobScreen());
-
-                                      }
-                                    }
-                                  },
-                                  width: mediaQuery.width * .6,
-                                  color2: ColorManager.primaryColor),
-                              SizedBox(
-                                height: mediaQuery.height * .01,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "Don't have an Account?",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorManager.textColor),
-                                  ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const RegisterScreen()));
-                                },
-                                      child: const Text(
-                                        "Create Account",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorManager.primaryColor),
-                                      )),
-                                ],
-                              )
-                            ],
+                    padding: const EdgeInsets.all(10.0),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: mediaQuery.height * .02,
                           ),
-                        )
-                      : Form(
-                          key: formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: 'البريد الالكتروني',
-                                controller: emailController,
-                                textInputType: TextInputType.emailAddress,
-                                prefixIcon: Icons.email,
-                              ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: 'كلمة المرور',
-                                controller: passwordController,
-                                textInputType: TextInputType.text,
-                                prefixIcon: Icons.lock,
-                                isPass: true,
-                              ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultButton(
-                                  buttonText: 'تسجيل الدخول',
-                                  onPressed: () {
-                                    if (CashHelper.getData(key: 'isCustomer') ==
-                                        true) {
-                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
-                                        Navigator.push(context, MaterialPageRoute(builder: (_){
-                                          return AdminScreen();
-                                        }));
-                                      }
-                                      else{
-                                        validateForm(const CustomerScreen());
-                                      }
-                                    } else if (CashHelper.getData(
+                          SizedBox(
+                            height: mediaQuery.height * .02,
+                          ),
+                          DefaultTextField(
+                            hintText: AppLocalizations.of(context)!
+                                .translate('email')
+                                .toString(),
+                            controller: emailController,
+                            textInputType: TextInputType.emailAddress,
+                            prefixIcon: Icons.email,
+                          ),
+                          SizedBox(
+                            height: mediaQuery.height * .02,
+                          ),
+                          DefaultTextField(
+                            hintText: AppLocalizations.of(context)!
+                                .translate('password')
+                                .toString(),
+                            controller: passwordController,
+                            textInputType: TextInputType.text,
+                            prefixIcon: Icons.lock,
+                            isPass: true,
+                          ),
+                          SizedBox(
+                            height: mediaQuery.height * .02,
+                          ),
+                          DefaultButton(
+                              buttonText: AppLocalizations.of(context)!
+                                  .translate('login')
+                                  .toString(),
+                              onPressed: () {
+                                if (CashHelper.getData(key: 'isCustomer') ==
+                                    true) {
+                                  if (emailController.text == 'Mandoob' &&
+                                      passwordController.text ==
+                                          'Mandoob2023') {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (_) {
+                                      return const AdminScreen();
+                                    }));
+                                  } else {
+                                    validateForm(const CustomerScreen());
+                                  }
+                                } else if (CashHelper.getData(
                                         key: 'isCustomer') ==
-                                        false) {
-                                      if(emailController.text =='Mandoob' && passwordController.text=='Mandoob2023'){
-                                        Navigator.push(context, MaterialPageRoute(builder: (_){
-                                          return const AdminScreen();
-                                        }));
-                                      }
-                                      else{
-                                        validateForm(const MandobScreen());
-
-                                      }
-                                    }
+                                    false) {
+                                  if (emailController.text == 'Mandoob' &&
+                                      passwordController.text ==
+                                          'Mandoob2023') {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (_) {
+                                      return const AdminScreen();
+                                    }));
+                                  } else {
+                                    validateForm(const MandobScreen());
+                                  }
+                                }
+                              },
+                              width: mediaQuery.width * .6,
+                              color2: ColorManager.primaryColor),
+                          SizedBox(
+                            height: mediaQuery.height * .01,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .translate("don'tHaveAnAccount?")
+                                    .toString(),
+                                style: const TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorManager.textColor),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const RegisterScreen()));
                                   },
-                                  width: mediaQuery.width * .6,
-                                  color2: ColorManager.primaryColor),
-                              SizedBox(
-                                height: mediaQuery.height * .01,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "ليس لديك حساب ؟",
-                                    style: TextStyle(
-                                        fontSize: 18,
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .translate("signUp")
+                                        .toString(),
+                                    style: const TextStyle(
+                                        fontSize: 18.0,
                                         fontWeight: FontWeight.bold,
-                                        color: ColorManager.textColor),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const RegisterScreen()));
-                                      },
-                                      child: const Text(
-                                        "إنشاء حساب",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorManager.primaryColor),
-                                      )),
-                                ],
-                              ),
-                              // TextButton(
-                              //   onPressed: (){
-                              //     MandoobCubit.get(context).getUser(uid: 'NFbh7U5BonVDKTIjT2t1');
-                              //     Navigator.push(context, MaterialPageRoute(builder: (_){
-                              //
-                              //       return const DriverScreen();
-                              //
-                              //     }));
-                              //
-                              //     // if (cubit.isCheckBoxTrue == true) {
-                              //     //
-                              //     //
-                              //     //
-                              //     // } else{
-                              //     //   customToast(title:AppLocalizations.of(context)!.translate('privacyToast').toString(), color: Colors.red);
-                              //     // }
-                              //   },
-                              //   child: Text(
-                              //     AppLocalizations.of(context)!.translate('loginAsAGuest').toString(),
-                              //     style: GoogleFonts.almarai(
-                              //         fontSize: 17.0,
-                              //         fontWeight: FontWeight.w700,
-                              //         color: ColorManager.textColor,
-                              //         decoration: TextDecoration.underline
-                              //     ),
-                              //   ),
-                              // ),
+                                        color: ColorManager.primaryColor),
+                                  )),
                             ],
                           ),
-                        ),
-                ),
+                          SizedBox(
+                            height: mediaQuery.height * .01,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                MandoobCubit.get(context)
+                                    .getGuestUser(id: "IqRzvBp4Po9wE1v91ASo")
+                                    .then((value) => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (_) {
+                                            return const MandobScreen();
+                                          }),
+                                        ));
+                              },
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .translate("loginAsGuest")
+                                    .toString(),
+                                style: const TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorManager.primaryColor),
+                              )),
+                        ],
+                      ),
+                    )),
               ),
             ),
           ],
@@ -268,7 +185,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void validateForm(Widget widget) {
     if (formKey.currentState!.validate()) {
-
       MandoobCubit.get(context).loginWithFirebaseAuth(
         emailController.text,
         passwordController.text,
@@ -278,7 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => widget));
       });
-
     }
   }
 }

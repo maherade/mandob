@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/open_profile_image.dart';
 import 'package:mandob/styles/color_manager.dart';
-
-
+import 'package:mandob/uitiles/local/cash_helper.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
       listener: (context,state){
         if(state is PickProfileImageSuccessState){
           Navigator.push(context, MaterialPageRoute(builder: (_){
-             return OpenProfileImage();
+            return const OpenProfileImage();
           }));
         }
       },
@@ -32,12 +32,13 @@ class ProfileScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0.0,
-              title: Text('الصفحه الشخصيه',
+              title: Text(
+                AppLocalizations.of(context)!.translate("myProfile").toString(),
                 style: GoogleFonts.almarai(
                     color: ColorManager.textColor,
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery.of(context).size.height*.025
-                ),),
+                    fontSize: MediaQuery.of(context).size.height * .025),
+              ),
               titleSpacing: 0,
               leading: IconButton(
                 icon: const Icon(
@@ -74,51 +75,68 @@ class ProfileScreen extends StatelessWidget {
                       ),
 
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // crossAxisAlignment: CashHelper.getData(key: CashHelper.languageKey).toString() == 'en'? CrossAxisAlignment.start:CrossAxisAlignment.end,
                         children: [
-                          SizedBox(height: MediaQuery.of(context).size.height*.06,),
-
-                          // personal information
-                          Text('المعلومات الشخصيه',
-                              style: GoogleFonts.almarai(
-                                  color: ColorManager.textColor,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: MediaQuery.of(context).size.height*.025
-                              ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * .06,
                           ),
 
-                          SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                          // personal information
+                          Row(
+                            mainAxisAlignment:
+                                CashHelper.getData(key: CashHelper.languageKey)
+                                            .toString() ==
+                                        'en'
+                                    ? MainAxisAlignment.end
+                                    : MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .translate("personalDetails")
+                                    .toString(),
+                                style: GoogleFonts.almarai(
+                                    color: ColorManager.textColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            .025),
+                              ),
+                            ],
+                          ),
 
-                          const Divider(color: ColorManager.textColor,),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * .01,
+                          ),
 
-                          SizedBox(height: MediaQuery.of(context).size.height*.02,),
+                          const Divider(
+                            color: ColorManager.textColor,
+                          ),
+
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * .02,
+                          ),
 
                           // name
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment:
+                                CashHelper.getData(key: CashHelper.languageKey)
+                                            .toString() ==
+                                        'en'
+                                    ? MainAxisAlignment.end
+                                    : MainAxisAlignment.start,
                             children: [
-
-                              Text('الاسم :',
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: MediaQuery.of(context).size.height*.022
-                                  ),                              ),
-
-                              SizedBox(width: MediaQuery.of(context).size.height*.01,),
-
-                              Expanded(
-                                child: Text('${cubit.user!.name}',
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: MediaQuery.of(context).size.height*.022
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-
-                                ),
+                              Text(
+                                '${AppLocalizations.of(context)!.translate("userName").toString()}: ${cubit.user!.name}',
+                                style: GoogleFonts.almarai(
+                                    color: ColorManager.textColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            .022),
                               ),
-
+                              SizedBox(
+                                width: MediaQuery.of(context).size.height * .01,
+                              ),
                             ],
                           ),
 
@@ -126,29 +144,24 @@ class ProfileScreen extends StatelessWidget {
 
                           // email
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment:
+                                CashHelper.getData(key: CashHelper.languageKey)
+                                            .toString() ==
+                                        'en'
+                                    ? MainAxisAlignment.end
+                                    : MainAxisAlignment.start,
                             children: [
-
-                              Text('البريد الالكتروني :',
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: MediaQuery.of(context).size.height*.022
-                                  ),
+                              Text(
+                                '${AppLocalizations.of(context)!.translate("email").toString()}: ${cubit.user!.email}',
+                                style: GoogleFonts.almarai(
+                                    color: ColorManager.textColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            .022),
                               ),
-
                               SizedBox(width: MediaQuery.of(context).size.height*.01,),
 
-                              Expanded(
-                                child: Text('${cubit.user!.email}',
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: MediaQuery.of(context).size.height*.022
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
 
                             ],
                           ),
@@ -157,112 +170,26 @@ class ProfileScreen extends StatelessWidget {
 
                           // phone
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment:
+                                CashHelper.getData(key: CashHelper.languageKey)
+                                            .toString() ==
+                                        'en'
+                                    ? MainAxisAlignment.end
+                                    : MainAxisAlignment.start,
                             children: [
-
-                              Text('رقم الهاتف :',
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: MediaQuery.of(context).size.height*.022
-                                  ),
+                              Text(
+                                '${AppLocalizations.of(context)!.translate("phoneNumber").toString()}: ${cubit.user!.phone}',
+                                style: GoogleFonts.almarai(
+                                    color: ColorManager.textColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            .022),
                               ),
-
                               SizedBox(width:  MediaQuery.of(context).size.height*.01,),
 
-                              Expanded(
-                                child: Text('${cubit.user!.phone}',
-                                  style:GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              .022),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
                             ],
                           ),
-                          //
-                          // SizedBox(height:  MediaQuery.of(context).size.height*.03,),
-                          //
-                          //
-                          // MandoobCubit.get(context).user!.isCustomer==true?
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //
-                          //     Text('التوصيلات المتبقية :',
-                          //       style: GoogleFonts.almarai(
-                          //           color: ColorManager.textColor,
-                          //           fontWeight: FontWeight.w500,
-                          //           fontSize: MediaQuery.of(context).size.height*.022
-                          //       ),                              ),
-                          //
-                          //     SizedBox(width: MediaQuery.of(context).size.height*.01,),
-                          //
-                          //     Expanded(
-                          //       child: Text('${cubit.user!.count} توصيلة',
-                          //         style: GoogleFonts.almarai(
-                          //             color: ColorManager.textColor,
-                          //             fontWeight: FontWeight.w500,
-                          //             fontSize: MediaQuery.of(context).size.height*.022
-                          //         ),
-                          //         overflow: TextOverflow.ellipsis,
-                          //
-                          //       ),
-                          //     ),
-                          //
-                          //   ],
-                          // ):SizedBox(),
-                          //
-                          //
-
-                          // const Padding(
-                          //   padding: EdgeInsets.all(8.0),
-                          //   child: Divider(color: ColorManager.textColor,),
-                          // ),
-                          //
-                          // SizedBox(height:  MediaQuery.of(context).size.height*.02,),
-
-                          // call center
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //
-                          //     Text('خدمه الدعم الفني :',
-                          //         style: GoogleFonts.almarai(
-                          //             color: ColorManager.white,
-                          //             fontWeight: FontWeight.w500,
-                          //             fontSize: MediaQuery.of(context).size.height*.022
-                          //         ),
-                          //     ),
-                          //
-                          //     SizedBox(width:  MediaQuery.of(context).size.height*.02,),
-                          //
-                          //     Text('01277556432',style: GoogleFonts.almarai(
-                          //         color: ColorManager.white,
-                          //         fontWeight: FontWeight.w500,
-                          //         fontSize: MediaQuery.of(context).size.height*.022
-                          //     ),  ),
-                          //   ],
-                          // ),
-
-                          // Text('للتواصل :',style:GoogleFonts.almarai(
-                          //   fontSize: MediaQuery.of(context).size.height*.025,
-                          //   fontWeight: FontWeight.w700,
-                          //   color: ColorManager.white,
-                          // ),),
-                          //
-                          // SizedBox(height: MediaQuery.of(context).size.height*.01,),
-                          //
-                          // Text('busla.almamora@gmail.com',style:GoogleFonts.almarai(
-                          //   fontSize: MediaQuery.of(context).size.height*.025,
-                          //   fontWeight: FontWeight.w500,
-                          //   color: ColorManager.white,
-                          // ),),
-                          //
-                          // SizedBox(height:  MediaQuery.of(context).size.height*.02,),
 
                         ],
 

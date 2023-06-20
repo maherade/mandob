@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
 import 'package:mandob/presentation/screens/mandob/mandob.dart';
@@ -29,11 +30,11 @@ class OrderDetails extends StatelessWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => MandobScreen()));
+                  MaterialPageRoute(builder: (_) => const MandobScreen()));
             },
             icon: const Icon(Icons.arrow_back_ios)),
         title: Text(
-          'تفاصيل الطلب',
+          AppLocalizations.of(context)!.translate("orderDetails").toString(),
           style: GoogleFonts.cairo(
             fontSize: 20.0,
             fontWeight: FontWeight.w700,
@@ -64,7 +65,7 @@ class OrderDetails extends StatelessWidget {
               ),
               // العنوان
               Text(
-                'العنوان',
+                AppLocalizations.of(context)!.translate("address").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -84,7 +85,9 @@ class OrderDetails extends StatelessWidget {
               ),
               //المحافظة
               Text(
-                'المحافظه',
+                AppLocalizations.of(context)!
+                    .translate("government")
+                    .toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -121,7 +124,7 @@ class OrderDetails extends StatelessWidget {
                 ),
               ),
               Text(
-                'من',
+                AppLocalizations.of(context)!.translate("from").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -140,7 +143,7 @@ class OrderDetails extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * .015,
               ),
               Text(
-                'الي',
+                AppLocalizations.of(context)!.translate("to").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -161,7 +164,7 @@ class OrderDetails extends StatelessWidget {
               // السعر
 
               Text(
-                'السعر',
+                AppLocalizations.of(context)!.translate("price").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -184,7 +187,7 @@ class OrderDetails extends StatelessWidget {
               // الوزن
 
               Text(
-                'الوزن',
+                AppLocalizations.of(context)!.translate("weight").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
@@ -206,7 +209,7 @@ class OrderDetails extends StatelessWidget {
               // الملاحظات
 
               Text(
-                'الملاحظات',
+                AppLocalizations.of(context)!.translate("notes").toString(),
                 style: GoogleFonts.cairo(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,

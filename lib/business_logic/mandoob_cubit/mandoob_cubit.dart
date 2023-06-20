@@ -576,4 +576,22 @@ class MandoobCubit extends Cubit<MandoobStates> {
       "isAccepted": true,
     });
   }
+
+  //get guest user
+  Future<void> getGuestUser({
+    required String id,
+  }) async {
+    emit(GetUserLoadingState());
+
+    FirebaseFirestore.instance.collection('users').doc(id).get().then((value) {
+      user = MyUser.fromJson(value.data()!);
+
+      debugPrint('get guest Success');
+
+      emit(GetUserSuccessState());
+    }).catchError((error) {
+      debugPrint('Error in getUser is ${error.toString()}');
+      emit(GetUserErrorState());
+    });
+  }
 }

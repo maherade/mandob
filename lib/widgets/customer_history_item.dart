@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 
 import '../styles/color_manager.dart';
 
@@ -59,7 +60,7 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "من: ${widget.productModel.productFrom}",
+                      "${AppLocalizations.of(context)!.translate("from").toString()}: ${widget.productModel.productFrom}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -76,7 +77,7 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "الي: ${widget.productModel.productTo}",
+                      "${AppLocalizations.of(context)!.translate("to").toString()}: ${widget.productModel.productTo}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -92,7 +93,7 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "الوزن: ${widget.productModel.productWeight}",
+                      "${AppLocalizations.of(context)!.translate("weight").toString()}: ${widget.productModel.productWeight}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -108,7 +109,7 @@ class _CustomerHistoryItemState extends State<CustomerHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "السعر: ${widget.productModel.productPrice}",
+                      "${AppLocalizations.of(context)!.translate("price").toString()}: ${widget.productModel.productPrice}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,

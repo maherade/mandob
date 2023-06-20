@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -47,7 +48,7 @@ class AdminVerifiedScreen extends StatelessWidget {
               },
             ),
             title: Text(
-              'تاكيد الدفع',
+              AppLocalizations.of(context)!.translate("confirmPay").toString(),
               style: GoogleFonts.cairo(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
@@ -83,15 +84,17 @@ class AdminVerifiedScreen extends StatelessWidget {
                         child: DefaultButton(
                             color: Colors.blue,
                             color2: Colors.lightBlue,
-                            buttonText: 'تاكيد',
-                            onPressed: (){
-
-                              cubit.isAcceptedPay(num: num,count: count,uId: uId).then((value) {
+                            buttonText: AppLocalizations.of(context)!
+                                .translate("confirm")
+                                .toString(),
+                            onPressed: () {
+                              cubit
+                                  .isAcceptedPay(
+                                      num: num, count: count, uId: uId)
+                                  .then((value) {
                                 Navigator.pop(context);
                               });
-
-                            }
-                        ),
+                            }),
                       ),
                     ),
                     Expanded(
@@ -100,13 +103,12 @@ class AdminVerifiedScreen extends StatelessWidget {
                         child: DefaultButton(
                             color: ColorManager.primaryColor,
                             color2: Colors.red,
-                            buttonText: 'رفض',
-                            onPressed: (){
-
+                            buttonText: AppLocalizations.of(context)!
+                                .translate("reject")
+                                .toString(),
+                            onPressed: () {
                               cubit.isRefusedPay(uId: uId);
-
-                            }
-                        ),
+                            }),
                       ),
                     ),
                   ],
