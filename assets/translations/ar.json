@@ -37,7 +37,7 @@
   "confirmPay": "تأكيد الدفع",
   "confirm": "تأكيد",
   "reject": "رفض",
-  "ordersList": "ٌائمة الطلبات",
+  "ordersList": "قائمة الطلبات",
   "filter": "تصنيف",
   "rest": "متبقي",
   "delivery": "توصيلة",
@@ -55,5 +55,9 @@
   "dollar": "دولار",
   "paymentPage": "صفحة الدفع",
   "send": "إرسال",
-  "loginAsGuest": "تسجيل الدخول كذائر"
+  "loginAsGuest": "تسجيل الدخول كذائر",
+  "orderDelivered": "تم إستلام الطلب",
+  "problem": "هناك مشكلة",
+  "successDelivered": "تم إستلام الطلب بنجاح",
+  "warn": "غير مصرح لك, من فضلك سجل الدخول اولاً"
 }

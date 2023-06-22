@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
-import 'package:mandob/data/modles/product_model.dart';
+import 'package:mandob/data/modles/my_products.dart';
 
 import '../styles/color_manager.dart';
 
 class MandoobHistoryItem extends StatefulWidget {
-  ProductModel productModel;
+  MyProduct myProduct;
 
-  MandoobHistoryItem(this.productModel, {super.key});
+  MandoobHistoryItem(this.myProduct, {super.key});
 
   @override
   State<MandoobHistoryItem> createState() => _MandoobHistoryItemState();
@@ -45,7 +45,7 @@ class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
             child: Container(
               width: double.infinity,
               child: Image.network(
-                '${widget.productModel.productImage}',
+                '${widget.myProduct.productImage}',
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -62,7 +62,7 @@ class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "${AppLocalizations.of(context)!.translate("from").toString()}: ${widget.productModel.productFrom}",
+                      "${AppLocalizations.of(context)!.translate("from").toString()}: ${widget.myProduct.productFrom}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -80,7 +80,7 @@ class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "${AppLocalizations.of(context)!.translate("to").toString()}: ${widget.productModel.productTo}",
+                      "${AppLocalizations.of(context)!.translate("to").toString()}: ${widget.myProduct.productTo}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -97,7 +97,7 @@ class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "${AppLocalizations.of(context)!.translate("weight").toString()}: ${widget.productModel.productWeight}",
+                      "${AppLocalizations.of(context)!.translate("weight").toString()}: ${widget.myProduct.productWeight}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,
@@ -114,7 +114,7 @@ class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      "${AppLocalizations.of(context)!.translate("price").toString()}: ${widget.productModel.productPrice}",
+                      "${AppLocalizations.of(context)!.translate("price").toString()}: ${widget.myProduct.productPrice}",
                       style: GoogleFonts.cairo(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600,

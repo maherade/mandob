@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
-import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/styles/color_manager.dart';
@@ -10,15 +9,16 @@ import 'package:mandob/widgets/default_text_field.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
 import '../../../business_logic/mandoob_cubit/mandoob_cubit.dart';
+import '../customer/customer_screen/customer_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class MandoobRegisterScreen extends StatefulWidget {
+  const MandoobRegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<MandoobRegisterScreen> createState() => _MandoobRegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _MandoobRegisterScreenState extends State<MandoobRegisterScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
@@ -70,32 +70,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           prefixIcon: Icons.edit,
                         ),
                         SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: AppLocalizations.of(context)!
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultTextField(
+                          hintText: AppLocalizations.of(context)!
                               .translate("phoneNumber")
                               .toString(),
                           controller: phoneController,
                           textInputType: TextInputType.phone,
                           prefixIcon: Icons.phone,
                         ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: AppLocalizations.of(context)!
+                        SizedBox(
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultTextField(
+                          hintText: AppLocalizations.of(context)!
                               .translate("email")
                               .toString(),
                           controller: emailController,
                           textInputType: TextInputType.emailAddress,
                           prefixIcon: Icons.email,
                         ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: AppLocalizations.of(context)!
+                        SizedBox(
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultTextField(
+                          hintText: AppLocalizations.of(context)!
                               .translate("password")
                               .toString(),
                           controller: passwordController,
@@ -103,17 +103,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           prefixIcon: Icons.lock,
                           isPass: true,
                         ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultButton(
-                                  buttonText: AppLocalizations.of(context)!
+                        SizedBox(
+                          height: mediaQuery.height * .02,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.sizeOf(context).height * .2,
+                          decoration: BoxDecoration(color: Colors.grey),
+                        ),
+                        DefaultButton(
+                            buttonText: AppLocalizations.of(context)!
                                 .translate("signUp")
                                 .toString(),
                             onPressed: () {
                               if (CashHelper.getData(key: 'isCustomer') ==
                                   true) {
-                                validateForm(const ProfileScreen());
+                                validateForm(const CustomerScreen());
                               } else if (CashHelper.getData(
                                       key: 'isCustomer') ==
                                   false) {
@@ -121,13 +126,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                             },
                             width: mediaQuery.width * .6,
-                                  color2: ColorManager.primaryColor),
-                              SizedBox(
-                                height: mediaQuery.height * .01,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                            color2: ColorManager.primaryColor),
+                        SizedBox(
+                          height: mediaQuery.height * .01,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             Text(
                               AppLocalizations.of(context)!
                                   .translate("doYouHaveAccount?")
@@ -152,10 +157,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       color: ColorManager.primaryColor),
                                 )),
                           ],
-                              )
-                            ],
-                          ),
-                        ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

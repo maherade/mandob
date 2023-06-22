@@ -55,7 +55,9 @@ class MandoobCubit extends Cubit<MandoobStates> {
           pic:
               'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
           isCustomer: CashHelper.getData(key: 'isCustomer'),
-          count: 100);
+          count: 100,
+          carPic: 'assets/images/lorry.png',
+          personalIdPic: 'assets/images/id.png');
       await addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
         customToast(
@@ -136,6 +138,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
       debugPrint('Path is ${pickedFile.path}');
       emit(PickProductImageSuccessState());
     } else {
+      product = const AssetImage('assets/images/location.jpg');
       debugPrint('No Image selected.');
       emit(PickProductImageErrorState());
     }
@@ -570,6 +573,16 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
+  Future<void> updateIsCustomer() {
+    CollectionReference updateRef = getUsersCollection();
+    return updateRef.doc(user!.uId!).update({"isCustomer": true});
+  }
+
+  Future<void> updateIsMandob() {
+    CollectionReference updateRef = getUsersCollection();
+    return updateRef.doc(user!.uId!).update({"isCustomer": false});
+  }
+
   Future<void> updateProductsList(ProductModel productModel) {
     CollectionReference updateRef = getProductsCollection();
     return updateRef.doc(productModel.productId).update({
@@ -577,21 +590,29 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
+  //update delivery arrived
+  Future<void> updateArrivedDelivery(ProductModel productModel) {
+    CollectionReference updateRef = getProductsCollection();
+    return updateRef.doc(productModel.productId).update({
+      "isArrived": true,
+    });
+  }
+
   //get guest user
   Future<void> getGuestUser({
     required String id,
   }) async {
-    emit(GetUserLoadingState());
+    emit(GetUserGuestLoadingState());
 
     FirebaseFirestore.instance.collection('users').doc(id).get().then((value) {
       user = MyUser.fromJson(value.data()!);
 
       debugPrint('get guest Success');
 
-      emit(GetUserSuccessState());
+      emit(GetUserGuestSuccessState());
     }).catchError((error) {
       debugPrint('Error in getUser is ${error.toString()}');
-      emit(GetUserErrorState());
+      emit(GetUserGuestErrorState());
     });
   }
 }

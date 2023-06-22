@@ -7,15 +7,20 @@ class MyUser {
   int? count;
   bool? isCustomer;
   String? pic;
-  MyUser(
-      {required this.uId,
-      required this.name,
-      required this.phone,
-      required this.email,
-      required this.count,
-      this.isCustomer = false,
-      required this.pic
-      });
+  String? personalIdPic;
+  String? carPic;
+
+  MyUser({
+    required this.uId,
+    required this.name,
+    required this.phone,
+    required this.email,
+    required this.count,
+    this.isCustomer = false,
+    required this.pic,
+    required this.carPic,
+    required this.personalIdPic,
+  });
 
   MyUser.fromJson(Map<String, dynamic> json)
       : this(
@@ -26,6 +31,8 @@ class MyUser {
           count: json["count"],
           isCustomer: json["isCustomer"],
           pic: json["pic"],
+          carPic: json["carPic"],
+          personalIdPic: json["personalIdPic"],
         );
 
   Map<String, dynamic> toJson() {
@@ -37,6 +44,8 @@ class MyUser {
       "count": count,
       "isCustomer": isCustomer,
       "pic": pic,
+      "carPic": carPic,
+      "personalIdPic": personalIdPic,
     };
   }
 }

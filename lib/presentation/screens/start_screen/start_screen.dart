@@ -239,7 +239,6 @@ class StartScreen extends StatelessWidget {
 
                         color: ColorManager.primaryColor,
                         onPressed: (){
-
                           if(MandoobCubit.get(context).isCheckBoxTrue==true){
                             CashHelper.saveData(key: 'isCustomer',value: false);
                             Navigator.push(context, MaterialPageRoute(builder: (_){

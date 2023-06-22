@@ -13,12 +13,28 @@ class OnBoarding extends StatelessWidget {
 
   static List<OnBoardingModel> onBoardingData = [
     OnBoardingModel(
-        title: 'Lorem Ipsum',
-        describtion:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        title: 'تطبيق يكسبك فلوس وانت علي دربك',
+        describtion: '''
+        طريقة سهلة في استقبال الطلبات
+              طلبات توصلك وين ما كنت
+              تواصل مع العميل مباشرةً
+        ''',
         image: 'assets/images/food.json'),
-    OnBoardingModel(title: 'Simply dummy',describtion: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',image: 'assets/images/onboarding3.json'),
-    OnBoardingModel(title: 'Typesetting industry',describtion: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',image: 'assets/images/onboarding2.json'),
+    OnBoardingModel(
+        title: 'مميزات التطبيق لأصحاب المشاريع المنزلية',
+        describtion: '''
+        الإستلام من باب بيتك
+        مندوبك متوفر علي مدار الساعة
+        نضمن لك سلامة منتجاتك
+        تتبع طلبك بكل سهولة
+        ''',
+        image: 'assets/images/onboarding3.json'),
+    OnBoardingModel(
+        title: '#حط_طلبك_يوصل_لك',
+        describtion: ''' سجل كمندوب واكسب فلوس 
+        في وقت فراغك و عيش حياتك
+        ''',
+        image: 'assets/images/onboarding2.json'),
   ];
 
   const OnBoarding({super.key});

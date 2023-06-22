@@ -9,7 +9,7 @@ import 'package:mandob/business_logic/localization_cubit/localization_states.dar
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
-import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
+import 'package:mandob/presentation/screens/on_boarding/on_boarding.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             debugShowCheckedModeBanner: false,
-            home: const StartScreen(),
+            home: const OnBoarding(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

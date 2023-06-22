@@ -7,7 +7,7 @@ import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
-import 'package:mandob/widgets/customer_history_item.dart';
+import 'package:mandob/widgets/mandoob_history_item.dart';
 
 class MandoobHistory extends StatefulWidget {
   const MandoobHistory({super.key});
@@ -59,8 +59,7 @@ class _MandoobHistoryState extends State<MandoobHistory> {
                         child: ListView.builder(
                             itemCount: cubit.myProduct.length,
                             itemBuilder: (context, index) {
-                              return CustomerHistoryItem(
-                                  cubit.myProduct[index]);
+                              return MandoobHistoryItem(cubit.myProduct[index]);
                             }),
                       )
                     ],

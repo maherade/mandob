@@ -5,8 +5,10 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/customer_details/customer_details.dart';
 import 'package:mandob/presentation/screens/mandob/order_details_screen/order_details.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
+import '../presentation/screens/login_screen/login_screen.dart';
 import '../styles/color_manager.dart';
 
 class OrderItem extends StatefulWidget {
@@ -48,7 +50,7 @@ class _OrderItemState extends State<OrderItem> {
             child: Column(
               children: [
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: Image.network(
                       '${widget.productModel.productImage}',
@@ -112,18 +114,21 @@ class _OrderItemState extends State<OrderItem> {
                                   .toString(),
                               color: ColorManager.primaryColor,
                               color2: ColorManager.primaryColor,
-                              onPressed: () {
-                                setState(() {
-                                  MandoobCubit.get(context)
-                                      .updateMandoobCounter();
-                                  MandoobCubit.get(context)
-                                      .updateProductsList(widget.productModel);
-                                });
-                                MandoobCubit.get(context)
-                                    .onOrderAccepted(
-                                  widget.productModel.productAddress,
-                                  widget.productModel.productPrice,
-                                  widget.productModel.productWeight,
+                              onPressed: CashHelper.getData(key: "isGuest") ==
+                                      false
+                                  ? () {
+                                      setState(() {
+                                        MandoobCubit.get(context)
+                                            .updateMandoobCounter();
+                                        MandoobCubit.get(context)
+                                            .updateProductsList(
+                                                widget.productModel);
+                                      });
+                                      MandoobCubit.get(context)
+                                          .onOrderAccepted(
+                                        widget.productModel.productAddress,
+                                        widget.productModel.productPrice,
+                                        widget.productModel.productWeight,
                                   widget.productModel.productNotes,
                                   widget.productModel.productFrom,
                                   widget.productModel.productTo,
@@ -188,17 +193,77 @@ class _OrderItemState extends State<OrderItem> {
                                               ),
                                               child: Text(
                                                 AppLocalizations.of(context)!
-                                                    .translate("ok")
-                                                    .toString(),
+                                                          .translate("ok")
+                                                          .toString(),
+                                                    )),
+                                              )
+                                            ],
+                                          ),
+                                        ).then((value) {
+                                          Navigator.of(context).pop();
+                                        });
+                                      });
+                                    }
+                                  : () {
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              child: Image(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .07,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .04,
+                                                color:
+                                                    ColorManager.primaryColor,
+                                                image: const AssetImage(
+                                                    "assets/images/warning.png"),
                                               )),
-                                        )
-                                      ],
-                                    ),
-                                  ).then((value) {
-                                    Navigator.of(context).pop();
-                                  });
-                                });
-                              },
+                                          content: Text(
+                                            AppLocalizations.of(context)!
+                                                .translate("warn")
+                                                .toString(),
+                                            style: GoogleFonts.almarai(
+                                                color: ColorManager.textColor,
+                                                fontSize: 16),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          actions: [
+                                            Center(
+                                              child: ElevatedButton(
+                                                  onPressed: () {
+                                                    MandoobCubit.get(context)
+                                                        .getUserDetails();
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                const LoginScreen()));
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    primary:
+                                                        Colors.blue.shade700,
+                                                  ),
+                                                  child: Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .translate("login")
+                                                        .toString(),
+                                                  )),
+                                            )
+                                          ],
+                                        ),
+                                      ).then((value) {
+                                        Navigator.of(context).pop();
+                                      });
+                                    },
                             ),
                           ),
                           SizedBox(

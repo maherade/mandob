@@ -15,6 +15,7 @@ class ProductModel {
   String? userImage;
   String? userUid;
   bool? isAccepted;
+  bool? isArrived;
 
   ProductModel({
     this.productId = "",
@@ -32,25 +33,28 @@ class ProductModel {
     required this.userImage,
     required this.userUid,
     this.isAccepted = false,
+    this.isArrived = false,
   });
 
   ProductModel.fromJson(Map<String, dynamic> json)
       : this(
-            productId: json["productId"],
-            productAddress: json["productAddress"],
-            productPrice: json["productPrice"],
-            productWeight: json["productWeight"],
-            productNotes: json["productNotes"],
-            productFrom: json["productFrom"],
-            productTo: json["productTo"],
-            productImage: json["productImage"],
-            productGovernment: json["productGovernment"],
-            userName: json["userName"],
-            userPhone: json["userPhone"],
-            userEmail: json["userEmail"],
-            userImage: json["userImage"],
-            userUid: json["userUid"],
-            isAccepted: json["isAccepted"]);
+          productId: json["productId"],
+          productAddress: json["productAddress"],
+          productPrice: json["productPrice"],
+          productWeight: json["productWeight"],
+          productNotes: json["productNotes"],
+          productFrom: json["productFrom"],
+          productTo: json["productTo"],
+          productImage: json["productImage"],
+          productGovernment: json["productGovernment"],
+          userName: json["userName"],
+          userPhone: json["userPhone"],
+          userEmail: json["userEmail"],
+          userImage: json["userImage"],
+          userUid: json["userUid"],
+          isAccepted: json["isAccepted"],
+          isArrived: json["isArrived"],
+        );
 
   Map<String, dynamic> toJson() {
     return {
@@ -69,6 +73,7 @@ class ProductModel {
       "userImage": userImage,
       "userUid": userUid,
       "isAccepted": isAccepted,
+      "isArrived": isArrived,
     };
   }
 }

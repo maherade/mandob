@@ -69,6 +69,13 @@ class GetUserSuccessState extends MandoobStates {}
 
 class GetUserErrorState extends MandoobStates {}
 
+//Guest
+class GetUserGuestLoadingState extends MandoobStates {}
+
+class GetUserGuestSuccessState extends MandoobStates {}
+
+class GetUserGuestErrorState extends MandoobStates {}
+
 class GetUserDetailsLoadingState extends MandoobStates {}
 
 class GetUserDetailsSuccessState extends MandoobStates {}

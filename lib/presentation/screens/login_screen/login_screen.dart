@@ -156,12 +156,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () {
                                 MandoobCubit.get(context)
                                     .getGuestUser(id: "IqRzvBp4Po9wE1v91ASo")
-                                    .then((value) => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (_) {
-                                            return const MandobScreen();
-                                          }),
-                                        ));
+                                    .then((_) {
+                                  CashHelper.saveData(
+                                      key: "isGuest", value: true);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) {
+                                      return CashHelper.getData(
+                                                  key: "isCustomer") ==
+                                              true
+                                          ? const CustomerScreen()
+                                          : const MandobScreen();
+                                    }),
+                                  );
+                                });
                               },
                               child: Text(
                                 AppLocalizations.of(context)!
@@ -170,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: const TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
-                                    color: ColorManager.primaryColor),
+                                    color: ColorManager.textColor),
                               )),
                         ],
                       ),
