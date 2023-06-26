@@ -7,7 +7,6 @@ import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
-import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/customer_history_item.dart';
 
 class CustomerHistory extends StatefulWidget {
@@ -50,9 +49,24 @@ class _CustomerHistoryState extends State<CustomerHistory> {
               textAlign: TextAlign.center,
             ),
           ),
-          body: cubit.customerHistory.isEmpty &&
-                  CashHelper.getData(key: "isGuest")
-              ? Center(
+          body: cubit.customerHistory.isNotEmpty
+              ? Container(
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: cubit.customerHistory.length,
+                            itemBuilder: (context, index) {
+                              return CustomerHistoryItem(
+                                  cubit.customerHistory[index]);
+                            }),
+                      )
+                    ],
+                  ),
+                )
+              : Center(
                   child: Column(
                     children: [
                       SizedBox(
@@ -73,22 +87,6 @@ class _CustomerHistoryState extends State<CustomerHistory> {
                             fontWeight: FontWeight.w700,
                             color: ColorManager.textColor,
                           ))
-                    ],
-                  ),
-                )
-              : Container(
-                  padding: const EdgeInsets.all(5),
-                  margin: const EdgeInsets.all(5),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                            itemCount: cubit.customerHistory.length,
-                            itemBuilder: (context, index) {
-                              return CustomerHistoryItem(
-                                  cubit.customerHistory[index]);
-                            }),
-                      )
                     ],
                   ),
                 ),
