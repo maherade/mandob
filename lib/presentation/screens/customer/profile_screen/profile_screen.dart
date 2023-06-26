@@ -215,43 +215,47 @@ class ProfileScreen extends StatelessWidget {
                               height: MediaQuery.of(context).size.height * .03,
                             ),
 
-                            Row(
-                              mainAxisAlignment: CashHelper.getData(
-                                              key: CashHelper.languageKey)
-                                          .toString() ==
-                                      'en'
-                                  ? MainAxisAlignment.end
-                                  : MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate("yourId")
-                                      .toString(),
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              .022),
-                                ),
-                              ],
-                            ),
+                            CashHelper.getData(key: "isCustomer") == false
+                                ? Row(
+                                    mainAxisAlignment: CashHelper.getData(
+                                                    key: CashHelper.languageKey)
+                                                .toString() ==
+                                            'en'
+                                        ? MainAxisAlignment.end
+                                        : MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .translate("yourId")
+                                            .toString(),
+                                        style: GoogleFonts.almarai(
+                                            color: ColorManager.textColor,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .022),
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox(),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .01,
                             ),
-
-                            Stack(
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * .3,
-                                  color: Colors.white,
-                                  child: Container(
-                                    child: Image(
-                                        image: NetworkImage(
-                                            cubit.user!.personalIdPic!)),
-                                  ),
+                            CashHelper.getData(key: "isCustomer") == false
+                                ? Stack(
+                                    children: [
+                                      Container(
+                                        width: double.infinity,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                .3,
+                                        color: Colors.white,
+                                        child: Container(
+                                          child: Image(
+                                              image: NetworkImage(
+                                                  cubit.user!.personalIdPic!)),
+                                        ),
                                 ),
                                 Positioned(
                                   right:
@@ -261,59 +265,64 @@ class ProfileScreen extends StatelessWidget {
                                   child: CircleAvatar(
                                     backgroundColor: Colors.black,
                                     child: IconButton(
-                                        onPressed: () {
-                                          cubit.getIdImage();
-                                        },
-                                        icon: const Icon(
-                                          Icons.camera_alt,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                ),
-                              ],
-                            ),
+                                              onPressed: () {
+                                                cubit.getIdImage();
+                                              },
+                                              icon: const Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox(),
 
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .03,
                             ),
 
-                            Row(
-                              mainAxisAlignment: CashHelper.getData(
-                                              key: CashHelper.languageKey)
-                                          .toString() ==
-                                      'en'
-                                  ? MainAxisAlignment.end
-                                  : MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate("carPic")
-                                      .toString(),
-                                  style: GoogleFonts.almarai(
-                                      color: ColorManager.textColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              .022),
-                                ),
-                              ],
-                            ),
+                            CashHelper.getData(key: "isCustomer") == false
+                                ? Row(
+                                    mainAxisAlignment: CashHelper.getData(
+                                                    key: CashHelper.languageKey)
+                                                .toString() ==
+                                            'en'
+                                        ? MainAxisAlignment.end
+                                        : MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .translate("carPic")
+                                            .toString(),
+                                        style: GoogleFonts.almarai(
+                                            color: ColorManager.textColor,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .022),
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox(),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .01,
                             ),
-
-                            Stack(
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * .3,
-                                  color: Colors.white,
-                                  child: Container(
-                                    child: Image(
-                                        image:
-                                            NetworkImage(cubit.user!.carPic!)),
-                                  ),
+                            CashHelper.getData(key: "isCustomer") == false
+                                ? Stack(
+                                    children: [
+                                      Container(
+                                        width: double.infinity,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                .3,
+                                        color: Colors.white,
+                                        child: Container(
+                                          child: Image(
+                                              image: NetworkImage(
+                                                  cubit.user!.carPic!)),
+                                        ),
                                 ),
                                 Positioned(
                                   right:
@@ -323,17 +332,18 @@ class ProfileScreen extends StatelessWidget {
                                   child: CircleAvatar(
                                     backgroundColor: Colors.black,
                                     child: IconButton(
-                                        onPressed: () {
-                                          cubit.getCarImage();
-                                        },
-                                        icon: const Icon(
-                                          Icons.camera_alt,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                ),
-                              ],
-                            ),
+                                              onPressed: () {
+                                                cubit.getCarImage();
+                                              },
+                                              icon: const Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox(),
                           ],
                         ),
                       ),
