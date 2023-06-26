@@ -228,164 +228,148 @@ class _MandobScreenState extends State<MandobScreen> {
                           ),
                           //شراء الباقات
                           GestureDetector(
-                            onTap: CashHelper.getData(key: "isGuest") == false
-                                ? () {
-                                    showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                        title: Lottie.asset(
-                                            "assets/images/money.json",
+                            onTap:
+                                // CashHelper.getData(key: "isGuest") == false
+                                //     ?
+                                () {
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: Lottie.asset(
+                                      "assets/images/money.json",
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              .25),
+                                  actions: [
+                                    Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .translate("choose")
+                                                .toString(),
+                                            style: GoogleFonts.almarai(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.w500,
+                                                color: ColorManager.textColor),
+                                          ),
+                                          SizedBox(
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
-                                                .25),
-                                        actions: [
-                                          Center(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate("choose")
-                                                      .toString(),
-                                                  style: GoogleFonts.almarai(
-                                                      fontSize: 20.0,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: ColorManager
-                                                          .textColor),
-                                                ),
-                                                SizedBox(
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                              .height *
-                                                          .02,
-                                                ),
-                                                ElevatedButton(
-                                                    onPressed: () {
-                                                      cubit.getUserDetails();
-                                                      Navigator.of(context)
-                                                          .push(
-                                                              MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            const Packages(),
-                                                      ));
-                                                    },
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Colors.blue.shade900,
-                                                    ),
-                                                    child: Text(
-                                                      AppLocalizations.of(
-                                                              context)!
-                                                          .translate("payPal")
-                                                          .toString(),
-                                                      style:
-                                                          GoogleFonts.almarai(
-                                                              fontSize: 18.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
-                                                              color:
-                                                                  Colors.white),
-                                                    )),
-                                                SizedBox(
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                              .height *
-                                                          .01,
-                                                ),
-                                                ElevatedButton(
-                                                    onPressed: () {
-                                                      Platform.isIOS
-                                                          ? launchUrl(
-                                                              iosWhatsapp)
-                                                          : launchUrl(
-                                                              androidWhatsapp);
-                                                    },
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Colors.green.shade900,
-                                                    ),
-                                                    child: Text(
-                                                      AppLocalizations.of(
-                                                              context)!
-                                                          .translate("connect")
-                                                          .toString(),
-                                                      style:
-                                                          GoogleFonts.almarai(
-                                                              fontSize: 18.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
-                                                              color:
-                                                                  Colors.white),
-                                                    )),
-                                              ],
-                                            ),
-                                          )
+                                                .02,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                cubit.getUserDetails();
+                                                Navigator.of(context)
+                                                    .push(MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const Packages(),
+                                                ));
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.blue.shade900,
+                                              ),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .translate("payPal")
+                                                    .toString(),
+                                                style: GoogleFonts.almarai(
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white),
+                                              )),
+                                          SizedBox(
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                .01,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                Platform.isIOS
+                                                    ? launchUrl(iosWhatsapp)
+                                                    : launchUrl(
+                                                        androidWhatsapp);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.green.shade900,
+                                              ),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .translate("connect")
+                                                    .toString(),
+                                                style: GoogleFonts.almarai(
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Colors.white),
+                                              )),
                                         ],
                                       ),
-                                    ).then((value) => Navigator.pop(context));
-                                  }
-                                : () {
-                                    showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                        title: Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: Image(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  .07,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  .04,
-                                              color: ColorManager.primaryColor,
-                                              image: const AssetImage(
-                                                  "assets/images/warning.png"),
-                                            )),
-                                        content: Text(
-                                          AppLocalizations.of(context)!
-                                              .translate("warn")
-                                              .toString(),
-                                          style: GoogleFonts.almarai(
-                                              color: ColorManager.textColor,
-                                              fontSize: 16),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        actions: [
-                                          Center(
-                                            child: ElevatedButton(
-                                                onPressed: () {
-                                                  MandoobCubit.get(context)
-                                                      .getUserDetails();
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              const LoginScreen()));
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors.blue.shade700,
-                                                ),
-                                                child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate("login")
-                                                      .toString(),
-                                                )),
-                                          )
-                                        ],
-                                      ),
-                                    ).then((value) {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
+                                    )
+                                  ],
+                                ),
+                              ).then((value) => Navigator.pop(context));
+                            }
+                            //     : () {
+                            //   showDialog<String>(
+                            //     context: context,
+                            //     builder: (BuildContext context) =>
+                            //         AlertDialog(
+                            //           title: Padding(
+                            //               padding: const EdgeInsets.all(12.0),
+                            //               child: Image(
+                            //                 height: MediaQuery.of(context)
+                            //                     .size
+                            //                     .height *
+                            //                     .07,
+                            //                 width: MediaQuery.of(context)
+                            //                     .size
+                            //                     .height *
+                            //                     .04,
+                            //                 color: ColorManager.primaryColor,
+                            //                 image: const AssetImage(
+                            //                     "assets/images/warning.png"),
+                            //               )),
+                            //           content: Text(
+                            //             AppLocalizations.of(context)!
+                            //                 .translate("warn")
+                            //                 .toString(),
+                            //             style: GoogleFonts.almarai(
+                            //                 color: ColorManager.textColor,
+                            //                 fontSize: 16),
+                            //             textAlign: TextAlign.center,
+                            //           ),
+                            //           actions: [
+                            //             Center(
+                            //               child: ElevatedButton(
+                            //                   onPressed: () {
+                            //                     MandoobCubit.get(context)
+                            //                         .getUserDetails();
+                            //                     Navigator.of(context).push(
+                            //                         MaterialPageRoute(
+                            //                             builder: (_) =>
+                            //                             const LoginScreen()));
+                            //                   },
+                            //                   style: ElevatedButton.styleFrom(
+                            //                     primary: Colors.blue.shade700,
+                            //                   ),
+                            //                   child: Text(
+                            //                     AppLocalizations.of(context)!
+                            //                         .translate("login")
+                            //                         .toString(),
+                            //                   )),
+                            //             )
+                            //           ],
+                            //         ),
+                            //   ).then((value) {
+                            //     Navigator.of(context).pop();
+                            //   });
+                            // }
+                            ,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 10),

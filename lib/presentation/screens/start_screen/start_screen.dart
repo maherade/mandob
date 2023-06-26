@@ -35,24 +35,29 @@ class StartScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                        Text(
-                            AppLocalizations.of(context)!.translate('language').toString(),
-                            style: GoogleFonts.almarai(
-                              fontSize: MediaQuery.of(context).size.height*.02,
-                              color: ColorManager.textColor,
-                              fontWeight: FontWeight.w700
-                            ),
+                      Text(
+                        AppLocalizations.of(context)!
+                            .translate('language')
+                            .toString(),
+                        style: GoogleFonts.almarai(
+                            fontSize: MediaQuery.of(context).size.height * .02,
+                            color: ColorManager.textColor,
+                            fontWeight: FontWeight.w700),
                       ),
-
-                      SizedBox(height: MediaQuery.of(context).size.height*.005,),
-
-                      CashHelper.getData(key: CashHelper.languageKey).toString() == 'en'?
-                      Container(
-                        width: MediaQuery.of(context).size.height*.06,
-                        height: MediaQuery.of(context).size.height*.0035,
-                        color: Colors.black,
-                      ):Container(
-                        width: MediaQuery.of(context).size.height*.03,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .005,
+                      ),
+                      CashHelper.getData(key: CashHelper.languageKey)
+                                  .toString() ==
+                              'en'
+                          ? Container(
+                              width: MediaQuery.of(context).size.height * .06,
+                              height:
+                                  MediaQuery.of(context).size.height * .0035,
+                              color: Colors.black,
+                            )
+                          : Container(
+                              width: MediaQuery.of(context).size.height*.03,
                         height: MediaQuery.of(context).size.height*.0035,
                         color: Colors.black,
                       )
@@ -72,13 +77,13 @@ class StartScreen extends StatelessWidget {
             body: Column(
               children: [
                 Image(
-                    image: const AssetImage('assets/images/delivery.png'),
+                  image: const AssetImage('assets/images/delivery.png'),
                   height: MediaQuery.of(context).size.height * .2,
                   width: MediaQuery.of(context).size.height * .2,
                 ),
 
                 CashHelper.getData(key: CashHelper.languageKey).toString() ==
-                        'en'
+                    'en'
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -118,12 +123,13 @@ class StartScreen extends StatelessWidget {
                             'Mandoob ',
                             style: GoogleFonts.almarai(
                                 fontWeight: FontWeight.w700,
-                                fontSize: MediaQuery.of(context).size.height*.03,
-                        color: ColorManager.black),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                color: ColorManager.black),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
 
 
                 Text('يوصلك كل شي',style: GoogleFonts.cairo(

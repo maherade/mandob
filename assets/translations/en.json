@@ -59,5 +59,9 @@
   "orderDelivered": "Order received",
   "problem": "There's a problem",
   "successDelivered": "Order Delivered Successfully",
-  "warn": "You aren not authorized ,Please login first"
+  "warn": "You aren not authorized ,Please login first",
+  "uploadId": "Upload your national Id",
+  "uploadCarPic": "Upload your car picture",
+  "yourId": "Your National Id",
+  "carPic": "Your Vehicle"
 }

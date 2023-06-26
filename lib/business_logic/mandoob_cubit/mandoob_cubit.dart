@@ -43,7 +43,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     try {
       emit(SignUpLoadingState());
       final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -56,8 +56,10 @@ class MandoobCubit extends Cubit<MandoobStates> {
               'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
           isCustomer: CashHelper.getData(key: 'isCustomer'),
           count: 100,
-          carPic: 'assets/images/lorry.png',
-          personalIdPic: 'assets/images/id.png');
+          carPic:
+              'https://img.freepik.com/free-vector/image-upload-concept-illustration_114360-996.jpg?w=740&t=st=1687783702~exp=1687784302~hmac=b8db28cfc86bde6e6930568483053d670e577b0d488017a4d758e9829dce51b1',
+          personalIdPic:
+              'https://img.freepik.com/free-vector/image-upload-concept-illustration_114360-996.jpg?w=740&t=st=1687783702~exp=1687784302~hmac=b8db28cfc86bde6e6930568483053d670e577b0d488017a4d758e9829dce51b1');
       await addUserToFireStore(myUser).then((value) {
         emit(SignUpSuccessState());
         customToast(
@@ -298,6 +300,46 @@ class MandoobCubit extends Cubit<MandoobStates> {
     }
   }
 
+  File? idImage;
+
+  ImageProvider imageId = const AssetImage('assets/images/upload.jpg');
+  var picker4 = ImagePicker();
+
+  Future<void> getIdImage() async {
+    final pickedFile = await picker4.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      idImage = File(pickedFile.path);
+      imageId = FileImage(idImage!);
+      debugPrint('Path is ${pickedFile.path}');
+      emit(PickUserIdImageSuccessState());
+    } else {
+      debugPrint('No Image selected.');
+      emit(PickUserIdImageErrorState());
+    }
+  }
+
+  ImageProvider carId = const AssetImage('assets/images/upload.jpg');
+  var picker5 = ImagePicker();
+
+  Future<void> getCarImage() async {
+    final pickedFile = await picker5.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      carImage = File(pickedFile.path);
+      carId = FileImage(carImage!);
+      debugPrint('Path is ${pickedFile.path}');
+      emit(PickCarImageSuccessState());
+    } else {
+      debugPrint('No Image selected.');
+      emit(PickCarImageErrorState());
+    }
+  }
+
   String? profilePath;
 
   Future uploadUserImage() {
@@ -327,6 +369,70 @@ class MandoobCubit extends Cubit<MandoobStates> {
     }).catchError((error) {
       debugPrint('Error in Upload profileImage ${error.toString()}');
       emit(UploadProfileImageErrorState());
+    });
+  }
+
+//upload user id image
+  Future uploadUserIdImage() {
+    emit(UploadUserIdImageLoadingState());
+    return firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('usersIdImage/${Uri.file(idImage!.path).pathSegments.last}')
+        .putFile(idImage!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        debugPrint('Upload Success');
+        profilePath = value;
+
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(CashHelper.getData(key: 'isUid'))
+            .update({'personalIdPic': '$profilePath'}).then((value) {
+          debugPrint('Image Updates');
+        });
+
+        getUser();
+        emit(UploadUserIdImageSuccessState());
+      }).catchError((error) {
+        debugPrint('Error in Upload profileImage ${error.toString()}');
+        emit(UploadUserIdImageErrorState());
+      });
+    }).catchError((error) {
+      debugPrint('Error in Upload profileImage ${error.toString()}');
+      emit(UploadUserIdImageErrorState());
+    });
+  }
+
+  File? carImage;
+
+  //upload car image
+  Future uploadCarImage() {
+    emit(UploadCarImageLoadingState());
+    return firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('carImage/${Uri.file(carImage!.path).pathSegments.last}')
+        .putFile(carImage!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        debugPrint('Upload Success');
+        profilePath = value;
+
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(CashHelper.getData(key: 'isUid'))
+            .update({'carPic': '$profilePath'}).then((value) {
+          debugPrint('Image Updates');
+        });
+
+        getUser();
+        emit(UploadCarImageSuccessState());
+      }).catchError((error) {
+        debugPrint('Error in Upload carImage ${error.toString()}');
+        emit(UploadCarImageErrorState());
+      });
+    }).catchError((error) {
+      debugPrint('Error in Upload carImage ${error.toString()}');
+      emit(UploadCarImageErrorState());
     });
   }
 
@@ -405,7 +511,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     myProduct = [];
     await FirebaseFirestore.instance
         .collection('myProducts')
-        .doc('${CashHelper.getData(key: 'isUid')}')
+        .doc(user!.uId)
         .collection('orders')
         .get()
         .then((value) {

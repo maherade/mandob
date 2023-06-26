@@ -70,32 +70,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           prefixIcon: Icons.edit,
                         ),
                         SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: AppLocalizations.of(context)!
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultTextField(
+                          hintText: AppLocalizations.of(context)!
                               .translate("phoneNumber")
                               .toString(),
                           controller: phoneController,
                           textInputType: TextInputType.phone,
                           prefixIcon: Icons.phone,
                         ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: AppLocalizations.of(context)!
+                        SizedBox(
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultTextField(
+                          hintText: AppLocalizations.of(context)!
                               .translate("email")
                               .toString(),
                           controller: emailController,
                           textInputType: TextInputType.emailAddress,
                           prefixIcon: Icons.email,
                         ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultTextField(
-                                hintText: AppLocalizations.of(context)!
+                        SizedBox(
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultTextField(
+                          hintText: AppLocalizations.of(context)!
                               .translate("password")
                               .toString(),
                           controller: passwordController,
@@ -103,11 +103,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           prefixIcon: Icons.lock,
                           isPass: true,
                         ),
-                              SizedBox(
-                                height: mediaQuery.height * .02,
-                              ),
-                              DefaultButton(
-                                  buttonText: AppLocalizations.of(context)!
+                        SizedBox(
+                          height: mediaQuery.height * .02,
+                        ),
+                        DefaultButton(
+                            buttonText: AppLocalizations.of(context)!
                                 .translate("signUp")
                                 .toString(),
                             onPressed: () {
@@ -121,13 +121,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                             },
                             width: mediaQuery.width * .6,
-                                  color2: ColorManager.primaryColor),
-                              SizedBox(
-                                height: mediaQuery.height * .01,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                            color2: ColorManager.primaryColor),
+                        SizedBox(
+                          height: mediaQuery.height * .01,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             Text(
                               AppLocalizations.of(context)!
                                   .translate("doYouHaveAccount?")
@@ -152,10 +152,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       color: ColorManager.primaryColor),
                                 )),
                           ],
-                              )
-                            ],
-                          ),
-                        ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

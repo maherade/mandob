@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +10,8 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/customer/customer_history/customer_history.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
-import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
-import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/default_text_field.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -208,7 +207,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                         // تسجيل الخروج
                         GestureDetector(
                           onTap: () {
-                            CashHelper.removeData(key: 'isUid');
+                            FirebaseAuth.instance.signOut();
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) => const StartScreen()),
@@ -545,21 +544,22 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                   child: CircularProgressIndicator(),
                                 )
                               : DefaultButton(
-                            onPressed: CashHelper.getData(
-                                              key: "isGuest") ==
-                                          false
-                                      ? () {
-                                          if (CustomerScreen
-                                              .formKey.currentState!
-                                              .validate()) {
-                                            cubit
-                                                .uploadProductImage(
-                                              productGovernment:
-                                                  CustomerScreen.bottomValue,
-                                              productAddress: CustomerScreen
-                                                  .addressController.text,
-                                              productPrice: CustomerScreen
-                                                  .priceController.text,
+                                  onPressed:
+                                      // CashHelper.getData(
+                                      //                   key: "isGuest") ==
+                                      //               true
+                                      //           ?
+                                      () {
+                                    if (CustomerScreen.formKey.currentState!
+                                        .validate()) {
+                                      cubit
+                                          .uploadProductImage(
+                                        productGovernment:
+                                            CustomerScreen.bottomValue,
+                                        productAddress: CustomerScreen
+                                            .addressController.text,
+                                        productPrice:
+                                            CustomerScreen.priceController.text,
                                               productWeight: CustomerScreen
                                             .weightController.text,
                                         productNotes:
@@ -581,80 +581,78 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                                   .clear();
                                               CustomerScreen.weightController
                                                   .clear();
-                                              CustomerScreen.notesController
-                                                  .clear();
-                                              CustomerScreen.fromController
-                                                  .clear();
-                                              CustomerScreen.toController
-                                                  .clear();
-                                              cubit.productImage = null;
-                                            });
-                                          }
-                                        }
-                                      : () {
-                                          showDialog<String>(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                AlertDialog(
-                                              title: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      12.0),
-                                                  child: Image(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .07,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .04,
-                                                    color: ColorManager
-                                                        .primaryColor,
-                                                    image: const AssetImage(
-                                                        "assets/images/warning.png"),
-                                                  )),
-                                              content: Text(
-                                                AppLocalizations.of(context)!
-                                                    .translate("warn")
-                                                    .toString(),
-                                                style: GoogleFonts.almarai(
-                                                    color:
-                                                        ColorManager.textColor,
-                                                    fontSize: 16),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              actions: [
-                                                Center(
-                                                  child: ElevatedButton(
-                                                      onPressed: () {
-                                                        MandoobCubit.get(
-                                                                context)
-                                                            .getUserDetails();
-                                                        Navigator.of(context).push(
-                                                            MaterialPageRoute(
-                                                                builder: (_) =>
-                                                                    const LoginScreen()));
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        primary: Colors
-                                                            .blue.shade700,
-                                                      ),
-                                                      child: Text(
-                                                        AppLocalizations.of(
-                                                                context)!
-                                                            .translate("login")
-                                                            .toString(),
-                                                      )),
-                                                )
-                                              ],
-                                            ),
-                                          ).then((value) {
-                                            Navigator.of(context).pop();
-                                          });
-                                        },
+                                        CustomerScreen.notesController.clear();
+                                        CustomerScreen.fromController.clear();
+                                        CustomerScreen.toController.clear();
+                                        cubit.productImage = null;
+                                      });
+                                    }
+                                  }
+                                  // : () {
+                                  //     showDialog<String>(
+                                  //       context: context,
+                                  //       builder: (BuildContext context) =>
+                                  //           AlertDialog(
+                                  //         title: Padding(
+                                  //             padding: const EdgeInsets.all(
+                                  //                 12.0),
+                                  //             child: Image(
+                                  //               height:
+                                  //                   MediaQuery.of(context)
+                                  //                           .size
+                                  //                           .height *
+                                  //                       .07,
+                                  //               width:
+                                  //                   MediaQuery.of(context)
+                                  //                           .size
+                                  //                           .height *
+                                  //                       .04,
+                                  //               color: ColorManager
+                                  //                   .primaryColor,
+                                  //               image: const AssetImage(
+                                  //                   "assets/images/warning.png"),
+                                  //             )),
+                                  //         content: Text(
+                                  //           AppLocalizations.of(context)!
+                                  //               .translate("warn")
+                                  //               .toString(),
+                                  //           style: GoogleFonts.almarai(
+                                  //               color:
+                                  //                   ColorManager.textColor,
+                                  //               fontSize: 16),
+                                  //           textAlign: TextAlign.center,
+                                  //         ),
+                                  //         actions: [
+                                  //           Center(
+                                  //             child: ElevatedButton(
+                                  //                 onPressed: () {
+                                  //                   // MandoobCubit.get(
+                                  //                   //         context)
+                                  //                   //     .getUserDetails();
+                                  //                   Navigator.of(context).push(
+                                  //                       MaterialPageRoute(
+                                  //                           builder: (_) =>
+                                  //                               const LoginScreen()));
+                                  //                 },
+                                  //                 style: ElevatedButton
+                                  //                     .styleFrom(
+                                  //                   primary: Colors
+                                  //                       .blue.shade700,
+                                  //                 ),
+                                  //                 child: Text(
+                                  //                   AppLocalizations.of(
+                                  //                           context)!
+                                  //                       .translate("login")
+                                  //                       .toString(),
+                                  //                 )),
+                                  //           )
+                                  //         ],
+                                  //       ),
+                                  //     ).then((value) {
+                                  //       Navigator.of(context).pop();
+                                  //     });
+                                  //   },
+                                  ,
                                   buttonText: AppLocalizations.of(context)!
                                       .translate("addOrder")
                                       .toString(),

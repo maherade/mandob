@@ -163,23 +163,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                     context,
                                     MaterialPageRoute(builder: (_) {
                                       return CashHelper.getData(
-                                                  key: "isCustomer") ==
-                                              true
-                                          ? const CustomerScreen()
-                                          : const MandobScreen();
+                                                key: "isCustomer") ==
+                                            true
+                                        ? const CustomerScreen()
+                                        : const MandobScreen();
                                     }),
                                   );
-                                });
-                              },
-                              child: Text(
-                                AppLocalizations.of(context)!
-                                    .translate("loginAsGuest")
-                                    .toString(),
-                                style: const TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorManager.textColor),
-                              )),
+                              });
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .translate("loginAsGuest")
+                                  .toString(),
+                              style: const TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorManager.textColor),
+                            ),
+                          ),
                         ],
                       ),
                     )),

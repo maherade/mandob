@@ -18,20 +18,25 @@ class SignUpErrorState extends MandoobStates {
 
 //Login States
 class LoginLoadingState extends MandoobStates {}
+
 class LoginSuccessState extends MandoobStates {}
+
 class LoginErrorState extends MandoobStates {
   LoginErrorState(String error);
 }
-// //Save User
-// class SaveUserLoadingState  extends MandoobStates{}
-// class SaveUserSuccessState  extends MandoobStates{}
-// class SaveUserErrorState  extends MandoobStates{}
+
+//Save User
+class SaveUserLoadingState extends MandoobStates {}
+
+class SaveUserSuccessState extends MandoobStates {}
+
+class SaveUserErrorState extends MandoobStates {}
 //
 // class GetUserLoadingState  extends MandoobStates{}
 // class GetUserSuccessState  extends MandoobStates{}
 // class GetUserErrorState  extends MandoobStates{}
 
- class PickProductImageSuccessState  extends MandoobStates{}
+class PickProductImageSuccessState extends MandoobStates {}
 
 class PickProductImageErrorState extends MandoobStates {}
 
@@ -61,6 +66,32 @@ class UploadProfileImageLoadingState extends MandoobStates {}
 class UploadProfileImageSuccessState extends MandoobStates {}
 
 class UploadProfileImageErrorState extends MandoobStates {}
+
+// user id image
+class PickUserIdImageLoadingState extends MandoobStates {}
+
+class PickUserIdImageSuccessState extends MandoobStates {}
+
+class PickUserIdImageErrorState extends MandoobStates {}
+
+class UploadUserIdImageLoadingState extends MandoobStates {}
+
+class UploadUserIdImageSuccessState extends MandoobStates {}
+
+class UploadUserIdImageErrorState extends MandoobStates {}
+
+//car image
+class PickCarImageLoadingState extends MandoobStates {}
+
+class PickCarImageSuccessState extends MandoobStates {}
+
+class PickCarImageErrorState extends MandoobStates {}
+
+class UploadCarImageLoadingState extends MandoobStates {}
+
+class UploadCarImageSuccessState extends MandoobStates {}
+
+class UploadCarImageErrorState extends MandoobStates {}
 
 //Get User
 class GetUserLoadingState extends MandoobStates {}

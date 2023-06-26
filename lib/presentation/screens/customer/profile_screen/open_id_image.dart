@@ -6,21 +6,19 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/styles/color_manager.dart';
 
-
-class OpenProfileImage extends StatelessWidget {
-  const OpenProfileImage({Key? key}) : super(key: key);
+class OpenIdImage extends StatelessWidget {
+  const OpenIdImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MandoobCubit,MandoobStates>(
-      listener: (context,state){
-
-        if (state is UploadProfileImageSuccessState) {
+    return BlocConsumer<MandoobCubit, MandoobStates>(
+      listener: (context, state) {
+        if (state is UploadUserIdImageSuccessState) {
           // customToast(title: AppLocalizations.of(context)!.translate('profileImageSave').toString(), color: ColorManager.primary);
           // Navigator.pop(context);
         }
       },
-      builder: (context,state){
+      builder: (context, state) {
         var cubit = MandoobCubit.get(context);
         return Directionality(
           textDirection: TextDirection.rtl,
@@ -31,7 +29,7 @@ class OpenProfileImage extends StatelessWidget {
               backgroundColor: ColorManager.lightColor,
               elevation: 0.0,
               title: Text(
-                'الصوره الشخصيه',
+                'الهوية الشخصيه',
                 style: GoogleFonts.almarai(
                     color: ColorManager.black,
                     fontWeight: FontWeight.w500,
@@ -66,7 +64,7 @@ class OpenProfileImage extends StatelessWidget {
                     // profile image
                     GestureDetector(
                       onTap: () {
-                        cubit.getProfileImage();
+                        cubit.getIdImage();
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .6,
@@ -77,14 +75,14 @@ class OpenProfileImage extends StatelessWidget {
                               color: ColorManager.textColor,
                             ),
                             image: DecorationImage(
-                                image: FileImage(cubit.profileImage!))),
+                                image: FileImage(cubit.idImage!))),
                       ),
                     ),
 
                     const Spacer(),
 
                     // upload profile image
-                    state is UploadProfileImageLoadingState
+                    state is UploadUserIdImageLoadingState
                         ? const Align(
                             alignment: Alignment.topRight,
                             child: CircularProgressIndicator(
@@ -96,7 +94,7 @@ class OpenProfileImage extends StatelessWidget {
                             child: FloatingActionButton(
                               backgroundColor: ColorManager.textColor,
                               onPressed: () {
-                                cubit.uploadUserImage().then((value) {
+                                cubit.uploadUserIdImage().then((value) {
                                   Navigator.pop(context);
                                 });
                               },
