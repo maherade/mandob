@@ -106,7 +106,9 @@ class ScreenShotScreen extends StatelessWidget {
                                               'assets/images/check.png')),
                                     ),
                                     content: Text(
-                                      'تم الارسال بنجاح سوف يتم التحقق من الصوره و الاشتراك في الباقه',
+                                        AppLocalizations.of(context)!
+                                          .translate("paymentConfirmation")
+                                          .toString(),
                                       style: GoogleFonts.almarai(
                                           color: ColorManager.textColor,
                                           fontSize: 16),

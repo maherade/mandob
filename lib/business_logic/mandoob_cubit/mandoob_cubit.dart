@@ -55,7 +55,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
           pic:
               'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1686738460~exp=1686739060~hmac=81237015ce0733024d3c67a813fbe61ab71869f6894f2f9fcf46097911f4c4ae',
           isCustomer: CashHelper.getData(key: 'isCustomer'),
-          count: 100,
+          count: 50,
           carPic:
               'https://img.freepik.com/free-vector/image-upload-concept-illustration_114360-996.jpg?w=740&t=st=1687783702~exp=1687784302~hmac=b8db28cfc86bde6e6930568483053d670e577b0d488017a4d758e9829dce51b1',
           personalIdPic:

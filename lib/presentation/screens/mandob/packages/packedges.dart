@@ -42,8 +42,8 @@ class Packages extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              title: Text(
-                AppLocalizations.of(context)!.translate("buyPackages").toString(),
+            title: Text(
+              AppLocalizations.of(context)!.translate("buyPackages").toString(),
               style: GoogleFonts.cairo(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
@@ -51,17 +51,17 @@ class Packages extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            ),
-            body: Padding(
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Lottie.asset("assets/images/pay.json",
-                        height: mediaQuery.height * .35),
-                    Text(
-                      AppLocalizations.of(context)!
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset("assets/images/pay.json",
+                      height: mediaQuery.height * .35),
+                  Text(
+                    AppLocalizations.of(context)!
                         .translate("choosePackage")
                         .toString(),
                     style: GoogleFonts.cairo(
@@ -97,7 +97,7 @@ class Packages extends StatelessWidget {
                           tittle:
                               "10 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
                           price:
-                              "10 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                              "0.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
                           backgroundColor: ColorManager.primaryColor,
                           textColor: ColorManager.lightColor2,
                         ),
@@ -115,7 +115,7 @@ class Packages extends StatelessWidget {
                           tittle:
                               "20 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
                           price:
-                              "20 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                              "1 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
                           backgroundColor: Colors.deepPurple.shade700,
                           textColor: ColorManager.lightColor2,
                         ),
@@ -133,7 +133,7 @@ class Packages extends StatelessWidget {
                           tittle:
                               "30 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
                           price:
-                              "30 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                              "1.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
                           backgroundColor: Colors.green.shade700,
                           textColor: ColorManager.lightColor2,
                         ),
@@ -143,22 +143,48 @@ class Packages extends StatelessWidget {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
                                 return const ScreenShotScreen(
-                                  num: 40,
+                                  num: 50,
                                 );
                               }));
                             });
                           },
                           tittle:
-                              "40 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                              "50 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
                           price:
-                              "40 ${AppLocalizations.of(context)!.translate("dollar").toString()}",
+                              "2.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
                           backgroundColor: Colors.blue.shade700,
                           textColor: ColorManager.lightColor2,
                         ),
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
+                  SizedBox(
+                    height: mediaQuery.height * .01,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PackageItem(
+                        onPressed: () {
+                          cubit.toPayPal().then((value) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
+                              return const ScreenShotScreen(
+                                num: 100,
+                              );
+                            }));
+                          });
+                        },
+                        tittle:
+                            "100 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                        price:
+                            "5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
+                        backgroundColor: Colors.orange.shade700,
+                        textColor: ColorManager.lightColor2,
+                      ),
+                    ],
+                  ),
+                ],
                 ),
               ),
             ),

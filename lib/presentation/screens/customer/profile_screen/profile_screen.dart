@@ -238,7 +238,7 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                     ],
                                   )
-                                : SizedBox(),
+                                : const SizedBox(),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .01,
                             ),
@@ -251,12 +251,10 @@ class ProfileScreen extends StatelessWidget {
                                             MediaQuery.sizeOf(context).height *
                                                 .3,
                                         color: Colors.white,
-                                        child: Container(
-                                          child: Image(
-                                              image: NetworkImage(
-                                                  cubit.user!.personalIdPic!)),
-                                        ),
-                                ),
+                                        child: Image(
+                                            image: NetworkImage(
+                                                cubit.user!.personalIdPic!)),
+                                      ),
                                 Positioned(
                                   right:
                                       MediaQuery.of(context).size.height * .01,
@@ -276,7 +274,7 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                     ],
                                   )
-                                : SizedBox(),
+                                : const SizedBox(),
 
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .03,
@@ -305,7 +303,7 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                     ],
                                   )
-                                : SizedBox(),
+                                : const SizedBox(),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .01,
                             ),
@@ -318,12 +316,10 @@ class ProfileScreen extends StatelessWidget {
                                             MediaQuery.sizeOf(context).height *
                                                 .3,
                                         color: Colors.white,
-                                        child: Container(
-                                          child: Image(
-                                              image: NetworkImage(
-                                                  cubit.user!.carPic!)),
-                                        ),
-                                ),
+                                        child: Image(
+                                            image: NetworkImage(
+                                                cubit.user!.carPic!)),
+                                      ),
                                 Positioned(
                                   right:
                                       MediaQuery.of(context).size.height * .01,
@@ -343,7 +339,7 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                     ],
                                   )
-                                : SizedBox(),
+                                : const SizedBox(),
                           ],
                         ),
                       ),
