@@ -114,42 +114,6 @@ class OnBoarding extends StatelessWidget {
                           color2: Colors.red,
                         ),
 
-                          SizedBox(height: MediaQuery.sizeOf(context).height*.025,),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                            Text(
-                              'Don\'t have an account?',
-                              style: GoogleFonts.cairo(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w700,
-                                color: ColorManager.darkGrey,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>
-                                            const RegisterScreen()));
-                              },
-                              child: Text(
-                                ' SignUp ',
-                                style: GoogleFonts.cairo(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w700,
-                                  color: ColorManager.primaryColor,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ],
-                          ),
-
-
                         ],
                       ),
                     );

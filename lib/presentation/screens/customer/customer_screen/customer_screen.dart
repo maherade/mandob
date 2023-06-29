@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -108,7 +109,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                         ),
 
                         // حسابي
-
                         GestureDetector(
                           onTap: () {
                             Navigator.push(context,
@@ -139,7 +139,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                             ),
                           ),
                         ),
-
                         // مرجعي
                         GestureDetector(
                           onTap: () {
@@ -203,7 +202,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                             ),
                           ),
                         ),
-
                         // تسجيل الخروج
                         GestureDetector(
                           onTap: () {
@@ -560,7 +558,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                             .addressController.text,
                                         productPrice:
                                             CustomerScreen.priceController.text,
-                                              productWeight: CustomerScreen
+                                        productWeight: CustomerScreen
                                             .weightController.text,
                                         productNotes:
                                             CustomerScreen.notesController.text,
@@ -575,12 +573,24 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                         userEmail: cubit.user!.email,
                                       )
                                           .then((value) {
-                                              CustomerScreen.addressController
-                                                  .clear();
-                                              CustomerScreen.priceController
-                                                  .clear();
-                                              CustomerScreen.weightController
-                                                  .clear();
+                                        if (cubit.user!.isCustomer == false) {
+                                          AwesomeNotifications()
+                                              .createNotification(
+                                                  content: NotificationContent(
+                                            id: 1,
+                                            channelKey: 'basic key',
+                                            title: "Someone added an order",
+                                            body: "Check your orders list",
+                                            bigPicture:
+                                                "assets/images/delivery.png",
+                                            notificationLayout:
+                                                NotificationLayout.Messaging,
+                                          ));
+                                        } else {}
+                                        CustomerScreen.addressController
+                                            .clear();
+                                        CustomerScreen.priceController.clear();
+                                        CustomerScreen.weightController.clear();
                                         CustomerScreen.notesController.clear();
                                         CustomerScreen.fromController.clear();
                                         CustomerScreen.toController.clear();
