@@ -782,7 +782,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
             token: element['token'],
             title: titleNotification,
             description:desNotification,
-            imageUrl: 'https://cdn-icons-png.flaticon.com/512/1182/1182718.png?w=740&t=st=1688133057~exp=1688133657~hmac=bebdd39c5e293d989e48b15042744dcb5ccbd4247237d8d31f4f0d98f9de54db',
+            imageUrl: 'https://mostaql-production.s3.eu-west-1.amazonaws.com/uploads/818812/64833207360b8/63656EAC-9F48-450A-B672-3EE7FC7C519B.jpeg?response-content-disposition=inline%3B%20filename%3D%2263656EAC-9F48-450A-B672-3EE7FC7C519B.jpeg%22&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJKI5LNJQTE2Z777Q%2F20230630%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20230630T143003Z&X-Amz-SignedHeaders=host&X-Amz-Expires=10&X-Amz-Signature=fa47a006c540eeac7fe8d6697720c2ac805eeff123f5f6bac7cb07bbec598200',
           );
         }
       }).then((value) {

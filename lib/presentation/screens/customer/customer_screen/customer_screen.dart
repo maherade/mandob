@@ -552,7 +552,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                         .validate()) {
                                       if(cubit.productImage==null){
                                         cubit.addNotification(titleNotification: 'تم اضافه توصيله',
-                                            desNotification: 'From ${CustomerScreen.fromController.text} To ${CustomerScreen.toController.text}');
+                                            desNotification: 'Check your orders list');
                                         cubit.uploadProduct(
                                             productGovernment:
                                             CustomerScreen.bottomValue,
