@@ -161,3 +161,18 @@ class OnOrderAcceptedSuccessState extends MandoobStates {}
 
 class OnOrderAcceptedErrorState extends MandoobStates {}
 
+class SaveTokenLoadingState extends MandoobStates {}
+class SaveTokenSuccessState extends MandoobStates {}
+class SaveTokenErrorState extends MandoobStates {}
+
+class GetTokenLoadingState extends MandoobStates {}
+class GetTokenSuccessState extends MandoobStates {}
+class GetTokenErrorState extends MandoobStates {}
+
+class CreateNotificationSuccessState extends MandoobStates {}
+class CreateNotificationLoadingState extends MandoobStates {}
+class CreateNotificationErrorState extends MandoobStates {}
+
+class SaveNotificationLoadingState extends MandoobStates {}
+class SaveNotificationSuccessState extends MandoobStates {}
+class SaveNotificationErrorState extends MandoobStates {}

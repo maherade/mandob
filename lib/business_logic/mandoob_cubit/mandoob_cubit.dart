@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/firebase_errors.dart';
 import '../../uitiles/database_utils/datebase_utils.dart';
+import '../../uitiles/notification/fcm_notification.dart';
 import '../../widgets/toast.dart';
 
 class MandoobCubit extends Cubit<MandoobStates> {
@@ -172,6 +175,8 @@ class MandoobCubit extends Cubit<MandoobStates> {
       value.ref.getDownloadURL().then((value) {
         debugPrint('Upload Success');
         productPath = value;
+
+
 
         uploadProduct(
             productAddress: productAddress,
@@ -721,4 +726,73 @@ class MandoobCubit extends Cubit<MandoobStates> {
       emit(GetUserGuestErrorState());
     });
   }
+
+
+  //========= Notification =============
+
+  Future<void> saveToken(String ?token)async{
+
+    emit(SaveTokenLoadingState());
+    FirebaseFirestore.instance
+        .collection('tokens')
+        .doc('${CashHelper.getData(key: 'isUid')}')
+        .set({
+      "token":token
+    }).then((value){
+
+      debugPrint('Save Token Success');
+      emit(SaveTokenSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error in save token is ${error.toString()}');
+      emit(SaveTokenErrorState());
+    });
+
+  }
+
+  Future<void> getToken()async{
+
+    emit(GetTokenLoadingState());
+    FirebaseMessaging.instance
+        .getToken()
+        .then((token){
+
+      saveToken(token);
+      debugPrint('============================= Token ======================');
+      debugPrint(token);
+
+      emit(GetTokenSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error in save token is ${error.toString()}');
+      emit(GetTokenErrorState());
+    });
+
+  }
+
+  Future addNotification ({
+    required String titleNotification,
+    required String desNotification,
+  }) async{
+
+    emit(CreateNotificationLoadingState());
+      FirebaseFirestore.instance.collection('tokens').get().then((value) {
+        for (var element in value.docs) {
+          callFcmApiSendPushNotificationsChat(
+            token: element['token'],
+            title: titleNotification,
+            description:desNotification,
+            imageUrl: 'https://cdn-icons-png.flaticon.com/512/1182/1182718.png?w=740&t=st=1688133057~exp=1688133657~hmac=bebdd39c5e293d989e48b15042744dcb5ccbd4247237d8d31f4f0d98f9de54db',
+          );
+        }
+      }).then((value) {
+        emit(CreateNotificationSuccessState());
+      }).catchError((error){
+        debugPrint('Error When Create Notification with image : ${error.toString()}');
+        emit(CreateNotificationErrorState());
+      });
+
+  }
+
+
 }

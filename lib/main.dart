@@ -12,6 +12,7 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/on_boarding/on_boarding.dart';
+import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 
@@ -41,6 +42,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static Widget ?widget;
+
+
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -48,6 +53,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) => MandoobCubit()
               ..getCustomerHistory()
+              ..getUser()
               ..getPayScreens()),
         BlocProvider(
             create: (BuildContext context) =>
@@ -59,6 +65,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             theme: ThemeData(
               appBarTheme: const AppBarTheme(
+                iconTheme: IconThemeData(
+                  color: Colors.black
+                ),
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarIconBrightness: Brightness.dark,
                   statusBarColor: ColorManager.lightColor,
@@ -66,7 +75,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             debugShowCheckedModeBanner: false,
-            home: const OnBoarding(),
+            home: const SplashScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

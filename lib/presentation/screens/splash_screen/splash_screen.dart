@@ -7,6 +7,7 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/customer/customer_screen/customer_screen.dart';
 import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/presentation/screens/on_boarding/on_boarding.dart';
+import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 
@@ -41,9 +42,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
       }
       else{
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-        const OnBoarding()
-        ), (Route<dynamic> route) => false);
+        if(CashHelper.getData(key: 'isStarted')!='Yes'){
+          print('3');
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+          const OnBoarding()
+          ), (Route<dynamic> route) => false);
+        }else{
+          print('4');
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+          const StartScreen()
+          ), (Route<dynamic> route) => false);
+        }
+
       }
 
 

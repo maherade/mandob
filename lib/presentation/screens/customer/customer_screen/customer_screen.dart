@@ -550,52 +550,106 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                       () {
                                     if (CustomerScreen.formKey.currentState!
                                         .validate()) {
-                                      cubit
-                                          .uploadProductImage(
-                                        productGovernment:
+                                      if(cubit.productImage==null){
+                                        cubit.addNotification(titleNotification: 'تم اضافه توصيله',
+                                            desNotification: 'From ${CustomerScreen.fromController.text} To ${CustomerScreen.toController.text}');
+                                        cubit.uploadProduct(
+                                            productGovernment:
                                             CustomerScreen.bottomValue,
-                                        productAddress: CustomerScreen
-                                            .addressController.text,
-                                        productPrice:
+                                            productAddress: CustomerScreen
+                                                .addressController.text,
+                                            productPrice:
                                             CustomerScreen.priceController.text,
-                                        productWeight: CustomerScreen
-                                            .weightController.text,
-                                        productNotes:
+                                            productWeight: CustomerScreen
+                                                .weightController.text,
+                                            productNotes:
                                             CustomerScreen.notesController.text,
-                                        productFrom:
+                                            productFrom:
                                             CustomerScreen.fromController.text,
-                                        productTo:
+                                            productTo:
                                             CustomerScreen.toController.text,
-                                        userUid: cubit.user!.uId,
-                                        userPhone: cubit.user!.phone,
-                                        userName: cubit.user!.name,
-                                        userImage: cubit.user!.pic,
-                                        userEmail: cubit.user!.email,
-                                      )
-                                          .then((value) {
-                                        if (cubit.user!.isCustomer == false) {
-                                          AwesomeNotifications()
-                                              .createNotification(
-                                                  content: NotificationContent(
-                                            id: 1,
-                                            channelKey: 'basic key',
-                                            title: "Someone added an order",
-                                            body: "Check your orders list",
-                                            bigPicture:
-                                                "assets/images/delivery.png",
-                                            notificationLayout:
-                                                NotificationLayout.Messaging,
-                                          ));
-                                        } else {}
-                                        CustomerScreen.addressController
-                                            .clear();
-                                        CustomerScreen.priceController.clear();
-                                        CustomerScreen.weightController.clear();
-                                        CustomerScreen.notesController.clear();
-                                        CustomerScreen.fromController.clear();
-                                        CustomerScreen.toController.clear();
-                                        cubit.productImage = null;
-                                      });
+                                            userUid: cubit.user!.uId,
+                                            userPhone: cubit.user!.phone,
+                                            userName: cubit.user!.name,
+                                            userEmail: cubit.user!.email,
+                                            userImage: cubit.user!.pic,
+                                            productImage: 'https://alhalawanji.com/wp-content/uploads/2022/03/%D9%84%D8%A7-%D9%8A%D9%88%D8%AC%D8%AF-%D8%B5%D9%88%D8%B1%D8%A9.png',
+                                        )  .then((value) {
+                                          if (cubit.user!.isCustomer == false) {
+                                            AwesomeNotifications()
+                                                .createNotification(
+                                                content: NotificationContent(
+                                                  id: 1,
+                                                  channelKey: 'basic key',
+                                                  title: "Someone added an order",
+                                                  body: "Check your orders list",
+                                                  bigPicture:
+                                                  "assets/images/delivery.png",
+                                                  notificationLayout:
+                                                  NotificationLayout.Messaging,
+                                                ));
+                                          } else {}
+                                          CustomerScreen.addressController
+                                              .clear();
+                                          CustomerScreen.priceController.clear();
+                                          CustomerScreen.weightController.clear();
+                                          CustomerScreen.notesController.clear();
+                                          CustomerScreen.fromController.clear();
+                                          CustomerScreen.toController.clear();
+                                          cubit.productImage = null;
+                                        });
+                                      }
+                                      else{
+                                        cubit.addNotification(titleNotification: 'تم اضافه توصيله',
+                                            desNotification: 'From ${CustomerScreen.fromController.text} To ${CustomerScreen.toController.text}');
+                                        cubit
+                                            .uploadProductImage(
+                                          productGovernment:
+                                          CustomerScreen.bottomValue,
+                                          productAddress: CustomerScreen
+                                              .addressController.text,
+                                          productPrice:
+                                          CustomerScreen.priceController.text,
+                                          productWeight: CustomerScreen
+                                              .weightController.text,
+                                          productNotes:
+                                          CustomerScreen.notesController.text,
+                                          productFrom:
+                                          CustomerScreen.fromController.text,
+                                          productTo:
+                                          CustomerScreen.toController.text,
+                                          userUid: cubit.user!.uId,
+                                          userPhone: cubit.user!.phone,
+                                          userName: cubit.user!.name,
+                                          userImage: cubit.user!.pic,
+                                          userEmail: cubit.user!.email,
+                                        )
+                                            .then((value) {
+                                          if (cubit.user!.isCustomer == false) {
+                                            AwesomeNotifications()
+                                                .createNotification(
+                                                content: NotificationContent(
+                                                  id: 1,
+                                                  channelKey: 'basic key',
+                                                  title: "Someone added an order",
+                                                  body: "Check your orders list",
+                                                  bigPicture:
+                                                  "assets/images/delivery.png",
+                                                  notificationLayout:
+                                                  NotificationLayout.Messaging,
+                                                ));
+                                          } else {}
+                                          CustomerScreen.addressController
+                                              .clear();
+                                          CustomerScreen.priceController.clear();
+                                          CustomerScreen.weightController.clear();
+                                          CustomerScreen.notesController.clear();
+                                          CustomerScreen.fromController.clear();
+                                          CustomerScreen.toController.clear();
+                                          cubit.productImage = null;
+                                        });
+                                      }
+
                                     }
                                   }
                                   // : () {

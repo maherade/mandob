@@ -39,6 +39,8 @@ class _MandobScreenState extends State<MandobScreen> {
   @override
   void initState() {
     super.initState();
+    MandoobCubit.get(context).getToken();
+
   }
 
   @override
@@ -150,12 +152,12 @@ class _MandobScreenState extends State<MandobScreen> {
                                       MediaQuery.sizeOf(context).height * .06,
                                 ),
                                 CircleAvatar(
-                                  radius: 67,
+                                  radius: 55,
                                   backgroundColor: ColorManager.lightColor2,
                                   child: CircleAvatar(
                                     backgroundImage:
                                         NetworkImage((cubit.user!.pic!)),
-                                    radius: 65,
+                                    radius: 52,
                                   ),
                                 ),
                                 SizedBox(
@@ -172,7 +174,7 @@ class _MandobScreenState extends State<MandobScreen> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 15,
                           ),
                           // حسابي
                           GestureDetector(
