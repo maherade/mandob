@@ -36,7 +36,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
 
   Future<void> toPrivacy() async {
     String url =
-        "https://www.freeprivacypolicy.com/live/b9836dca-bb1f-451d-9d36-9b9549719cde";
+        "https://www.freeprivacypolicy.com/live/e8b409d5-cf69-4ec7-8ede-cf3f37126624";
     await launch(url, forceSafariVC: false);
     emit(LaunchState());
   }
