@@ -11,8 +11,10 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/presentation/screens/customer/customer_history/customer_history.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
+import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/default_text_field.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -548,12 +550,13 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                       //               true
                                       //           ?
                                       () {
-                                    if (CustomerScreen.formKey.currentState!
-                                        .validate()) {
-                                      if(cubit.productImage==null){
-                                        cubit.addNotification(titleNotification: 'تم اضافه توصيله',
-                                            desNotification: 'Check your orders list');
-                                        cubit.uploadProduct(
+                                    if(CashHelper.getData(key: 'isGuest')!=true){
+                                      if (CustomerScreen.formKey.currentState!
+                                          .validate()) {
+                                        if(cubit.productImage==null){
+                                          cubit.addNotification(titleNotification: 'تم اضافه توصيله',
+                                              desNotification: 'Check your orders list');
+                                          cubit.uploadProduct(
                                             productGovernment:
                                             CustomerScreen.bottomValue,
                                             productAddress: CustomerScreen
@@ -574,83 +577,147 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                             userEmail: cubit.user!.email,
                                             userImage: cubit.user!.pic,
                                             productImage: 'https://alhalawanji.com/wp-content/uploads/2022/03/%D9%84%D8%A7-%D9%8A%D9%88%D8%AC%D8%AF-%D8%B5%D9%88%D8%B1%D8%A9.png',
-                                        )  .then((value) {
-                                          if (cubit.user!.isCustomer == false) {
-                                            AwesomeNotifications()
-                                                .createNotification(
-                                                content: NotificationContent(
-                                                  id: 1,
-                                                  channelKey: 'basic key',
-                                                  title: "Someone added an order",
-                                                  body: "Check your orders list",
-                                                  bigPicture:
-                                                  "assets/images/delivery.png",
-                                                  notificationLayout:
-                                                  NotificationLayout.Messaging,
-                                                ));
-                                          } else {}
-                                          CustomerScreen.addressController
-                                              .clear();
-                                          CustomerScreen.priceController.clear();
-                                          CustomerScreen.weightController.clear();
-                                          CustomerScreen.notesController.clear();
-                                          CustomerScreen.fromController.clear();
-                                          CustomerScreen.toController.clear();
-                                          cubit.productImage = null;
-                                        });
+                                          )  .then((value) {
+                                            if (cubit.user!.isCustomer == false) {
+                                              AwesomeNotifications()
+                                                  .createNotification(
+                                                  content: NotificationContent(
+                                                    id: 1,
+                                                    channelKey: 'basic key',
+                                                    title: "Someone added an order",
+                                                    body: "Check your orders list",
+                                                    bigPicture:
+                                                    "assets/images/delivery.png",
+                                                    notificationLayout:
+                                                    NotificationLayout.Messaging,
+                                                  ));
+                                            } else {}
+                                            CustomerScreen.addressController
+                                                .clear();
+                                            CustomerScreen.priceController.clear();
+                                            CustomerScreen.weightController.clear();
+                                            CustomerScreen.notesController.clear();
+                                            CustomerScreen.fromController.clear();
+                                            CustomerScreen.toController.clear();
+                                            cubit.productImage = null;
+                                          });
+                                        }
+                                        else{
+                                          cubit.addNotification(titleNotification: 'تم اضافه توصيله',
+                                              desNotification: 'From ${CustomerScreen.fromController.text} To ${CustomerScreen.toController.text}');
+                                          cubit
+                                              .uploadProductImage(
+                                            productGovernment:
+                                            CustomerScreen.bottomValue,
+                                            productAddress: CustomerScreen
+                                                .addressController.text,
+                                            productPrice:
+                                            CustomerScreen.priceController.text,
+                                            productWeight: CustomerScreen
+                                                .weightController.text,
+                                            productNotes:
+                                            CustomerScreen.notesController.text,
+                                            productFrom:
+                                            CustomerScreen.fromController.text,
+                                            productTo:
+                                            CustomerScreen.toController.text,
+                                            userUid: cubit.user!.uId,
+                                            userPhone: cubit.user!.phone,
+                                            userName: cubit.user!.name,
+                                            userImage: cubit.user!.pic,
+                                            userEmail: cubit.user!.email,
+                                          )
+                                              .then((value) {
+                                            if (cubit.user!.isCustomer == false) {
+                                              AwesomeNotifications()
+                                                  .createNotification(
+                                                  content: NotificationContent(
+                                                    id: 1,
+                                                    channelKey: 'basic key',
+                                                    title: "Someone added an order",
+                                                    body: "Check your orders list",
+                                                    bigPicture:
+                                                    "assets/images/delivery.png",
+                                                    notificationLayout:
+                                                    NotificationLayout.Messaging,
+                                                  ));
+                                            } else {}
+                                            CustomerScreen.addressController
+                                                .clear();
+                                            CustomerScreen.priceController.clear();
+                                            CustomerScreen.weightController.clear();
+                                            CustomerScreen.notesController.clear();
+                                            CustomerScreen.fromController.clear();
+                                            CustomerScreen.toController.clear();
+                                            cubit.productImage = null;
+                                          });
+                                        }
+
                                       }
-                                      else{
-                                        cubit.addNotification(titleNotification: 'تم اضافه توصيله',
-                                            desNotification: 'From ${CustomerScreen.fromController.text} To ${CustomerScreen.toController.text}');
-                                        cubit
-                                            .uploadProductImage(
-                                          productGovernment:
-                                          CustomerScreen.bottomValue,
-                                          productAddress: CustomerScreen
-                                              .addressController.text,
-                                          productPrice:
-                                          CustomerScreen.priceController.text,
-                                          productWeight: CustomerScreen
-                                              .weightController.text,
-                                          productNotes:
-                                          CustomerScreen.notesController.text,
-                                          productFrom:
-                                          CustomerScreen.fromController.text,
-                                          productTo:
-                                          CustomerScreen.toController.text,
-                                          userUid: cubit.user!.uId,
-                                          userPhone: cubit.user!.phone,
-                                          userName: cubit.user!.name,
-                                          userImage: cubit.user!.pic,
-                                          userEmail: cubit.user!.email,
-                                        )
-                                            .then((value) {
-                                          if (cubit.user!.isCustomer == false) {
-                                            AwesomeNotifications()
-                                                .createNotification(
-                                                content: NotificationContent(
-                                                  id: 1,
-                                                  channelKey: 'basic key',
-                                                  title: "Someone added an order",
-                                                  body: "Check your orders list",
-                                                  bigPicture:
-                                                  "assets/images/delivery.png",
-                                                  notificationLayout:
-                                                  NotificationLayout.Messaging,
-                                                ));
-                                          } else {}
-                                          CustomerScreen.addressController
-                                              .clear();
-                                          CustomerScreen.priceController.clear();
-                                          CustomerScreen.weightController.clear();
-                                          CustomerScreen.notesController.clear();
-                                          CustomerScreen.fromController.clear();
-                                          CustomerScreen.toController.clear();
-                                          cubit.productImage = null;
-                                        });
-                                      }
+                                    }
+                                    else{
+
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                              title: Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(12.0),
+                                                  child: Image(
+                                                    height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                        .07,
+                                                    width: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                        .04,
+                                                    color:
+                                                    ColorManager.primaryColor,
+                                                    image: const AssetImage(
+                                                        "assets/images/warning.png"),
+                                                  )),
+                                              content: Text(
+                                                AppLocalizations.of(context)!
+                                                    .translate("warn")
+                                                    .toString(),
+                                                style: GoogleFonts.almarai(
+                                                    color: ColorManager.textColor,
+                                                    fontSize: 16),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              actions: [
+                                                Center(
+                                                  child: ElevatedButton(
+                                                      onPressed: () {
+                                                        MandoobCubit.get(context)
+                                                            .getUserDetails();
+                                                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                                        const LoginScreen()
+                                                        ), (Route<dynamic> route) => false);
+                                                      },
+                                                      style:
+                                                      ElevatedButton.styleFrom(
+                                                        primary:
+                                                        ColorManager.primaryColor,
+                                                      ),
+                                                      child: Text(
+                                                        AppLocalizations.of(
+                                                            context)!
+                                                            .translate("login")
+                                                            .toString(),
+                                                      )),
+                                                )
+                                              ],
+                                            ),
+                                      ).then((value) {
+                                        Navigator.of(context).pop();
+                                      });
 
                                     }
+
+
                                   }
                                   // : () {
                                   //     showDialog<String>(

@@ -4,7 +4,9 @@ import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/customer_details/customer_details.dart';
+import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/mandob/order_details_screen/order_details.dart';
+import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/defualtButton.dart';
 
 import '../styles/color_manager.dart';
@@ -118,150 +120,157 @@ class _OrderItemState extends State<OrderItem> {
                                     //     ?
 
                                     () {
-                                  setState(() {
-                                    MandoobCubit.get(context)
-                                        .updateMandoobCounter();
-                                    MandoobCubit.get(context)
-                                        .updateProductsList(
-                                            widget.productModel);
-                                  });
-                                  MandoobCubit.get(context).onOrderAccepted(
-                                    widget.productModel.productAddress,
-                                    widget.productModel.productPrice,
-                                    widget.productModel.productWeight,
-                                    widget.productModel.productNotes,
-                                    widget.productModel.productFrom,
-                                    widget.productModel.productTo,
-                                    widget.productModel.productImage,
-                                    widget.productModel.productGovernment,
-                                    widget.productModel.userName,
-                                    widget.productModel.userPhone,
-                                    widget.productModel.userEmail,
-                                    widget.productModel.userImage,
-                                    widget.productModel.userUid,
-                                  );
-                                  showDialog<String>(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        AlertDialog(
-                                      title: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Image(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                .07,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                .04,
-                                            color: ColorManager.primaryColor,
-                                            image: const AssetImage(
-                                                'assets/images/check.png')),
-                                      ),
-                                      content: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate("orderAccept")
-                                            .toString(),
-                                        style: GoogleFonts.almarai(
-                                            color: ColorManager.textColor,
-                                            fontSize: 16),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      actions: [
-                                        Center(
-                                          child: ElevatedButton(
-                                              onPressed: () {
-                                                MandoobCubit.get(context)
-                                                    .getUserDetails();
-                                                Navigator.of(context)
-                                                    .push(MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      CustomerDetailsScreen(
-                                                    name: widget
-                                                        .productModel.userName!,
-                                                    phone: widget.productModel
-                                                        .userPhone!,
-                                                    pic: widget.productModel
-                                                        .userImage!,
-                                                  ),
-                                                ));
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                primary: Colors.green.shade700,
-                                              ),
-                                              child: Text(
-                                                AppLocalizations.of(context)!
-                                                    .translate("ok")
-                                                    .toString(),
-                                              )),
-                                        )
-                                      ],
-                                    ),
-                                  ).then((value) {
-                                    Navigator.of(context).pop();
-                                  });
+
+
+                                  if(CashHelper.getData(key: "isGuest") !=true){
+                                    print(MandoobCubit.get(context).user!.uId);
+                                    setState(() {
+                                      MandoobCubit.get(context)
+                                          .updateMandoobCounter();
+                                      MandoobCubit.get(context)
+                                          .updateProductsList(
+                                          widget.productModel);
+                                    });
+                                    MandoobCubit.get(context).onOrderAccepted(
+                                      widget.productModel.productAddress,
+                                      widget.productModel.productPrice,
+                                      widget.productModel.productWeight,
+                                      widget.productModel.productNotes,
+                                      widget.productModel.productFrom,
+                                      widget.productModel.productTo,
+                                      widget.productModel.productImage,
+                                      widget.productModel.productGovernment,
+                                      widget.productModel.userName,
+                                      widget.productModel.userPhone,
+                                      widget.productModel.userEmail,
+                                      widget.productModel.userImage,
+                                      widget.productModel.userUid,
+                                    );
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                            title: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Image(
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                      .07,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                      .04,
+                                                  color: ColorManager.primaryColor,
+                                                  image: const AssetImage(
+                                                      'assets/images/check.png')),
+                                            ),
+                                            content: Text(
+                                              AppLocalizations.of(context)!
+                                                  .translate("orderAccept")
+                                                  .toString(),
+                                              style: GoogleFonts.almarai(
+                                                  color: ColorManager.textColor,
+                                                  fontSize: 16),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            actions: [
+                                              Center(
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      MandoobCubit.get(context)
+                                                          .getUserDetails();
+                                                      Navigator.of(context)
+                                                          .push(MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            CustomerDetailsScreen(
+                                                              name: widget
+                                                                  .productModel.userName!,
+                                                              phone: widget.productModel
+                                                                  .userPhone!,
+                                                              pic: widget.productModel
+                                                                  .userImage!,
+                                                            ),
+                                                      ));
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      primary: Colors.green.shade700,
+                                                    ),
+                                                    child: Text(
+                                                      AppLocalizations.of(context)!
+                                                          .translate("ok")
+                                                          .toString(),
+                                                    )),
+                                              )
+                                            ],
+                                          ),
+                                    ).then((value) {
+                                      Navigator.of(context).pop();
+                                    });
+                                  }
+                                  else{
+
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Image(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      .07,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      .04,
+                                                  color:
+                                                      ColorManager.primaryColor,
+                                                  image: const AssetImage(
+                                                      "assets/images/warning.png"),
+                                                )),
+                                            content: Text(
+                                              AppLocalizations.of(context)!
+                                                  .translate("warn")
+                                                  .toString(),
+                                              style: GoogleFonts.almarai(
+                                                  color: ColorManager.textColor,
+                                                  fontSize: 16),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            actions: [
+                                              Center(
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      MandoobCubit.get(context)
+                                                          .getUserDetails();
+                                                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                                      const LoginScreen()
+                                                      ), (Route<dynamic> route) => false);
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      primary:
+                                                          ColorManager.primaryColor,
+                                                    ),
+                                                    child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .translate("login")
+                                                          .toString(),
+                                                    )),
+                                              )
+                                            ],
+                                          ),
+                                        ).then((value) {
+                                          Navigator.of(context).pop();
+                                        });
+
+                                  }
+
                                 }
-                                // : () {
-                                //     showDialog<String>(
-                                //       context: context,
-                                //       builder: (BuildContext context) =>
-                                //           AlertDialog(
-                                //         title: Padding(
-                                //             padding:
-                                //                 const EdgeInsets.all(12.0),
-                                //             child: Image(
-                                //               height: MediaQuery.of(context)
-                                //                       .size
-                                //                       .height *
-                                //                   .07,
-                                //               width: MediaQuery.of(context)
-                                //                       .size
-                                //                       .height *
-                                //                   .04,
-                                //               color:
-                                //                   ColorManager.primaryColor,
-                                //               image: const AssetImage(
-                                //                   "assets/images/warning.png"),
-                                //             )),
-                                //         content: Text(
-                                //           AppLocalizations.of(context)!
-                                //               .translate("warn")
-                                //               .toString(),
-                                //           style: GoogleFonts.almarai(
-                                //               color: ColorManager.textColor,
-                                //               fontSize: 16),
-                                //           textAlign: TextAlign.center,
-                                //         ),
-                                //         actions: [
-                                //           Center(
-                                //             child: ElevatedButton(
-                                //                 onPressed: () {
-                                //                   MandoobCubit.get(context)
-                                //                       .getUserDetails();
-                                //                   Navigator.of(context).push(
-                                //                       MaterialPageRoute(
-                                //                           builder: (_) =>
-                                //                               const LoginScreen()));
-                                //                 },
-                                //                 style:
-                                //                     ElevatedButton.styleFrom(
-                                //                   primary:
-                                //                       Colors.blue.shade700,
-                                //                 ),
-                                //                 child: Text(
-                                //                   AppLocalizations.of(
-                                //                           context)!
-                                //                       .translate("login")
-                                //                       .toString(),
-                                //                 )),
-                                //           )
-                                //         ],
-                                //       ),
-                                //     ).then((value) {
-                                //       Navigator.of(context).pop();
-                                //     });
-                                //   },
                                 ),
                           ),
                           SizedBox(
@@ -276,9 +285,74 @@ class _OrderItemState extends State<OrderItem> {
                               color2: ColorManager.gold,
                               textColor: ColorManager.textColor,
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) =>
-                                        OrderDetails(widget.productModel)));
+                                if(CashHelper.getData(key: 'isGuest') !=true){
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) =>
+                                          OrderDetails(widget.productModel)));
+                                }
+                                else{
+
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                          title: Padding(
+                                              padding:
+                                              const EdgeInsets.all(12.0),
+                                              child: Image(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                    .07,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                    .04,
+                                                color:
+                                                ColorManager.primaryColor,
+                                                image: const AssetImage(
+                                                    "assets/images/warning.png"),
+                                              )),
+                                          content: Text(
+                                            AppLocalizations.of(context)!
+                                                .translate("warn")
+                                                .toString(),
+                                            style: GoogleFonts.almarai(
+                                                color: ColorManager.textColor,
+                                                fontSize: 16),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          actions: [
+                                            Center(
+                                              child: ElevatedButton(
+                                                  onPressed: () {
+                                                    MandoobCubit.get(context)
+                                                        .getUserDetails();
+
+                                                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                                    const LoginScreen()
+                                                    ), (Route<dynamic> route) => false);
+                                                  },
+                                                  style:
+                                                  ElevatedButton.styleFrom(
+                                                    primary:
+                                                    ColorManager.primaryColor,
+                                                  ),
+                                                  child: Text(
+                                                    AppLocalizations.of(
+                                                        context)!
+                                                        .translate("login")
+                                                        .toString(),
+                                                  )),
+                                            )
+                                          ],
+                                        ),
+                                  ).then((value) {
+                                    Navigator.of(context).pop();
+                                  });
+
+                                }
+
                               },
                             ),
                           ),

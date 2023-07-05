@@ -105,6 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           .translate('login')
                                           .toString(),
                                       onPressed: () {
+                                        CashHelper.saveData(
+                                            key: "isGuest", value: false);
                                         if (CashHelper.getData(key: 'isCustomer') ==
                                             true) {
                                           if (emailController.text == 'Mandoob' &&

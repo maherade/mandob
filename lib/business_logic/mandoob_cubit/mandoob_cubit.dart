@@ -718,6 +718,8 @@ class MandoobCubit extends Cubit<MandoobStates> {
     FirebaseFirestore.instance.collection('users').doc(id).get().then((value) {
       user = MyUser.fromJson(value.data()!);
 
+      debugPrint(user!.uId);
+
       debugPrint('get guest Success');
 
       emit(GetUserGuestSuccessState());
