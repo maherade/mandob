@@ -758,7 +758,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
     FirebaseMessaging.instance
         .getToken()
         .then((token){
-
       saveToken(token);
       debugPrint('============================= Token ======================');
       debugPrint(token);

@@ -1,6 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,11 +10,9 @@ import 'package:mandob/business_logic/localization_cubit/localization_states.dar
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/presentation/screens/home_screen/home_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
-import 'package:mandob/presentation/screens/on_boarding/on_boarding.dart';
 import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
-
 import 'business_logic/localization_cubit/localization_cubit.dart';
 import 'firebase_options.dart';
 import 'presentation/screens/register_screen/register_screen.dart';
