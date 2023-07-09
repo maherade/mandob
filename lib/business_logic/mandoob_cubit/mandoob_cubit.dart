@@ -164,6 +164,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     required String? userEmail,
     required String? userImage,
     required String? userUid,
+    required String? date,
   }) {
     emit(UploadProductImageLoadingState());
     return firebase_storage.FirebaseStorage.instance
@@ -191,7 +192,8 @@ class MandoobCubit extends Cubit<MandoobStates> {
             userImage: userImage,
             userName: userName,
             userPhone: userPhone,
-            userUid: userUid);
+            userUid: userUid,
+            date: date);
 
         emit(UploadProductImageSuccessState());
       }).catchError((error) {
@@ -227,6 +229,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     required String? userEmail,
     required String? userImage,
     required String? userUid,
+    required String? date,
   }) async {
     emit(AddProductLoadingStates());
 
@@ -243,7 +246,8 @@ class MandoobCubit extends Cubit<MandoobStates> {
         userImage: userImage,
         userName: userName,
         userPhone: userPhone,
-        userUid: userUid);
+        userUid: userUid,
+        date: date);
     var collection = getProductsCollection();
     var docRef = collection.doc();
     productModel.productId = docRef.id;

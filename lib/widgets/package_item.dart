@@ -6,6 +6,7 @@ class PackageItem extends StatelessWidget {
   Color? textColor;
   String? tittle;
   String? price;
+  bool? isClicked;
   final Function onPressed;
 
   PackageItem(
@@ -13,6 +14,7 @@ class PackageItem extends StatelessWidget {
       required this.price,
       required this.backgroundColor,
       required this.textColor,
+      this.isClicked = true,
       required this.onPressed});
 
   @override

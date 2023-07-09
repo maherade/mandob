@@ -84,7 +84,8 @@ class Packages extends StatelessWidget {
                         shrinkWrap: true,
                         children: [
                           PackageItem(
-                            onPressed: () {
+                            isClicked: false,
+                          onPressed: () {
                             cubit.toPayPal().then((value) {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
@@ -95,11 +96,11 @@ class Packages extends StatelessWidget {
                             });
                           },
                           tittle:
-                              "10 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
-                          price:
-                              "0.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
-                          backgroundColor: ColorManager.primaryColor,
-                          textColor: ColorManager.lightColor2,
+                            "10 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                            price:
+                            "0.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
+                            backgroundColor: ColorManager.primaryColor,
+                            textColor: ColorManager.lightColor2,
                         ),
                           PackageItem(
                             onPressed: () {

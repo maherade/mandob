@@ -14,6 +14,7 @@ class ProductModel {
   String? userEmail;
   String? userImage;
   String? userUid;
+  String? date;
   bool? isAccepted;
   bool? isArrived;
 
@@ -32,6 +33,7 @@ class ProductModel {
     required this.userEmail,
     required this.userImage,
     required this.userUid,
+    required this.date,
     this.isAccepted = false,
     this.isArrived = false,
   });
@@ -52,6 +54,7 @@ class ProductModel {
           userEmail: json["userEmail"],
           userImage: json["userImage"],
           userUid: json["userUid"],
+          date: json["date"],
           isAccepted: json["isAccepted"],
           isArrived: json["isArrived"],
         );
@@ -72,6 +75,7 @@ class ProductModel {
       "userEmail": userEmail,
       "userImage": userImage,
       "userUid": userUid,
+      "date": date,
       "isAccepted": isAccepted,
       "isArrived": isArrived,
     };

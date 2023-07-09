@@ -13,6 +13,7 @@ import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/profile_screen/profile_screen.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
 import 'package:mandob/presentation/screens/mandob/mandoob_history/mandoob_history.dart';
+import 'package:mandob/presentation/screens/mandob/packages/whatsapp_packages.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/database_utils/datebase_utils.dart';
 import 'package:mandob/widgets/order_item.dart';
@@ -265,11 +266,6 @@ class _MandobScreenState extends State<MandobScreen> {
                                           ElevatedButton(
                                               onPressed: () {
                                                 cubit.getUserDetails();
-                                                Navigator.of(context)
-                                                    .push(MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      const Packages(),
-                                                ));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor:
@@ -291,10 +287,11 @@ class _MandobScreenState extends State<MandobScreen> {
                                           ),
                                           ElevatedButton(
                                               onPressed: () {
-                                                Platform.isIOS
-                                                    ? launchUrl(iosWhatsapp)
-                                                    : launchUrl(
-                                                        androidWhatsapp);
+                                                Navigator.of(context)
+                                                    .push(MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const WhatsAppPackages(),
+                                                ));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor:

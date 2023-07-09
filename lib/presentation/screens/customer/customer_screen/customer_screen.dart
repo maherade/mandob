@@ -26,6 +26,7 @@ class CustomerScreen extends StatefulWidget {
   static var priceController = TextEditingController();
   static var weightController = TextEditingController();
   static var notesController = TextEditingController();
+  static var dateController = TextEditingController();
   static var formKey = GlobalKey<FormState>();
   static String bottomValue = '';
 
@@ -514,6 +515,35 @@ class _CustomerScreenState extends State<CustomerScreen> {
                             height: MediaQuery.sizeOf(context).height * .015,
                           ),
 
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * .015,
+                          ),
+
+                          // تاريخ التوصيل
+
+                          Text(
+                            AppLocalizations.of(context)!
+                                .translate("date")
+                                .toString(),
+                            style: GoogleFonts.cairo(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w700,
+                              color: ColorManager.textColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          DefaultTextField(
+                              hintText: AppLocalizations.of(context)!
+                                  .translate("date")
+                                  .toString(),
+                              isPass: false,
+                              prefixIcon: Icons.date_range,
+                              controller: CustomerScreen.dateController,
+                              textInputType: TextInputType.text),
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * .015,
+                          ),
+
                           // الملاحظات
 
                           Text(
@@ -561,22 +591,25 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                             CustomerScreen.bottomValue,
                                             productAddress: CustomerScreen
                                                 .addressController.text,
-                                            productPrice:
-                                            CustomerScreen.priceController.text,
+                                            productPrice: CustomerScreen
+                                                .priceController.text,
                                             productWeight: CustomerScreen
                                                 .weightController.text,
-                                            productNotes:
-                                            CustomerScreen.notesController.text,
-                                            productFrom:
-                                            CustomerScreen.fromController.text,
-                                            productTo:
-                                            CustomerScreen.toController.text,
+                                            productNotes: CustomerScreen
+                                                .notesController.text,
+                                            productFrom: CustomerScreen
+                                                .fromController.text,
+                                            productTo: CustomerScreen
+                                                .toController.text,
+                                            date: CustomerScreen
+                                                .dateController.text,
                                             userUid: cubit.user!.uId,
                                             userPhone: cubit.user!.phone,
                                             userName: cubit.user!.name,
                                             userEmail: cubit.user!.email,
                                             userImage: cubit.user!.pic,
-                                            productImage: 'https://alhalawanji.com/wp-content/uploads/2022/03/%D9%84%D8%A7-%D9%8A%D9%88%D8%AC%D8%AF-%D8%B5%D9%88%D8%B1%D8%A9.png',
+                                            productImage:
+                                                'https://alhalawanji.com/wp-content/uploads/2022/03/%D9%84%D8%A7-%D9%8A%D9%88%D8%AC%D8%AF-%D8%B5%D9%88%D8%B1%D8%A9.png',
                                           )  .then((value) {
                                             if (cubit.user!.isCustomer == false) {
                                               AwesomeNotifications()
@@ -589,16 +622,23 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                                     bigPicture:
                                                     "assets/images/delivery.png",
                                                     notificationLayout:
-                                                    NotificationLayout.Messaging,
-                                                  ));
+                                                    NotificationLayout
+                                                        .Messaging,
+                                              ));
                                             } else {}
                                             CustomerScreen.addressController
                                                 .clear();
-                                            CustomerScreen.priceController.clear();
-                                            CustomerScreen.weightController.clear();
-                                            CustomerScreen.notesController.clear();
-                                            CustomerScreen.fromController.clear();
+                                            CustomerScreen.priceController
+                                                .clear();
+                                            CustomerScreen.weightController
+                                                .clear();
+                                            CustomerScreen.notesController
+                                                .clear();
+                                            CustomerScreen.fromController
+                                                .clear();
                                             CustomerScreen.toController.clear();
+                                            CustomerScreen.dateController
+                                                .clear();
                                             cubit.productImage = null;
                                           });
                                         }
@@ -611,16 +651,18 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                             CustomerScreen.bottomValue,
                                             productAddress: CustomerScreen
                                                 .addressController.text,
-                                            productPrice:
-                                            CustomerScreen.priceController.text,
+                                            productPrice: CustomerScreen
+                                                .priceController.text,
                                             productWeight: CustomerScreen
                                                 .weightController.text,
-                                            productNotes:
-                                            CustomerScreen.notesController.text,
-                                            productFrom:
-                                            CustomerScreen.fromController.text,
-                                            productTo:
-                                            CustomerScreen.toController.text,
+                                            productNotes: CustomerScreen
+                                                .notesController.text,
+                                            productFrom: CustomerScreen
+                                                .fromController.text,
+                                            productTo: CustomerScreen
+                                                .toController.text,
+                                            date: CustomerScreen
+                                                .dateController.text,
                                             userUid: cubit.user!.uId,
                                             userPhone: cubit.user!.phone,
                                             userName: cubit.user!.name,

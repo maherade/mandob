@@ -65,5 +65,6 @@
   "uploadCarPic": "Upload your car picture",
   "yourId": "Your National Id",
   "getStarted": "Get Started",
-  "carPic": "Your Vehicle"
+  "carPic": "Your Vehicle",
+  "date": "Delivery Date"
 }

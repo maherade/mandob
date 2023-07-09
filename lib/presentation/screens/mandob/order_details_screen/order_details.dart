@@ -205,6 +205,31 @@ class OrderDetails extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * .015,
               ),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .015,
+              ),
+
+              // تاريخ التوصيل
+
+              Text(
+                AppLocalizations.of(context)!.translate("date").toString(),
+                style: GoogleFonts.cairo(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w700,
+                  color: ColorManager.textColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              DefaultTextField(
+                  hintText: "${model.date}",
+                  isPass: false,
+                  isEnabled: false,
+                  prefixIcon: Icons.date_range,
+                  controller: CustomerScreen.dateController,
+                  textInputType: TextInputType.text),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .015,
+              ),
 
               // الملاحظات
 
