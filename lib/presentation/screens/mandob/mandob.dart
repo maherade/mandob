@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
+import 'package:mandob/business_logic/localization_cubit/localization_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/data/modles/product_model.dart';
@@ -20,7 +21,6 @@ import 'package:mandob/widgets/order_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../uitiles/local/cash_helper.dart';
-import 'packages/packedges.dart';
 
 class MandobScreen extends StatefulWidget {
   const MandobScreen({super.key});
@@ -455,6 +455,45 @@ class _MandobScreenState extends State<MandobScreen> {
                               ),
                             ),
                           ),
+
+//                      اللغة
+                          GestureDetector(
+                            onTap: () {
+                              if (CashHelper.getData(
+                                          key: CashHelper.languageKey)
+                                      .toString() ==
+                                  'en') {
+                                LocalizationCubit.get(context)
+                                    .changeLanguage(code: 'ar');
+                              } else {
+                                LocalizationCubit.get(context)
+                                    .changeLanguage(code: 'en');
+                              }
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(Icons.language),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                      AppLocalizations.of(context)!
+                                          .translate("language")
+                                          .toString(),
+                                      style: GoogleFonts.cairo(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w700,
+                                        color: ColorManager.textColor,
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+
                           // تسجيل الخروج
                           GestureDetector(
                             onTap: () {
@@ -514,8 +553,11 @@ class _MandobScreenState extends State<MandobScreen> {
                                       .map((doc) => doc.data())
                                       .toList() ??
                                   [];
-
-                              if (MandobScreen.government ==
+                              if (MandobScreen.government == 'الكل') {
+                                product.forEach((element) {
+                                  MandobScreen.allProducts.add(element);
+                                });
+                              } else if (MandobScreen.government ==
                                   'محافظة الداخلية') {
                                 MandobScreen.allProducts = [];
 

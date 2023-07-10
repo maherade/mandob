@@ -229,9 +229,9 @@ class StartScreen extends StatelessWidget {
                         },
                         child: Text(AppLocalizations.of(context)!.translate('customer').toString(),style: GoogleFonts.almarai(
                             fontWeight: FontWeight.w600,
-                            fontSize: MediaQuery.of(context).size.height*.022,
-                            color: ColorManager.lightColor
-                        ),),
+                              fontSize:
+                                  MediaQuery.of(context).size.height * .02,
+                              color: ColorManager.lightColor),),
                       ),
                       SizedBox(height:MediaQuery.of(context).size.height*.02,),
                       MaterialButton(
@@ -258,9 +258,9 @@ class StartScreen extends StatelessWidget {
                         },
                         child: Text(AppLocalizations.of(context)!.translate('driver').toString(),style: GoogleFonts.almarai(
                             fontWeight: FontWeight.w600,
-                            fontSize: MediaQuery.of(context).size.height*.022,
-                            color: ColorManager.white
-                        ),),
+                              fontSize:
+                                  MediaQuery.of(context).size.height * .02,
+                              color: ColorManager.white),),
                       ),
 
                     ],

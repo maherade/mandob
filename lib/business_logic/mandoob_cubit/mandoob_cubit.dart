@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -111,6 +110,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
   }
 
   List<String> governmentName = [
+    'الكل',
     'محافظة الداخلية',
     'محافظة الظاهرة',
     'محافظة شمال الباطنة',

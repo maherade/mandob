@@ -28,7 +28,7 @@ class _OrderItemState extends State<OrderItem> {
     return widget.productModel.isAccepted == false
         ? Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * .55,
+            height: MediaQuery.of(context).size.height * .70,
             padding: const EdgeInsets.symmetric(
               vertical: 10,
               horizontal: 10,
@@ -98,6 +98,17 @@ class _OrderItemState extends State<OrderItem> {
                       ),
                       Text(
                         "${AppLocalizations.of(context)!.translate("price").toString()}: ${widget.productModel.productPrice}",
+                        style: GoogleFonts.cairo(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          color: ColorManager.textColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .01,
+                      ),
+                      Text(
+                        "${AppLocalizations.of(context)!.translate("date").toString()}: ${widget.productModel.date}",
                         style: GoogleFonts.cairo(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w600,
