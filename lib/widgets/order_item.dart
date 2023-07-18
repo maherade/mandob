@@ -5,6 +5,7 @@ import 'package:mandob/business_logic/mandoob_cubit/mandoob_cubit.dart';
 import 'package:mandob/data/modles/product_model.dart';
 import 'package:mandob/presentation/screens/customer/customer_details/customer_details.dart';
 import 'package:mandob/presentation/screens/login_screen/login_screen.dart';
+import 'package:mandob/presentation/screens/mandob/mandob.dart';
 import 'package:mandob/presentation/screens/mandob/order_details_screen/order_details.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:mandob/widgets/defualtButton.dart';
@@ -197,18 +198,30 @@ class _OrderItemState extends State<OrderItem> {
                                                         .getUserDetails();
                                                     Navigator.of(context)
                                                         .push(MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          CustomerDetailsScreen(
-                                                        name: widget
-                                                            .productModel
-                                                            .userName!,
-                                                        phone: widget
-                                                            .productModel
-                                                            .userPhone!,
-                                                        pic: widget.productModel
-                                                            .userImage!,
-                                                      ),
-                                                    ));
+                                                          builder: (_) =>
+                                                              CustomerDetailsScreen(
+                                                            name: widget
+                                                                .productModel
+                                                                .userName!,
+                                                            phone: widget
+                                                                .productModel
+                                                                .userPhone!,
+                                                            pic: widget
+                                                                .productModel
+                                                                .userImage!,
+                                                          ),
+                                                        ))
+                                                        .then((value) => {
+                                                              MandoobCubit.get(
+                                                                      context)
+                                                                  .updateMandoobCounter(),
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pushReplacement(
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              const MandobScreen())),
+                                                            });
                                                   },
                                                   style:
                                                       ElevatedButton.styleFrom(

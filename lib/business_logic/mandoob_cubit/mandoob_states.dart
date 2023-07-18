@@ -167,12 +167,23 @@ class SaveTokenErrorState extends MandoobStates {}
 
 class GetTokenLoadingState extends MandoobStates {}
 class GetTokenSuccessState extends MandoobStates {}
+
 class GetTokenErrorState extends MandoobStates {}
 
 class CreateNotificationSuccessState extends MandoobStates {}
+
 class CreateNotificationLoadingState extends MandoobStates {}
+
 class CreateNotificationErrorState extends MandoobStates {}
 
 class SaveNotificationLoadingState extends MandoobStates {}
+
 class SaveNotificationSuccessState extends MandoobStates {}
+
 class SaveNotificationErrorState extends MandoobStates {}
+
+class UpdateMandoobCounterLoadingState extends MandoobStates {}
+
+class UpdateMandoobCounterSuccessState extends MandoobStates {}
+
+class UpdateMandoobCounterErrorState extends MandoobStates {}

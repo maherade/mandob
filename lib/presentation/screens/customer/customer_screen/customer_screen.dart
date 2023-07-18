@@ -37,6 +37,8 @@ class CustomerScreen extends StatefulWidget {
   State<CustomerScreen> createState() => _CustomerScreenState();
 }
 
+DateTime selectedDate = DateTime.now();
+
 class _CustomerScreenState extends State<CustomerScreen> {
   @override
   Widget build(BuildContext context) {
@@ -620,14 +622,49 @@ class _CustomerScreenState extends State<CustomerScreen> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          DefaultTextField(
-                              hintText: AppLocalizations.of(context)!
-                                  .translate("date")
-                                  .toString(),
-                              isPass: false,
-                              prefixIcon: Icons.date_range,
-                              controller: CustomerScreen.dateController,
-                              textInputType: TextInputType.text),
+                          GestureDetector(
+                              onTap: () {
+                                showTaskDatePicker();
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.calendar_month,
+                                      color: Colors.grey,
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
+                                      style: GoogleFonts.cairo(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w300,
+                                        color: ColorManager.textColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                              // DefaultTextField(
+                              //     hintText: '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}'
+                              //         .toString(),
+                              //     isPass: false,
+                              //     prefixIcon: Icons.date_range,
+                              //     controller: CustomerScreen.dateController,
+                              //     textInputType: TextInputType.phone
+                              // ),
+                              ),
                           SizedBox(
                             height: MediaQuery.sizeOf(context).height * .015,
                           ),
@@ -694,8 +731,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                                 .fromController.text,
                                             productTo: CustomerScreen
                                                 .toController.text,
-                                            date: CustomerScreen
-                                                .dateController.text,
+                                            date:
+                                                '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
                                             userUid: cubit.user!.uId,
                                             userPhone: cubit.user!.phone,
                                             userName: cubit.user!.name,
@@ -733,8 +770,6 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                             CustomerScreen.fromController
                                                 .clear();
                                             CustomerScreen.toController.clear();
-                                            CustomerScreen.dateController
-                                                .clear();
                                             cubit.productImage = null;
                                           });
                                         } else {
@@ -759,8 +794,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                                 .fromController.text,
                                             productTo: CustomerScreen
                                                 .toController.text,
-                                            date: CustomerScreen
-                                                .dateController.text,
+                                            date:
+                                                '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
                                             userUid: cubit.user!.uId,
                                             userPhone: cubit.user!.phone,
                                             userName: cubit.user!.name,
@@ -955,5 +990,34 @@ class _CustomerScreenState extends State<CustomerScreen> {
               );
       },
     );
+  }
+
+  void showTaskDatePicker() async {
+    DateTime? chosenDate = await showDatePicker(
+        cancelText:
+            AppLocalizations.of(context)!.translate("cancel").toString(),
+        confirmText: AppLocalizations.of(context)!.translate("ok").toString(),
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(const Duration(days: 365)),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                colorScheme: const ColorScheme.light(
+                  primary: ColorManager.primaryColor,
+                  onPrimary: ColorManager.lightColor,
+                  onSurface: ColorManager.darkGrey,
+                ),
+                textButtonTheme: TextButtonThemeData(
+                    style: TextButton.styleFrom(fixedSize: const Size(25, 25))),
+                dialogBackgroundColor: Colors.white,
+              ),
+              child: child!);
+        });
+    setState(() {
+      if (chosenDate == null) return;
+      selectedDate = chosenDate;
+    });
   }
 }
