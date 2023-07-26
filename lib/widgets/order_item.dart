@@ -215,6 +215,9 @@ class _OrderItemState extends State<OrderItem> {
                                                               MandoobCubit.get(
                                                                       context)
                                                                   .updateMandoobCounter(),
+                                                              MandoobCubit.get(
+                                                                      context)
+                                                                  .getUser(),
                                                               Navigator.of(
                                                                       context)
                                                                   .pushReplacement(

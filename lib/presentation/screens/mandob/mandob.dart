@@ -210,6 +210,7 @@ class _MandobScreenState extends State<MandobScreen> {
                             ),
                           ),
                           // عدد الباقات المتبقية
+
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 10),
