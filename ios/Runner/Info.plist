@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -22,7 +24,49 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Mandoob application needs access to the calendar in order to be able to book a shaving appointment and choose the right time, and this helps you easily access the services.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>$(PRODUCT_NAME) application needs contacts access so that we can contact $(PRODUCT_NAME) with you and make contact and calls with you, and this helps to speed up service delivery.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Looking for local tcp Bonjour service</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) for a reliable direction for $(PRODUCT_NAME), we collects location data from the time you open the app until a $(PRODUCT_NAME) accepted your request. this improves delivery, support, and more</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) for a reliable direction for the barber, we collects location data from the time you open the app until a barber accepted your request. this improves delivery, support, and more</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
+	<key>NSLocationWhenInUseUsageDescriptions</key>
+	<string>$(PRODUCT_NAME) for a reliable direction for the barber, we collects location data from the time you open the app until a barber accepted your request. this improves delivery, support, and more</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) microphone use.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to motion to be able to send you alerts and notifications, and this helps you access services easily.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow access to the photos to be able to attach photos required for an advertisement from your library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to the photos to be able to attach photos required for an advertisement from your library.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>$(PRODUCT_NAME) reminders use.</string>
+	<key>NSSiriUsageDescription</key>
+	<string>$(PRODUCT_NAME) siri use.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to Speech Recognition to be able to send you alerts and notifications, and how call with you and this helps you access services easily.</string>
+	<key>NSVideoSubscriberAccountUsageDescription</key>
+	<string>$(PRODUCT_NAME) video use.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -31,8 +75,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -43,53 +85,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-    <false/>
-    <key>FirebaseScreenReportingEnabled</key>
-    <false/>
-    <key>LSRequiresIPhoneOS</key>
-    <true/>
-    <key>NSAppleMusicUsageDescription</key>
-    <string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
-    <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
-    <key>NSCalendarsUsageDescription</key>
-    <string>Mandoob application needs access to the calendar in order to be able to book a shaving appointment and choose the right time, and this helps you easily access the services.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
-    <key>NSContactsUsageDescription</key>
-    <string>$(PRODUCT_NAME) application needs contacts access so that we can contact $(PRODUCT_NAME) with you and make contact and calls with you, and this helps to speed up service delivery.</string>
-    <key>NSLocalNetworkUsageDescription</key>
-    <string>Looking for local tcp Bonjour service</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>$(PRODUCT_NAME) for a reliable direction for $(PRODUCT_NAME), we collects location data from the time you open the app until a $(PRODUCT_NAME) accepted your request. this improves delivery, support, and more</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>$(PRODUCT_NAME) for a reliable direction for the barber, we collects location data from the time you open the app until a barber accepted your request. this improves delivery, support, and more</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Allow access to the camera to be able to attach photos required for an advertisement by camera.</string>
-    <key>NSLocationWhenInUseUsageDescriptions</key>
-    <string>$(PRODUCT_NAME) for a reliable direction for the barber, we collects location data from the time you open the app until a barber accepted your request. this improves delivery, support, and more</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>$(PRODUCT_NAME) microphone use.</string>
-    <key>NSMotionUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to motion to be able to send you alerts and notifications, and this helps you access services easily.</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Allow access to the photos to be able to attach photos required for an advertisement from your library.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Allow access to the photos to be able to attach photos required for an advertisement from your library.</string>
-    <key>NSRemindersUsageDescription</key>
-    <string>$(PRODUCT_NAME) reminders use.</string>
-    <key>NSSiriUsageDescription</key>
-    <string>$(PRODUCT_NAME) siri use.</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to Speech Recognition to be able to send you alerts and notifications, and how call with you and this helps you access services easily.</string>
-    <key>NSVideoSubscriberAccountUsageDescription</key>
-    <string>$(PRODUCT_NAME) video use.</string>
-
 </dict>
 </plist>
-
