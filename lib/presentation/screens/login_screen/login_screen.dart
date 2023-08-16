@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<MandoobCubit,MandoobStates>(
       listener: (context,state){},
       builder: (context,state){
-        var cubit= MandoobCubit.get(context);
           return SafeArea(
             child: Scaffold(
               backgroundColor: ColorManager.lightColor,
@@ -60,8 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-
-
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
                                   child: DefaultTextField(
@@ -92,14 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: mediaQuery.height * .06,
                                 ),
 
-                                state is LoginLoadingState?
+                                state is LoginLoadingState ?
                                 const Center(
                                   child: CircularProgressIndicator(
                                     color: ColorManager.primaryColor,
                                   ),
-                                ):
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                ) : Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.0),
                                   child: DefaultButton(
                                       buttonText: AppLocalizations.of(context)!
                                           .translate('login')
@@ -107,30 +104,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                       onPressed: () {
                                         CashHelper.saveData(
                                             key: "isGuest", value: false);
-                                        if (CashHelper.getData(key: 'isCustomer') ==
-                                            true) {
-                                          if (emailController.text == 'Mandoob' &&
-                                              passwordController.text ==
-                                                  'Mandoob2023') {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(builder: (_) {
-                                                  return const AdminScreen();
-                                                }));
-                                          } else {
-                                            validateForm(const CustomerScreen());
-                                          }
-                                        } else if (CashHelper.getData(
+                                        if (CashHelper.getData(
                                             key: 'isCustomer') ==
-                                            false) {
-                                          if (emailController.text == 'Mandoob' &&
-                                              passwordController.text ==
-                                                  'Mandoob2023') {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(builder: (_) {
+                                            true) {
+                                              if (emailController.text ==
+                                                      'Mandoob' &&
+                                                  passwordController.text ==
+                                                      'Mandoob2023') {
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                        builder: (_) {
                                                   return const AdminScreen();
                                                 }));
-                                          } else {
-                                            validateForm(const MandobScreen());
+                                              } else {
+                                                validateForm(
+                                                    const CustomerScreen());
+                                              }
+                                            } else if (CashHelper.getData(
+                                                    key: 'isCustomer') ==
+                                                false) {
+                                              if (emailController.text ==
+                                                      'Mandoob' &&
+                                                  passwordController.text ==
+                                                      'Mandoob2023') {
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                        builder: (_) {
+                                                  return const AdminScreen();
+                                                }));
+                                              } else {
+                                                validateForm(const MandobScreen());
                                           }
                                         }
                                       },

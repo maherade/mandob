@@ -15,7 +15,6 @@ import FirebaseMessaging
     GeneratedPluginRegistrant.register(with: self)
     Messaging.messaging().delegate = self
     if #available(iOS 10.0, *) {
-
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(

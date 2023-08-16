@@ -72,7 +72,6 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.white,
                 child: Stack(
                   children: [
-
                     Container(
                       padding: EdgeInsets.all(MediaQuery.of(context).size.height*.02),
                       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*.15),

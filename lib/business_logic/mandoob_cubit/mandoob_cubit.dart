@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -15,7 +14,6 @@ import 'package:mandob/data/modles/user_model.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../constants/firebase_errors.dart';
 import '../../uitiles/database_utils/datebase_utils.dart';
 import '../../uitiles/notification/fcm_notification.dart';
@@ -772,9 +770,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
       debugPrint('Error in save token is ${error.toString()}');
       emit(GetTokenErrorState());
     });
-
   }
-
   Future addNotification ({
     required String titleNotification,
     required String desNotification,
@@ -798,6 +794,4 @@ class MandoobCubit extends Cubit<MandoobStates> {
       emit(CreateNotificationErrorState());
     });
   }
-
-
 }
