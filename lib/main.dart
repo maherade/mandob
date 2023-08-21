@@ -14,13 +14,13 @@ import 'package:mandob/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'business_logic/localization_cubit/localization_cubit.dart';
-import 'firebase_options.dart';
 import 'presentation/screens/register_screen/register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CashHelper.init();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
+
   AwesomeNotifications().initialize(
     'resource://drawable/delivery',
     [
