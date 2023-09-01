@@ -45,7 +45,7 @@ class MandoobCubit extends Cubit<MandoobStates> {
     try {
       emit(SignUpLoadingState());
       final credential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
