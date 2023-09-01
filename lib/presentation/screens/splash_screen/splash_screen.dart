@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,6 @@ import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -20,43 +18,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     //
-    Future.delayed(const Duration(seconds: 3),()async{
-
-      if(CashHelper.getData(key: 'isUid')!=null&&CashHelper.getData(key: 'isCustomer')==true){
-
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-        const CustomerScreen()
-        ), (Route<dynamic> route) => false);
-
-
-      }
-      else if(CashHelper.getData(key: 'isUid')!=null&&CashHelper.getData(key: 'isCustomer')==false){
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-        const MandobScreen()
-        ), (Route<dynamic> route) => false);
-
-
-      }
-      else{
-        if(CashHelper.getData(key: 'isStarted')!='Yes'){
+    Future.delayed(const Duration(seconds: 3), () async {
+      if (CashHelper.getData(key: 'isUid') != null &&
+          CashHelper.getData(key: 'isCustomer') == true) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const CustomerScreen()),
+            (Route<dynamic> route) => false);
+      } else if (CashHelper.getData(key: 'isUid') != null &&
+          CashHelper.getData(key: 'isCustomer') == false) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const MandobScreen()),
+            (Route<dynamic> route) => false);
+      } else {
+        if (CashHelper.getData(key: 'isStarted') != 'Yes') {
           print('3');
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-          const OnBoarding()
-          ), (Route<dynamic> route) => false);
-        }else{
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const OnBoarding()),
+              (Route<dynamic> route) => false);
+        } else {
           print('4');
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-          const StartScreen()
-          ), (Route<dynamic> route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const StartScreen()),
+              (Route<dynamic> route) => false);
         }
-
       }
-
-
     });
 
     super.initState();
@@ -64,52 +52,45 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MandoobCubit,MandoobStates>(
-        listener: (context,state){
-
-        },
-      builder: (context,state){
-          return Scaffold(
-            appBar: AppBar(
-              toolbarHeight: 0.0,
-              elevation: 0.0,
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarIconBrightness: Brightness.dark,
-                statusBarColor: ColorManager.lightColor,
-              ),
+    return BlocConsumer<MandoobCubit, MandoobStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 0.0,
+            elevation: 0.0,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: ColorManager.lightColor,
             ),
-            body: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        ColorManager.lightColor2,
-                        ColorManager.lightColor,
-                        ColorManager.lightColor,
-                        ColorManager.lightColor2,
-                      ]
-                  )
-              ),
-              height: double.infinity,
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:  [
-
-                  Image(
-                    fit: BoxFit.contain,
-                    image: const AssetImage('assets/images/logo.jpeg'),
-                    height: MediaQuery.of(context).size.height*.55,
-                    width: double.infinity,
-                  ),
-
-
-                ],
-              ),
+          ),
+          body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                  ColorManager.lightColor2,
+                  ColorManager.lightColor,
+                  ColorManager.lightColor,
+                  ColorManager.lightColor2,
+                ])),
+            height: double.infinity,
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  fit: BoxFit.contain,
+                  image: const AssetImage('assets/images/logo.jpeg'),
+                  height: MediaQuery.of(context).size.height * .55,
+                  width: double.infinity,
+                ),
+              ],
             ),
-          );
+          ),
+        );
       },
     );
   }

@@ -1,9 +1,10 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
@@ -14,6 +15,7 @@ import 'package:mandob/data/modles/user_model.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../constants/firebase_errors.dart';
 import '../../uitiles/database_utils/datebase_utils.dart';
 import '../../uitiles/notification/fcm_notification.dart';
@@ -174,8 +176,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
       value.ref.getDownloadURL().then((value) {
         debugPrint('Upload Success');
         productPath = value;
-
-
 
         uploadProduct(
             productAddress: productAddress,
@@ -731,50 +731,40 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
-
   //========= Notification =============
 
-  Future<void> saveToken(String ?token)async{
-
+  Future<void> saveToken(String? token) async {
     emit(SaveTokenLoadingState());
     FirebaseFirestore.instance
         .collection('tokens')
         .doc('${CashHelper.getData(key: 'isUid')}')
-        .set({
-      "token":token
-    }).then((value){
-
+        .set({"token": token}).then((value) {
       debugPrint('Save Token Success');
       emit(SaveTokenSuccessState());
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in save token is ${error.toString()}');
       emit(SaveTokenErrorState());
     });
-
   }
 
-  Future<void> getToken()async{
-
+  Future<void> getToken() async {
     emit(GetTokenLoadingState());
-    FirebaseMessaging.instance
-        .getToken()
-        .then((token){
+    FirebaseMessaging.instance.getToken().then((token) {
       saveToken(token);
       debugPrint('============================= Token ======================');
       debugPrint(token);
 
       emit(GetTokenSuccessState());
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in save token is ${error.toString()}');
       emit(GetTokenErrorState());
     });
   }
-  Future addNotification ({
+
+  Future addNotification({
     required String titleNotification,
     required String desNotification,
-  }) async{
+  }) async {
     emit(CreateNotificationLoadingState());
     FirebaseFirestore.instance.collection('tokens').get().then((value) {
       for (var element in value.docs) {

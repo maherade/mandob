@@ -14,32 +14,30 @@ class AdminScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<MandoobCubit,MandoobStates>(
-        listener: (context,state){
-
-        },
-        builder: (context,state){
-          var cubit=MandoobCubit.get(context);
-          return Scaffold(
+    return BlocConsumer<MandoobCubit, MandoobStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = MandoobCubit.get(context);
+        return Scaffold(
+          backgroundColor: ColorManager.lightColor,
+          appBar: AppBar(
+            titleSpacing: 0.0,
+            iconTheme: const IconThemeData(color: ColorManager.textColor),
             backgroundColor: ColorManager.lightColor,
-            appBar: AppBar(
-              titleSpacing: 0.0,
-              iconTheme: const IconThemeData(color: ColorManager.textColor),
-              backgroundColor: ColorManager.lightColor,
-              elevation: 0.0,
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarIconBrightness: Brightness.dark,
-                statusBarColor: ColorManager.lightColor,
+            elevation: 0.0,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: ColorManager.lightColor,
+            ),
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: ColorManager.textColor,
               ),
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: ColorManager.textColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             title: Text(
               AppLocalizations.of(context)!.translate("adminPage").toString(),
               style: GoogleFonts.cairo(
@@ -70,8 +68,7 @@ class AdminScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child:
-                            Text(
+                            child: Text(
                                 AppLocalizations.of(context)!
                                     .translate("noOrderNeeds")
                                     .toString(),
@@ -170,8 +167,8 @@ class AdminScreen extends StatelessWidget {
                     )
             ],
           ),
-          );
-        },
+        );
+      },
     );
   }
 }

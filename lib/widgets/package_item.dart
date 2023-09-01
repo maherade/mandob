@@ -10,7 +10,8 @@ class PackageItem extends StatelessWidget {
   final Function onPressed;
 
   PackageItem(
-      {required this.tittle,
+      {super.key,
+      required this.tittle,
       required this.price,
       required this.backgroundColor,
       required this.textColor,
@@ -24,9 +25,8 @@ class PackageItem extends StatelessWidget {
       elevation: 10,
       color: backgroundColor,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15),
       ),
-
       child: MaterialButton(
         elevation: 10,
         onPressed: () {

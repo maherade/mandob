@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/data/modles/onbaording_model.dart';
-import 'package:mandob/presentation/screens/register_screen/register_screen.dart';
 import 'package:mandob/presentation/screens/start_screen/start_screen.dart';
 import 'package:mandob/styles/color_manager.dart';
 import 'package:mandob/uitiles/local/cash_helper.dart';
@@ -16,11 +15,13 @@ class OnBoarding extends StatelessWidget {
   static List<OnBoardingModel> onBoardingData = [
     OnBoardingModel(
         title: 'تطبيق يكسبك فلوس وانت علي دربك',
-        describtion: ' طريقة سهلة في استقبال الطلبات طلبات توصلك وين ما كنت تواصل مع العميل مباشرةً',
+        describtion:
+            ' طريقة سهلة في استقبال الطلبات طلبات توصلك وين ما كنت تواصل مع العميل مباشرةً',
         image: 'assets/images/food.json'),
     OnBoardingModel(
         title: 'مميزات التطبيق لأصحاب المشاريع المنزلية',
-        describtion: 'تتبع طلبك بكل سهولة نضمن لك سلامة منتجاتك مندوبك متوفر علي مدار الساعة الإستلام من باب بيتك',
+        describtion:
+            'تتبع طلبك بكل سهولة نضمن لك سلامة منتجاتك مندوبك متوفر علي مدار الساعة الإستلام من باب بيتك',
         image: 'assets/images/onboarding3.json'),
     OnBoardingModel(
         title: '#حط_طلبك_يوصل_لك',
@@ -32,7 +33,7 @@ class OnBoarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: ColorManager.lightColor2,
       body: SafeArea(
         child: Column(
@@ -40,64 +41,63 @@ class OnBoarding extends StatelessWidget {
             Expanded(
               child: PageView.builder(
                 controller: pageController,
-                  itemBuilder: (context,index){
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).height*.03),
-                      child: Column(
-                        children: [
-
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Lottie.asset(onBoardingData[index].image!,
-                              height: MediaQuery.of(context).size.height*.42,
-                              width: MediaQuery.of(context).size.height*.45,
-                            ),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.sizeOf(context).height * .03),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Lottie.asset(
+                            onBoardingData[index].image!,
+                            height: MediaQuery.of(context).size.height * .42,
+                            width: MediaQuery.of(context).size.height * .45,
                           ),
-
-                          SizedBox(height: MediaQuery.sizeOf(context).height*.02,),
-
-                          Text(
-                            onBoardingData[index].title!,
-                            style: GoogleFonts.cairo(
-                              fontSize: 21.0,
-                              fontWeight: FontWeight.w700,
-                              color: ColorManager.darkGrey,
-                            ),
-                            textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * .02,
+                        ),
+                        Text(
+                          onBoardingData[index].title!,
+                          style: GoogleFonts.cairo(
+                            fontSize: 21.0,
+                            fontWeight: FontWeight.w700,
+                            color: ColorManager.darkGrey,
                           ),
-
-                          SizedBox(height: MediaQuery.sizeOf(context).height*.04,),
-
-                          Text(
-                            onBoardingData[index].describtion!,
-                            style: GoogleFonts.cairo(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w700,
-                              color: ColorManager.darkGrey,
-                            ),
-                            textAlign: TextAlign.center,
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * .04,
+                        ),
+                        Text(
+                          onBoardingData[index].describtion!,
+                          style: GoogleFonts.cairo(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w700,
+                            color: ColorManager.darkGrey,
                           ),
-
-                          SizedBox(height: MediaQuery.sizeOf(context).height*.045,),
-
-                          SmoothPageIndicator(
-                            controller: pageController,  // PageController
-                            count:  3,
-                            effect: const ExpandingDotsEffect(
-                                dotColor: Colors.grey,
-                                dotHeight: 8,
-                                activeDotColor:  ColorManager.primaryColor
-                            ),   // your preferred effect
-
-                          ),
-
-                          const Spacer(),
-
-                          DefaultButton(
-                            buttonText: AppLocalizations.of(context)!.translate('getStarted').toString(),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * .045,
+                        ),
+                        SmoothPageIndicator(
+                          controller: pageController, // PageController
+                          count: 3,
+                          effect: const ExpandingDotsEffect(
+                              dotColor: Colors.grey,
+                              dotHeight: 8,
+                              activeDotColor: ColorManager
+                                  .primaryColor), // your preferred effect
+                        ),
+                        const Spacer(),
+                        DefaultButton(
+                          buttonText: AppLocalizations.of(context)!
+                              .translate('getStarted')
+                              .toString(),
                           onPressed: () {
-
-                            CashHelper.saveData(key: 'isStarted',value: 'Yes');
+                            CashHelper.saveData(key: 'isStarted', value: 'Yes');
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -106,17 +106,16 @@ class OnBoarding extends StatelessWidget {
                           color: ColorManager.primaryColor,
                           color2: Colors.red,
                         ),
-
-                          SizedBox(height: MediaQuery.sizeOf(context).height*.07,),
-                        ],
-                      ),
-                    );
-                  },
-                  itemCount: 3,
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * .07,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                itemCount: 3,
               ),
             ),
-
-
           ],
         ),
       ),

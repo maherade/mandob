@@ -13,7 +13,9 @@ class AdminVerifiedScreen extends StatelessWidget {
   final String uId;
   final int num;
   final int count;
-  const AdminVerifiedScreen({super.key,
+
+  const AdminVerifiedScreen({
+    super.key,
     required this.screen,
     required this.uId,
     required this.num,
@@ -22,12 +24,10 @@ class AdminVerifiedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<MandoobCubit,MandoobStates>(
-      listener: (context,state){
-
-      },
-      builder: (context,state){
-        var cubit=MandoobCubit.get(context);
+    return BlocConsumer<MandoobCubit, MandoobStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = MandoobCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             titleSpacing: 0.0,
@@ -62,20 +62,15 @@ class AdminVerifiedScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: MediaQuery.sizeOf(context).height*.7,
-                  margin: const EdgeInsets.all(10),
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: Colors.black
+                    height: MediaQuery.sizeOf(context).height * .7,
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black),
                     ),
-                  ),
-                  child:  Image(image: NetworkImage(screen!))
-                ),
-
+                    child: Image(image: NetworkImage(screen))),
                 const Spacer(),
-
                 Row(
                   children: [
                     Expanded(
@@ -113,7 +108,9 @@ class AdminVerifiedScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: MediaQuery.sizeOf(context).height*.02,)
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height * .02,
+                )
               ],
             ),
           ),

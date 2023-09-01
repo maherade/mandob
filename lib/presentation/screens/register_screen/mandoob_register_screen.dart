@@ -109,7 +109,7 @@ class _MandoobRegisterScreenState extends State<MandoobRegisterScreen> {
                         Container(
                           width: double.infinity,
                           height: MediaQuery.sizeOf(context).height * .2,
-                          decoration: BoxDecoration(color: Colors.grey),
+                          decoration: const BoxDecoration(color: Colors.grey),
                         ),
                         DefaultButton(
                             buttonText: AppLocalizations.of(context)!

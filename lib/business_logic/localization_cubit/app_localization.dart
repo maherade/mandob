@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class AppLocalizations {
   final Locale locale;
+
   AppLocalizations({required this.locale});
 
   static AppLocalizations? of(BuildContext context) {
@@ -12,14 +14,15 @@ class AppLocalizations {
   }
 
   // Static member to have a simple access to the delegate from the MaterialApp
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
-  static  Map<String, String> localizedStrings={};
+  static Map<String, String> localizedStrings = {};
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    String jsonString =
-    await rootBundle.loadString('assets/translations/${locale.languageCode}.json');
+    String jsonString = await rootBundle
+        .loadString('assets/translations/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     localizedStrings = jsonMap.map((key, value) {
@@ -46,8 +49,10 @@ class _AppLocalizationsDelegate
   @override
   bool isSupported(Locale locale) {
     // Include all of your supported language codes here
-    return ['en', 'ar',].contains(locale.languageCode);
-
+    return [
+      'en',
+      'ar',
+    ].contains(locale.languageCode);
   }
 
   @override

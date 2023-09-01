@@ -64,7 +64,7 @@ class MyProduct {
       "userEmail": userEmail,
       "userImage": userImage,
       "userUid": userUid,
-      "userUid": productUid,
+      "productUid": productUid,
     };
   }
 }

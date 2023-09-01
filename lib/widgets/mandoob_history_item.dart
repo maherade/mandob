@@ -42,7 +42,7 @@ class _MandoobHistoryItemState extends State<MandoobHistoryItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               child: Image.network(
                 '${widget.myProduct.productImage}',

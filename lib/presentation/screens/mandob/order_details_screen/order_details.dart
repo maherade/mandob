@@ -51,7 +51,7 @@ class OrderDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Image.network(
                   "${model.productImage}",
