@@ -16,32 +16,30 @@ class Packages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
-    return BlocConsumer<MandoobCubit,MandoobStates>(
-        listener: (context,state){
-
-        },
-      builder: (context,state){
-          var cubit=MandoobCubit.get(context);
-          return Scaffold(
+    return BlocConsumer<MandoobCubit, MandoobStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = MandoobCubit.get(context);
+        return Scaffold(
+          backgroundColor: ColorManager.lightColor,
+          appBar: AppBar(
+            titleSpacing: 0.0,
+            iconTheme: const IconThemeData(color: ColorManager.textColor),
             backgroundColor: ColorManager.lightColor,
-            appBar: AppBar(
-              titleSpacing: 0.0,
-              iconTheme: const IconThemeData(color: ColorManager.textColor),
-              backgroundColor: ColorManager.lightColor,
-              elevation: 0.0,
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarIconBrightness: Brightness.dark,
-                statusBarColor: ColorManager.lightColor,
+            elevation: 0.0,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: ColorManager.lightColor,
+            ),
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: ColorManager.textColor,
               ),
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: ColorManager.textColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             title: Text(
               AppLocalizations.of(context)!.translate("buyPackages").toString(),
               style: GoogleFonts.cairo(
@@ -71,20 +69,20 @@ class Packages extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                    SizedBox(
-                      height: mediaQuery.height * .03,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.8/0.7,
-                        crossAxisSpacing: mediaQuery.width * .03,
-                        mainAxisSpacing: mediaQuery.height * .03,
-                        shrinkWrap: true,
-                        children: [
-                          PackageItem(
-                            isClicked: false,
+                  SizedBox(
+                    height: mediaQuery.height * .03,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.8 / 0.7,
+                      crossAxisSpacing: mediaQuery.width * .02,
+                      mainAxisSpacing: mediaQuery.height * .02,
+                      shrinkWrap: true,
+                      children: [
+                        PackageItem(
+                          isClicked: false,
                           onPressed: () {
                             cubit.toPayPal().then((value) {
                               Navigator.push(context,
@@ -96,14 +94,14 @@ class Packages extends StatelessWidget {
                             });
                           },
                           tittle:
-                            "10 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
-                            price:
-                            "0.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
-                            backgroundColor: ColorManager.primaryColor,
-                            textColor: ColorManager.lightColor2,
+                              "10 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                          price:
+                              "0.5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
+                          backgroundColor: ColorManager.primaryColor,
+                          textColor: ColorManager.lightColor2,
                         ),
-                          PackageItem(
-                            onPressed: () {
+                        PackageItem(
+                          onPressed: () {
                             cubit.toPayPal().then((value) {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
@@ -120,8 +118,8 @@ class Packages extends StatelessWidget {
                           backgroundColor: Colors.deepPurple.shade700,
                           textColor: ColorManager.lightColor2,
                         ),
-                          PackageItem(
-                            onPressed: () {
+                        PackageItem(
+                          onPressed: () {
                             cubit.toPayPal().then((value) {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
@@ -138,8 +136,8 @@ class Packages extends StatelessWidget {
                           backgroundColor: Colors.green.shade700,
                           textColor: ColorManager.lightColor2,
                         ),
-                          PackageItem(
-                            onPressed: () {
+                        PackageItem(
+                          onPressed: () {
                             cubit.toPayPal().then((value) {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
@@ -156,40 +154,32 @@ class Packages extends StatelessWidget {
                           backgroundColor: Colors.blue.shade700,
                           textColor: ColorManager.lightColor2,
                         ),
+                        PackageItem(
+                          onPressed: () {
+                            cubit.toPayPal().then((value) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return const ScreenShotScreen(
+                                  num: 100,
+                                );
+                              }));
+                            });
+                          },
+                          tittle:
+                              "100 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
+                          price:
+                              "5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
+                          backgroundColor: Colors.orange.shade700,
+                          textColor: ColorManager.lightColor2,
+                        ),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: mediaQuery.height * .01,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      PackageItem(
-                        onPressed: () {
-                          cubit.toPayPal().then((value) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) {
-                              return const ScreenShotScreen(
-                                num: 100,
-                              );
-                            }));
-                          });
-                        },
-                        tittle:
-                            "100 ${AppLocalizations.of(context)!.translate("delivery").toString()}",
-                        price:
-                            "5 ${AppLocalizations.of(context)!.translate("dinar").toString()}",
-                        backgroundColor: Colors.orange.shade700,
-                        textColor: ColorManager.lightColor2,
-                      ),
-                    ],
-                  ),
                 ],
-                ),
               ),
             ),
-          );
+          ),
+        );
       },
     );
   }
