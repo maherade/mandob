@@ -67,5 +67,7 @@
   "yourId": "Your National Id",
   "getStarted": "Get Started",
   "carPic": "Your Vehicle",
-  "date": "Delivery Date"
+  "date": "Delivery Date",
+  "deleteAccount": "Delete Account",
+  "deleteSuccess": "Account Deleted Successfully"
 }

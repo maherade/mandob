@@ -6,7 +6,6 @@ class LaunchState extends MandoobStates {}
 
 class ChangeCheckBoxState extends MandoobStates {}
 
-
 // Sign Up States
 class SignUpLoadingState extends MandoobStates {}
 
@@ -125,8 +124,6 @@ class GetMandoobHistorySuccessState extends MandoobStates {}
 
 class GetMandoobHistoryErrorState extends MandoobStates {}
 
-
-
 class PickPayImageSuccessState extends MandoobStates {}
 
 class PickPayImageErrorState extends MandoobStates {}
@@ -162,10 +159,13 @@ class OnOrderAcceptedSuccessState extends MandoobStates {}
 class OnOrderAcceptedErrorState extends MandoobStates {}
 
 class SaveTokenLoadingState extends MandoobStates {}
+
 class SaveTokenSuccessState extends MandoobStates {}
+
 class SaveTokenErrorState extends MandoobStates {}
 
 class GetTokenLoadingState extends MandoobStates {}
+
 class GetTokenSuccessState extends MandoobStates {}
 
 class GetTokenErrorState extends MandoobStates {}
@@ -187,3 +187,9 @@ class UpdateMandoobCounterLoadingState extends MandoobStates {}
 class UpdateMandoobCounterSuccessState extends MandoobStates {}
 
 class UpdateMandoobCounterErrorState extends MandoobStates {}
+
+class DeleteUserLoadingState extends MandoobStates {}
+
+class DeleteUserSuccessState extends MandoobStates {}
+
+class DeleteUserErrorState extends MandoobStates {}

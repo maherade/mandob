@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mandob/business_logic/localization_cubit/app_localization.dart';
 import 'package:mandob/business_logic/mandoob_cubit/mandoob_states.dart';
 import 'package:mandob/data/modles/my_products.dart';
 import 'package:mandob/data/modles/pay_model.dart';
@@ -176,8 +177,6 @@ class MandoobCubit extends Cubit<MandoobStates> {
       value.ref.getDownloadURL().then((value) {
         debugPrint('Upload Success');
         productPath = value;
-
-
 
         uploadProduct(
             productAddress: productAddress,
@@ -733,52 +732,40 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
-
   //========= Notification =============
 
-  Future<void> saveToken(String ?token)async{
-
+  Future<void> saveToken(String? token) async {
     emit(SaveTokenLoadingState());
     FirebaseFirestore.instance
         .collection('tokens')
         .doc('${CashHelper.getData(key: 'isUid')}')
-        .set({
-      "token":token
-    }).then((value){
-
+        .set({"token": token}).then((value) {
       debugPrint('Save Token Success');
       emit(SaveTokenSuccessState());
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in save token is ${error.toString()}');
       emit(SaveTokenErrorState());
     });
-
   }
 
-  Future<void> getToken()async{
-
+  Future<void> getToken() async {
     emit(GetTokenLoadingState());
-    FirebaseMessaging.instance
-        .getToken()
-        .then((token){
+    FirebaseMessaging.instance.getToken().then((token) {
       saveToken(token);
       debugPrint('============================= Token ======================');
       debugPrint(token);
 
       emit(GetTokenSuccessState());
-    }).catchError((error){
-
+    }).catchError((error) {
       debugPrint('Error in save token is ${error.toString()}');
       emit(GetTokenErrorState());
     });
-
   }
 
-  Future addNotification ({
+  Future addNotification({
     required String titleNotification,
     required String desNotification,
-  }) async{
+  }) async {
     emit(CreateNotificationLoadingState());
     FirebaseFirestore.instance.collection('tokens').get().then((value) {
       for (var element in value.docs) {
@@ -799,5 +786,30 @@ class MandoobCubit extends Cubit<MandoobStates> {
     });
   }
 
+  Future<void> deleteUser({
+    required String id,
+    required context,
+  }) async {
+    emit(DeleteUserLoadingState());
 
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .delete()
+        .then((value) {
+      customToast(
+          title: AppLocalizations.of(context)!
+              .translate("deleteSuccess")
+              .toString(),
+          color: Colors.red.shade700);
+      getUser();
+
+      debugPrint('Account Deleted Successfully');
+
+      emit(DeleteUserSuccessState());
+    }).catchError((error) {
+      debugPrint('Error in DeleteUser is ${error.toString()}');
+      emit(DeleteUserErrorState());
+    });
+  }
 }
