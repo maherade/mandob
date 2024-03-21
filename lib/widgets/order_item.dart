@@ -228,8 +228,7 @@ class _OrderItemState extends State<OrderItem> {
                                                   },
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary:
-                                                        Colors.green.shade700,
+                                                    backgroundColor: Colors.green.shade700,
                                                   ),
                                                   child: Text(
                                                     AppLocalizations.of(
@@ -292,7 +291,7 @@ class _OrderItemState extends State<OrderItem> {
                                                   },
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary: ColorManager
+                                                    backgroundColor: ColorManager
                                                         .primaryColor,
                                                   ),
                                                   child: Text(
@@ -374,8 +373,7 @@ class _OrderItemState extends State<OrderItem> {
                                                               false);
                                                 },
                                                 style: ElevatedButton.styleFrom(
-                                                  primary:
-                                                      ColorManager.primaryColor,
+                                                  backgroundColor: ColorManager.primaryColor,
                                                 ),
                                                 child: Text(
                                                   AppLocalizations.of(context)!

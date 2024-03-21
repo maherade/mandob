@@ -884,7 +884,7 @@ class _CustomerScreenState extends State<CustomerScreen> {
                                                   },
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    primary: ColorManager
+                                                    backgroundColor: ColorManager
                                                         .primaryColor,
                                                   ),
                                                   child: Text(
