@@ -39,7 +39,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static Widget ?widget;
 
 
 
@@ -49,7 +48,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (BuildContext context) => MandoobCubit()
-              ..getCustomerHistory()
+              ..getCustomerHistory()..getProduct()
               ..getUser()
               ..getPayScreens()),
         BlocProvider(

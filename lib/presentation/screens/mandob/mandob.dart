@@ -563,132 +563,8 @@ class _MandobScreenState extends State<MandobScreen> {
                                         child: Text('Something went Wrong'));
                                   }
 
-                                  var product = snapshot.data?.docs
-                                          .map((doc) => doc.data())
-                                          .toList() ??
-                                      [];
-                                  if (MandobScreen.government == 'الكل') {
-                                    product.forEach((element) {
-                                      MandobScreen.allProducts.add(element);
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة الداخلية') {
-                                    MandobScreen.allProducts = [];
 
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة الداخلية') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة الظاهرة') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة الظاهرة') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة شمال الباطنة') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة شمال الباطنة') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة جنوب الباطنة') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة جنوب الباطنة') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة البريمي') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة البريمي') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة شمال الشرقية') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة شمال الشرقية') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة الوسطى') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة الوسطى') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة جنوب الشرقية') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة جنوب الشرقية') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة ظفار') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة ظفار') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة مسقط') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة مسقط') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else if (MandobScreen.government ==
-                                      'محافظة مسندم') {
-                                    MandobScreen.allProducts = [];
-
-                                    product.forEach((element) {
-                                      if (element.productGovernment ==
-                                          'محافظة مسندم') {
-                                        MandobScreen.allProducts.add(element);
-                                      }
-                                    });
-                                  } else {
-                                    MandobScreen.allProducts = [];
-                                    product.forEach((element) {
-                                      MandobScreen.allProducts.add(element);
-                                    });
-                                  }
-
-                                  if (MandobScreen.allProducts.isEmpty) {
+                                  if (cubit.allProduct.isEmpty) {
                                     return Center(
                                       child: Column(
                                         children: [
@@ -761,11 +637,11 @@ class _MandobScreenState extends State<MandobScreen> {
 
                                   return Expanded(
                                     child: ListView.builder(
-                                        itemCount: MandobScreen.allProducts.length,
+                                        itemCount: cubit.allProduct.length,
                                         itemBuilder: (context, index) {
                                           return OrderItem(
                                               productModel:
-                                                  MandobScreen.allProducts[index]);
+                                                  cubit.allProduct[index]);
                                         }),
                                   );
                                 })
