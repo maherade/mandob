@@ -51,10 +51,12 @@ class AddProductSuccessStates extends MandoobStates {}
 
 class AddProductErrorStates extends MandoobStates {}
 
-//
-// class GetProductsLoadingStates extends MandoobStates{}
-// class GetProductsSuccessStates extends MandoobStates{}
-// class GetProductsErrorStates extends MandoobStates{}
+
+class GetProductsLoadingStates extends MandoobStates{}
+class GetProductsSuccessStates extends MandoobStates{}
+class GetProductsErrorStates extends MandoobStates{}
+
+class ChangeGovernmentState extends MandoobStates {}
 
 class PickProfileImageSuccessState extends MandoobStates {}
 

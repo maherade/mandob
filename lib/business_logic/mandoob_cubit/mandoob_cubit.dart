@@ -812,4 +812,42 @@ class MandoobCubit extends Cubit<MandoobStates> {
       emit(DeleteUserErrorState());
     });
   }
+
+  List<ProductModel> allProduct = [];
+  String gov = 'الكل';
+  
+  void changeGovernment(int index) {
+    gov = governmentName[index];
+    debugPrint(gov);
+    emit(ChangeGovernmentState());
+  }
+
+  Future <void> getProduct() async {
+    emit(GetProductsLoadingStates());
+
+
+    FirebaseFirestore.instance.collection("Products").snapshots().listen((event) {
+      allProduct = [];
+      for (var element in event.docs) {
+        debugPrint("model gov =====> ${element['productGovernment']}  filter ==== > $gov");
+
+
+        if (element['productGovernment'] == gov ) {
+          allProduct.add(ProductModel.fromJson(element.data()));
+        }
+
+        else if(gov == 'الكل'){
+          allProduct.add(ProductModel.fromJson(element.data()));
+        }
+
+
+      }
+      emit(GetProductsSuccessStates());
+      debugPrint("get product success============> ${allProduct.length}");
+    });
+
+  }
+
+
+
 }
